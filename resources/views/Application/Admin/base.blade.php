@@ -39,7 +39,7 @@
     <div class="wrapper" >
 		<nav id="sidebar" class="sidebar">
 			<a class="sidebar-brand"  style="background: #66DBE2;" href="dashboard">
-				<img src="	 style="height: 50px;">
+				<img src=""	 style="height: 50px;">
 				FK Kiosk Management
 			</a>
 			<div class="sidebar-content">

@@ -13,12 +13,13 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        //
+        $application = Application::all();
+        return view('Application.Admin.dashboard',[
+            'application' => $application
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
