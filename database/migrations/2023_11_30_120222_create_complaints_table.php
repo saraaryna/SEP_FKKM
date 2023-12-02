@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('complaints', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('userID'); // Foreign Key
+            $table->foreign('userID')->references('id')->on('users');
+            $table->string('compName');
+            $table->datetime('compDate');
+            $table->date('compDateOccured');
+            $table->integer('compKioskNum');
+            $table->string('compPhoneNum');
+            $table->string('compType');
+            $table->string('compDescription');
+            $table->string('compEvidence');
+            $table->enum('compStatus', ['In Investigation', 'In Review', 'In Progress', 'Solved']);
+            $table->string('compPIC');
             $table->timestamps();
         });
     }
