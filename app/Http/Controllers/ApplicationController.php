@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\User;
 use App\Http\Requests\StoreApplicationRequest;
 use App\Http\Requests\UpdateApplicationRequest;
 
@@ -13,6 +14,9 @@ class ApplicationController extends Controller
      */
     public function index()
     {
+        
+
+        
         $application = Application::all();
         return view('Application.Admin.dashboard',[
             'application' => $application
@@ -30,7 +34,22 @@ class ApplicationController extends Controller
      */
     public function store(StoreApplicationRequest $request)
     {
-        //
+
+        $application = New Application;
+
+        $application->appName = $request->appName;
+        $application->appPhoneNum = $request->appPhoneNum;
+        $application->appBusinessType = $request->appBusinessType;
+        $application->appKioskNum = $request->appKioskNum;
+        $application->appBusinessPeriod = $request->appBusinessPeriod;
+        $application->appStatus = 'In progress';
+
+
+        $application->save();
+
+        return redirect('/dashboard-admin');
+
+
     }
 
     /**

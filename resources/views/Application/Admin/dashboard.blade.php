@@ -70,47 +70,42 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body m-3">
-                <form action="admin-manageUser.php" method="post">
+                <form method="POST" action="/dashboard-admin" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="appName" name="appName" required>
                     </div>
                     <div class="form-group">
-                        <label for="ic">Contact Number</label>
-                        <input type="text" class="form-control" id="appPhoneNumber" name="appPhoneNumber" required>
+                        <label for="contactNumber">Contact Number</label>
+                        <input type="text" class="form-control" id="appPhoneNum" name="appPhoneNum" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="userEmail" name="userEmail" required>
+                        <label for="email">Business Type</label>
+                        <select class="form-control" id="appBusinessType" name="appBusinessType" required>
+                            <option disabled selected value="Select Business Type">Business Type</option>
+                            <option value="Food">Food</option>
+                            <option value="Beverages">Beverages</option>
+                            <option value="Others">Others</option>
+                        </select>                    
                     </div>
                     <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="text" class="form-control" id="userPhone" name="userPhone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="address">Address</label>
-                        <input type="text" class="form-control" id="userAddress" name="userAddress" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="userProgram">Course Program</label>
-                        <select class="form-control" id="userProgram" name="userProgram" required>
-                            <option disabled selected value="Select program">Select program</option>
-                            <option value="DCS">DCS</option>
-                            <option value="BCS">BCS</option>
-                            <option value="BCN">BCN</option>
-                            <option value="BCG">BCG</option>
+                        <label for="appKioskNum">Kiosk Number</label>
+                        <select class="form-control" id="appKioskNum" name="appKioskNum" required>
+                            <option disabled selected value="Kiosk Number">Select Kiosk Number</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="role">Role</label>
-                        <select class="form-control" id="userRole" name="userRole" required>
-                            <option value="Student">Student</option>
-                            <option value="Lecturer">Lecturer</option>
-                        </select>
+                        <label for="appBusinessPeriod">Business Period</label>
+                        <input type="datetime-local" class="form-control" id="appBusinessPeriod" name="appBusinessPeriod" required>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-info" name="addUser">Add User</button>
+                        <button type="submit" class="btn btn-info" name="addApp">APPLY</button>
                     </div>
                 </form>
             </div>

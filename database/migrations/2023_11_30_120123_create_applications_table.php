@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('userID'); // Foreign Key
-            $table->foreign('userID')->references('id')->on('users');
+            $table->unsignedBigInteger('userID')->nullable();
+            $table->foreign('userID')->references('id')->on('users')->nullable();
             $table->string('appName');
             $table->string('appPhoneNum');
             $table->string('appBusinessType');
