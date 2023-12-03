@@ -18,8 +18,10 @@ class ApplicationController extends Controller
 
         
         $application = Application::all();
+         $user = User::find(1);
         return view('Application.Admin.dashboard',[
-            'application' => $application
+            'application' => $application,
+            'user' => $user,
         ]);
     }
 

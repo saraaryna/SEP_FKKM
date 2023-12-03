@@ -8,15 +8,15 @@
         </h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="dashboardAdmin.php">User</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Manage User Profile</a></li>
+                <li class="breadcrumb-item"><a href="dashboardAdmin.php">Kiosk Application</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Application List</a></li>
             </ol>
         </nav>
     </div>
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <a href="#" class="btn btn-info" style="float: right;" data-bs-toggle="modal" data-bs-target="#addApp">+ New Application</a>
+                <a href="#" class="btn btn-info" style="float: right; background-color: #66DBE2; color:black;" data-bs-toggle="modal" data-bs-target="#addApp">+ New Application</a>
             </div>
             <div class="card-body">
                 <table id="datatables-buttons" class="table table-striped" style="width:100%">
