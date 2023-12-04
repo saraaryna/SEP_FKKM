@@ -14,18 +14,18 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        
-
-        
         $application = Application::all();
-         $user = User::find(1);
-        return view('Application.Admin.dashboard',[
-            'application' => $application,
-            'user' => $user,
-        ]);
+        $user = User::find(1);
+       return view('Application.Admin.dashboard',[
+           'application' => $application,
+           'user' => $user,
+       ]);
+
     }
 
-
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
         //
@@ -36,7 +36,6 @@ class ApplicationController extends Controller
      */
     public function store(StoreApplicationRequest $request)
     {
-
         $application = New Application;
 
         $application->appName = $request->appName;
@@ -51,7 +50,6 @@ class ApplicationController extends Controller
 
         return redirect('/dashboard-admin');
 
-
     }
 
     /**
@@ -62,20 +60,25 @@ class ApplicationController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Application $application)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateApplicationRequest $request, Application $application)
     {
-        //
+        $application = Application ::where('id', $request->id)->where('appStatus','In progress')->get()->first();
+
+        $application->appName = $request->appName;
+        $application->appPhoneNum = $request->appPhoneNum;
+        $application->appBusinessType = $request->appBusinessType;
+        $application->appKioskNum = $request->appKioskNum;
+        $application->appBusinessPeriod = $request->appBusinessPeriod;
+
+
+        $application->save();
+
+        return redirect('/dashboard-admin');
+
     }
 
     /**
@@ -83,6 +86,9 @@ class ApplicationController extends Controller
      */
     public function destroy(Application $application)
     {
-        //
+        $application->delete();
+
+        return redirect('/dashboard-admin');
+
     }
 }

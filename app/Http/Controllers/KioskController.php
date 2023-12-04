@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Kiosk;
+use App\Models\User;
 use App\Http\Requests\StoreKioskRequest;
 use App\Http\Requests\UpdateKioskRequest;
 
@@ -13,7 +14,12 @@ class KioskController extends Controller
      */
     public function index()
     {
-        //
+        $kiosk = Kiosk::all();
+        $user = User::find(1);
+       return view('Kiosk.index',[
+           'kiosk' => $kiosk,
+           'user' => $user,
+       ]);
     }
 
     /**
@@ -29,7 +35,16 @@ class KioskController extends Controller
      */
     public function store(StoreKioskRequest $request)
     {
-        //
+        $kiosk = New Kiosk;
+
+        $kiosk->kioskNum = $request->kioskNum;
+        $kiosk->kioskLocation = $request->kioskLocation;
+        $kiosk->appStatus = 'Available';
+
+
+        $kiosk->save();
+
+        return redirect('/kiosk-admin');
     }
 
     /**
@@ -53,7 +68,14 @@ class KioskController extends Controller
      */
     public function update(UpdateKioskRequest $request, Kiosk $kiosk)
     {
-        //
+        $kiosk->kioskNum = $request->kioskNum;
+        $kiosk->kioskLocation = $request->kioskLocation;
+        $kiosk->appStatus = 'Available';
+
+
+        $kiosk->save();
+
+        return redirect('/kiosk-admin');
     }
 
     /**

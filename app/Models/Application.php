@@ -11,4 +11,9 @@ class Application extends Model
     {
         return $this->belongsTo(User::class, 'userID');
     }
+
+    public function kiosk() {
+        return $this->belongsTo(Kiosk::class, 'kioskID');
+    }
+
 }

@@ -52,6 +52,59 @@
                             <a href="/application/{{$application->id}}/delete"><i class="align-middle fas fa-fw fa-trash"></i></a>
                         </td>
                     </tr>
+                                    
+                <!-- Modal Kemaskini -->
+                <div class="modal fade" id="update-{{ $application->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">New Application</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body m-3">
+                                <form method="POST" action="/dashboard-admin/{{ $application->id }}" enctype="multipart/form-data">
+                                    @csrf 
+                                    @method('PUT')
+                                    <input type="hidden" name="id" value="{{$application->id}}">
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" class="form-control" id="appName" name="appName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contactNumber">Contact Number</label>
+                                        <input type="text" class="form-control" id="appPhoneNum" name="appPhoneNum" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Business Type</label>
+                                        <select class="form-control" id="appBusinessType" name="appBusinessType" required>
+                                            <option disabled selected value="Select Business Type">Business Type</option>
+                                            <option value="Food">Food</option>
+                                            <option value="Beverages">Beverages</option>
+                                            <option value="Others">Others</option>
+                                        </select>                    
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="appKioskNum">Kiosk Number</label>
+                                        <select class="form-control" id="appKioskNum" name="appKioskNum" required>
+                                            <option disabled selected value="Kiosk Number">Select Kiosk Number</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="appBusinessPeriod">Business Period</label>
+                                        <input type="datetime-local" class="form-control" id="appBusinessPeriod" name="appBusinessPeriod" required>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-info" name="addApp">APPLY</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 @endforeach
             </tbody>
         </table>

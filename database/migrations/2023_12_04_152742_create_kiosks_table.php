@@ -11,8 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('complaints', function (Blueprint $table) {
+        Schema::create('kiosks', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('userID'); // Foreign Key userID
+            $table->foreign('userID')->references('id')->on('users');
+            $table->integer('kioskNumber');
+            $table->string('KioskLocation');
+            $table->enum('kioskStatus', ['Available', 'Not Available']);
             $table->timestamps();
         });
     }
@@ -22,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('complaints');
+        Schema::dropIfExists('kiosks');
     }
 };
