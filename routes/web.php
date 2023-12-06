@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ComplaintController;
+use App\Http\Controllers\SaleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +19,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/sale', function () {
+    return view('Sale.sale');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('complaint', ComplaintController::class);
+Route::resource('sale', SaleController::class);
