@@ -13,7 +13,10 @@ class SaleController extends Controller
      */
     public function index()
     {
-        //
+        $sale = Sale::all();
+        return view('Sale.sale', [
+            'sale' => $sale
+        ]);
     }
 
     /**

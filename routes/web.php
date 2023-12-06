@@ -19,9 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/sale', function () {
-    return view('Sale.sale');
-});
+/*Route::get('/sale', function () {
+    return view('Sale/sale');
+});*/
 
 Auth::routes();
 

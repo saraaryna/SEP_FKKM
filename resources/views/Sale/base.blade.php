@@ -16,7 +16,7 @@
 
 		.wrapper:before
 		{
-			background:#66DBE2;
+			background:#30C9B7;
 			content:" ";
 			height:264px;
 			left:0;
@@ -24,8 +24,26 @@
 			top:0;width:100%
 		}
 
-	
+		.wrapper 
+		{
+			position: relative;
+		}
 
+		.sign-out 
+		{
+			position: absolute;
+			top: 20px; /* Adjust the top position as needed */
+			right: 20px; /* Adjust the right position as needed */
+		}
+
+		
+		.sign-out-link 
+		{
+			text-decoration: none; /* Remove underline */
+			color: #000; /* Set color */
+			border: none; /* Remove border */
+			outline: none; /* Remove outline */
+		}
 
 	</style>
 	<script src="js/settings.js"></script>
@@ -37,7 +55,7 @@
 
     <div class="wrapper" >
 		<nav id="sidebar" class="sidebar">
-			<a class="sidebar-brand"  style="background: #66DBE2;" href="dashboard">
+			<a class="sidebar-brand"  style="background: #30C9B7;" href="dashboard">
 				<img src=""	 style="height: 50px;">
 				FK Kiosk Management
 			</a>
@@ -83,20 +101,6 @@
                               </svg><span class="align-middle">Kiosk Sales</span>
 						</a>
 					</li>
-                    <li class="sidebar-item">
-						<a class="sidebar-link" href="/manageKiosk-admin">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-dots-fill" viewBox="0 0 16 16">
-                                <path d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                              </svg> <span class="align-middle">Manage Kiosk</span>
-						</a>
-					</li>
-                    <li class="sidebar-item">
-						<a class="sidebar-link" href="/logout">
-							<svg width="16" height="16" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M13.5 7.5L10.5 10.75M13.5 7.5L10.5 4.5M13.5 7.5L4 7.5M8 13.5H1.5L1.5 1.5L8 1.5" stroke="#000000"/>
-								</svg><span class="align-middle">Sign Out</span>
-						</a>
-					</li>
 				</ul>
 			</div>
 		</nav>
@@ -107,7 +111,8 @@
 				<div class="container-fluid" >
 
 					{{-- Yield --}}
-					@yield('Sale.sale')
+                    @yield('contents')
+
 
 					</div>
 
@@ -125,6 +130,15 @@
 					</div>
 				</div>
 			</footer>
+
+			<!-- Right-aligned Sign Out link -->
+            <div class="sign-out">  
+                <a class="sidebar-link sign-out-link" href="/logout">
+                    <svg width="16" height="16" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.5 7.5L10.5 10.75M13.5 7.5L10.5 4.5M13.5 7.5L4 7.5M8 13.5H1.5L1.5 1.5L8 1.5" stroke="#000000"/>
+                    </svg><span class="align-middle">Sign Out</span>
+                 </a>
+            </div>
 		</div>
 
 	</div>
