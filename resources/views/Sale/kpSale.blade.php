@@ -8,7 +8,7 @@
         </h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="dashboardAdmin.php">Kiosk Sales</a></li>
+                <li class="breadcrumb-item"><a href="sale.php">Kiosk Sales</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Sales List</a></li>
             </ol>
         </nav>
@@ -112,7 +112,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body m-3">
-                <form method="POST" action="/complaint" enctype="multipart/form-data">
+                <form method="POST" action="addSale" enctype="multipart/form-data">
                     @csrf
                     <!--Kiosk Number-->
                     <div class="form-group">
@@ -154,16 +154,16 @@
             datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
         });
 
-        function deleteUser(userID) {
-            if (confirm("Are you sure you want to delete this user?")) {
+        function deleteSale(saleID) {
+            if (confirm("Are you sure you want to delete this?")) {
                 var form = document.createElement("form");
                 form.method = "post";
-                form.action = "admin-deleteUser.php";
+                form.action = "deleteSale.php";
 
                 var input = document.createElement("input");
                 input.type = "hidden";
-                input.name = "userID";
-                input.value = userID;
+                input.name = "saleID";
+                input.value = saleID;
 
                 form.appendChild(input);
 

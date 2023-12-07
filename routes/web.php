@@ -19,12 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Route::get('/sale', function () {
-    return view('Sale/sale');
-});*/
+
+//route for kiosk participant sale
+Route::get('gotosale', function () {
+    return view('Sale.kpsale');
+});
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
 Route::resource('complaint', ComplaintController::class);
-Route::resource('sale', SaleController::class);
