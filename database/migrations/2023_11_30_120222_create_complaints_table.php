@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('complaints', function (Blueprint $table) {
-            $table->id();
+            $table->id('compID');
             $table->unsignedBigInteger('userID'); // Foreign Key
             $table->foreign('userID')->references('id')->on('users');
             $table->string('compName');

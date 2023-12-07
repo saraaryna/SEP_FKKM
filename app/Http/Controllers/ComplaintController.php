@@ -72,7 +72,12 @@ class ComplaintController extends Controller
      */
     public function update(UpdateComplaintRequest $request, Complaint $complaint)
     {
-        //
+        $complaint->compDateOccured = $request->compDateOccured;
+        $complaint->compKioskNum = $request->compKioskNum;
+        $complaint->compPhoneNum = $request->compPhoneNum;
+
+        $complaint->save();
+
     }
 
     /**

@@ -16,7 +16,8 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <a href="#" class="btn btn-info" style="float: right;" data-bs-toggle="modal" data-bs-target="#addApp">+
+                <a href="#" class="btn btn-info" style="float: right;" data-bs-toggle="modal"
+                    data-bs-target="#addComplaint">+
                     New Application</a>
             </div>
             <div class="card-body">
@@ -64,13 +65,54 @@
     </div>
 </div>
 </div>
-
+<!--Modal Kemaskini-->
+<div class="modal fade" id="update-{{ $complaint->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropL abel">Update</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body m-3">
+                <form method="POST" action="/complaint/{{ $complaint->id }}">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="id" value="{{$complaint->id}}">
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Complaint</label>
+                            <input class="form-control" name="compDateOccured" type="date" id="inputcompDateOccured"
+                                value="{{$complaint->compDateOccured}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Kiosk Number</label>
+                            <input class="form-control" name="compKioskNum" type="text" id="inputcompKioskNum"
+                                value="{{$complaint->compKioskNum}}">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input class="form-control" name="compPhoneNum" type="text" id="inputcompPhoneNum"
+                                value="{{$complaint->compPhoneNum}}">
+                        </div>
+                        
+                
+                    </div>
+                    <br>
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">CLOSE</button>
+                    <button type="submit" class="btn btn-primary">UPDATE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+              
+</div>
 <!-- Modal -->
-<div class="modal fade" id="addApp" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="addComplaint" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">New Application</h5>
+                <h5 class="modal-title">New Complaint</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body m-3">
