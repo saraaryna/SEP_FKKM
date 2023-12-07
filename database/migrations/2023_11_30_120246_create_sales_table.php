@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('userID'); // Foreign Key userID
+            $table->foreign('userID')->references('id')->on('users');
+            $table->unsignedBigInteger('kioskID'); // Foreign Key kioskID
+            $table->foreign('kioskID')->references('id')->on('kiosks');
+            $table->date('salesDate');
+            $table->float('salesTotal', 8, 2);
             $table->timestamps();
+
         });
     }
 
