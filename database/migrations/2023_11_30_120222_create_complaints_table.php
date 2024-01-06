@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('complaints', function (Blueprint $table) {
             $table->id('compID');
             $table->unsignedBigInteger('userID'); // Foreign Key
-            $table->foreign('userID')->references('id')->on('users');
+            $table->foreign('userID')->references('userID')->on('users');
             $table->string('compName');
-            $table->datetime('compDate');
+            $table->timestamp('compDate');
             $table->date('compDateOccured');
             $table->integer('compKioskNum');
             $table->string('compPhoneNum');
