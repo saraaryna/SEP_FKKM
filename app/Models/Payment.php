@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-    use HasFactory;
+    protected $primaryKey = 'payID';
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'userID');
+    }
+
+    public function application() 
+    {
+        return $this->belongsTo(Application::class, 'appID');
+    }
 }

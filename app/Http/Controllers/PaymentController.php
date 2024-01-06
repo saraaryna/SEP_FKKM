@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use App\Models\User;
+use App\Models\Application;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
 
@@ -13,7 +15,15 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $payment = Payment::all();
+        $user = User::find(1);
+        $application = Application::find(1);
+       return view('Payment.kpPayment',[
+           'payment' => $payment,
+           'user' => $user,
+           'application' => $application,
+       ]);
+
     }
 
     /**
