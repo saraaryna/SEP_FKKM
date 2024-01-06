@@ -16,7 +16,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <a href="#" class="btn btn-info" style="float: right; background-color: #66DBE2; color:black;" data-bs-toggle="modal" data-bs-target="#addApp">+ Add Payment</a>
+                <a href="#" class="btn btn-info" style="float: right; background-color: #66DBE2; color:black;" data-bs-toggle="modal" data-bs-target="#addPayment">+ Add Payment</a>
             </div>
             <div class="card-body">
                 <table id="datatables-buttons" class="table table-striped" style="width:100%">
@@ -35,8 +35,6 @@
                     <tbody>
                         <tr>
                         @foreach($payment as $payment)
-                        @foreach($user as $user)
-                        @foreach($application as $application)
                         <td class="text-xs">{{ $loop->index + 1 }}</td>
                         <td class="text-xs">{{$user->name}}</td>
                         <td class="text-xs">{{$application->appBusinessType}}</td>
@@ -124,8 +122,6 @@
                         </div>
                     </div>
                 @endforeach
-                @endforeach
-                @endforeach
 
             </tbody>
         </table>
@@ -136,7 +132,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="addApp" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="addPayment" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -144,29 +140,34 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body m-3">
-                <form method="POST" action="/dashboard-admin" enctype="multipart/form-data">
+                <form method="POST" action="/addPayment" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id" value="">
                      <div class="form-group">
                          <label for="name">Payment For</label>
-                         <input type="text" class="form-control" id="payFor" name="payFor" required>
-                     </div>
+                         <select class="form-control" id="payFor" name="payFor" required>
+                            <option disabled selected value="Kiosk Number">Kiosk Number</option>
+                            <option value="Kiosk Number 1">Kiosk Number 1</option>
+                            <option value="Kiosk Number 2">Kiosk Number 2</option>
+                            <option value="Kiosk Number 3">Kiosk Number 3</option>
+                        </select>   
+                        </div>
                      <div class="form-group">
                          <label for="email">Fee Type</label>
-                         <select class="form-control" id="appBusinessType" name="appBusinessType" required>
+                         <select class="form-control" id="payFeeType" name="payFeeType" required>
                              <option disabled selected value="Select Business Type">Fee Type</option>
-                             <option value="Food">Food</option>
-                             <option value="Beverages">Beverages</option>
+                             <option value="Rental">Rental</option>
+                             <option value="Compound">Compound</option>
                              <option value="Others">Others</option>
                          </select>                    
                      </div>
                      <div class="form-group">
                          <label for="contactNumber">Payment Total(MYR)</label>
-                         <input type="text" class="form-control" id="appPhoneNum" name="appPhoneNum" required>
+                         <input type="text" class="form-control" id="payFeeTotal" name="payFeeTotal" required>
                      </div>
                      <div class="form-group">
                          <label for="appKioskNum">Kiosk Number</label>
-                         <select class="form-control" id="appKioskNum" name="appKioskNum" required>
+                         <select class="form-control" id="payKioskNum" name="payKioskNum" required>
                              <option disabled selected value="Kiosk Number">Select Kiosk Number</option>
                              <option value="1">1</option>
                              <option value="2">2</option>
@@ -176,23 +177,24 @@
                      </div>
                      <div class="form-group">
                          <label for="appBusinessPeriod">Name</label>
-                         <input type="text" class="form-control" id="appName" name="appName" required>
+                         <label for="appBusinessPeriod">{{ $user->name }}</label>
                      </div>
                      <div class="form-group">
                          <label for="appBusinessPeriod">Email Address</label>
-                         <input type="text" class="form-control" id="appName" name="appName" required>
+                         <input type="text" class="form-control" id="payEmail" name="payEmail" required>
                      </div>
                      <div class="form-group">
                          <label for="appBusinessPeriod">Remarks</label>
-                         <input type="text" class="form-control" id="appName" name="appName" required>
+                         <input type="text" class="form-control" id="payRemarks" name="payRemarks" required>
                      </div>
                      <div class="form-group">
                          <label for="appBusinessPeriod">Proof of Payment</label>
-                         <input type="text" class="form-control" id="appName" name="appName" required>
+                         <input type="file" class="form-control" id="payProof" name="payProof" required>
                      </div>
+                     <input type="hidden" id="payDate" name="payDate" value="<?php echo date('Y-m-d'); ?>" required>
                      <div class="modal-footer">
                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                         <button type="submit" class="btn btn-info" name="addApp">Submit</button>
+                         <button type="submit" class="btn btn-info" name="addPayment">Submit</button>
                      </div>
                 </form>
             </div>
@@ -201,6 +203,9 @@
 
     <script>
 		document.addEventListener("DOMContentLoaded", function() {
+            var currentDate = new Date().toISOString().split('T')[0];
+            
+            document.getElementById('payDate').value = currentDate;
 			// Datatables basic
 			$('#datatables-basic').DataTable({
 				responsive: true

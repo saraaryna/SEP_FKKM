@@ -20,4 +20,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/kpPayment', [App\Http\Controllers\PaymentController::class, 'index'])->name('kpPayment');
+Route::get('/kpPayment', [App\Http\Controllers\Payment\kpPaymentController::class, 'index'])->name('kpPayment');
+Route::post('/addPayment', [App\Http\Controllers\Payment\kpPaymentController::class, 'store'])->name('addPayment');
