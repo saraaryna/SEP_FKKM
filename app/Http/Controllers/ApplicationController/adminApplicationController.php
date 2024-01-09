@@ -1,17 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ApplicationController;
 
+use App\Http\Controllers\Controller;
 use App\Models\Application;
 use App\Models\User;
 use App\Http\Requests\StoreApplicationRequest;
 use App\Http\Requests\UpdateApplicationRequest;
 
-class ApplicationController extends Controller
+class adminApplicationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         $application = Application::all();
@@ -23,17 +22,7 @@ class ApplicationController extends Controller
 
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreApplicationRequest $request)
     {
         $application = New Application;
@@ -52,18 +41,12 @@ class ApplicationController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Application $application)
     {
         //
     }
 
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateApplicationRequest $request, Application $application)
     {
         $application = Application ::where('id', $request->id)->where('appStatus','In progress')->get()->first();
@@ -81,9 +64,7 @@ class ApplicationController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Application $application)
     {
         $application->delete();
