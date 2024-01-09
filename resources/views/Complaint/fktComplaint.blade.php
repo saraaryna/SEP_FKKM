@@ -16,19 +16,18 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <a href="#" class="btn btn-info" style="float: right;" data-bs-toggle="modal"
-                    data-bs-target="#addComplaint">+
-                    New Application</a>
+
             </div>
             <div class="card-body">
                 <table id="datatables-buttons" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
                             <th>NO</th>
+                            <th>Complaint Name</th>
                             <th>Kiosk Number</th>
-                            <th>Complaint Type</th>
                             <th>Complaint Date</th>
-                            <th>Description</th>
+                            <th>Complaint Type</th>
+                            <th>PIC</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -37,10 +36,11 @@
                         <tr>
                             @foreach($complaint as $complaint)
                             <td class="text-xs">{{ $loop->index + 1 }}</td>
+                            <td class="text-xs">{{$complaint->compName}}</td>
                             <td class="text-xs">{{$complaint->compKioskNum}}</td>
-                            <td class="text-xs">{{$complaint->compType}}</td>
                             <td class="text-xs">{{$complaint->compDate}}</td>
-                            <td class="text-xs">{{$complaint->compDescription}}</td>
+                            <td class="text-xs">{{$complaint->compType}}</td>
+                            <td class="text-xs">{{$complaint->compPIC}}</td>
                             <td style="text-xs">
                                 @if ($complaint->compStatus === "Approved")
                                 <span class="badge rounded-pill bg-success">{{ $complaint->compStatus}}</span>
@@ -51,8 +51,10 @@
                             </td>
                             @endif
                             <td class="table-action">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#update-{{ $complaint->id }}"><i
-                                        class="align-middle fas fa-fw fa-pen"></i></i></a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#update-{{ $complaint->userID }}"><i
+                                        class="align-middle fas fa-fw fa-bell"></i></i></a>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#destroy-{{ $complaint->userID }}"><i
+                                        class="align-middle fas fa-fw fa-trash"></i></i></a>
                                 <a href="/complaint/{{$complaint->id}}/delete"><i
                                         class="align-middle fas fa-fw fa-trash"></i></a>
                             </td>
@@ -65,7 +67,66 @@
     </div>
 </div>
 </div>
+<!--Modal Update PIC-->
+<div class="modal fade" id="update-{{ $complaint->userID }}" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropL abel">Assign Person</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body m-3">
+                <form method="POST" action="/fktComplaintEdit">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="complaintID" value="{{$complaint->complaintID}}">
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Person In Charge</label>
+                            <input type="text" class="form-control" id="compPIC" name="compPIC">
+                        </div>
 
+                    </div>
+                    <br>
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">CLOSE</button>
+                    <button type="submit" class="btn btn-primary">UPDATE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+              
+</div>
+<!--Modal Update Status-->
+<div class="modal fade" id="destroy-{{ $complaint->userID }}" data-bs-backdrop="static" data-bs-keyboard="false"
+    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropL abel">Assign Person</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body m-3">
+                <form method="POST" action="/fktComplaintEdit">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="complaintID" value="{{$complaint->complaintID}}">
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Person In Charge</label>
+                            <input type="text" class="form-control" id="compPIC" name="compPIC">
+                        </div>
+
+                    </div>
+                    <br>
+                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">CLOSE</button>
+                    <button type="submit" class="btn btn-primary">UPDATE</button>
+                </form>
+            </div>
+        </div>
+    </div>
+              
+</div>
 <!-- Modal -->
 <div class="modal fade" id="addComplaint" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
