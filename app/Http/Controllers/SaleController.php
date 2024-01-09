@@ -13,10 +13,7 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $sale = Sale::all();
-        return view('Sale.sale', [
-            'sale' => $sale
-        ]);
+        //
     }
 
     /**
@@ -40,9 +37,7 @@ class SaleController extends Controller
      */
     public function show(Sale $sale)
     {
-        //show popup details
-        return view('Sale.Admin.dashboard', []);
-       
+        //
     }
 
     /**
@@ -59,14 +54,6 @@ class SaleController extends Controller
     public function update(UpdateSaleRequest $request, Sale $sale)
     {
         //
-        $sale->salesDate = $request->salesDate;
-        $sale->salesTotal = $request->salesTotal;
-
-        //save sale model to database
-        $sale->save();
-
-        return redirect('/dashboard-admin');
-
     }
 
     /**
@@ -75,9 +62,5 @@ class SaleController extends Controller
     public function destroy(Sale $sale)
     {
         //
-        $sale->delete();
-
-        return redirect('/dashboard-admin');
-
     }
 }

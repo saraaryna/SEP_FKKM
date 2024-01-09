@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\ComplaintController;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Complaint;
 use App\Http\Requests\StoreComplaintRequest;
 use App\Http\Requests\UpdateComplaintRequest;
@@ -14,10 +13,7 @@ class ComplaintController extends Controller
      */
     public function index()
     {
-        $complaint = Complaint::all();
-        return view('Complaint.complaint', [
-            'complaint' => $complaint
-        ]);
+        //
     }
 
     /**
@@ -33,24 +29,8 @@ class ComplaintController extends Controller
      */
     public function store(StoreComplaintRequest $request)
     {
-        $complaint = new Complaint;
-
-        // Store the uploaded file
-        //$compEvidence = $request->file('compEvidence')->store('banner');
-
-        // Set values for the Complaint model
-        $complaint->compDateOccured = $request->compDateOccured;
-        $complaint->compKioskNum = $request->compKioskNum;
-        $complaint->compPhoneNum = $request->compPhoneNum;
-        $complaint->compType = $request->compType;
-        //$complaint->compEvidence = $compEvidence;
-
-        // Save the Complaint model to the database
-        $complaint->save();
-
-        return redirect('/complaint');
+        //
     }
-
 
     /**
      * Display the specified resource.
@@ -73,12 +53,7 @@ class ComplaintController extends Controller
      */
     public function update(UpdateComplaintRequest $request, Complaint $complaint)
     {
-        $complaint->compDateOccured = $request->compDateOccured;
-        $complaint->compKioskNum = $request->compKioskNum;
-        $complaint->compPhoneNum = $request->compPhoneNum;
-
-        $complaint->save();
-
+        //
     }
 
     /**

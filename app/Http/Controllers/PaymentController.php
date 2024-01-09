@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\PaymentController;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;

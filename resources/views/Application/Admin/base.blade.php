@@ -45,8 +45,8 @@
 			</a>
 			<div class="sidebar-content">
 				<div class="sidebar-user">
-					{{-- <span class="d-sm-inline d-none">{{$user->name}}</span>
-					<span class="d-sm-inline d-none">{{$user->role}}</span> --}}
+					<span class="d-sm-inline d-none">{{$user->name}}</span>
+					<span class="d-sm-inline d-none">{{$user->role}}</span>
 				</div>
 
 				<ul class="sidebar-nav">

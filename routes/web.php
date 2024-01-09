@@ -1,11 +1,8 @@
 <?php
 
-use App\Http\Controllers\ApplicationController\adminApplicationController;
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\KioskController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ComplaintController\kpComplaintController;
-use App\Http\Controllers\SaleController;
-use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,14 +24,9 @@ Route::get('/', function () {
 // });
 
 // require __DIR__.'/auth.php';
-/*Route::get('/sale', function () {
-    return view('Sale/sale');
-});*/
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/dashboard-admin', adminApplicationController::class);
+Route::resource('/dashboard-admin', ApplicationController::class);
 Route::resource('/kiosk-admin', KioskController::class);
-Route::resource('complaint', kpComplaintController::class);
-Route::resource('sale', SaleController::class);
