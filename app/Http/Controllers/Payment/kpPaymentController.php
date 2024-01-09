@@ -8,6 +8,9 @@ use App\Models\Application;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 
 class kpPaymentController extends Controller
 {
@@ -16,22 +19,39 @@ class kpPaymentController extends Controller
      */
     public function index()
     {
-        $userID = "1";
-        $payment = Payment::all();
-        $user = User::find($userID);
-        $application = Application::find($userID);
-       return view('Payment.kpPayment',[
-           'payment' => $payment,
-           'user' => $user,
-           'application' => $application,
-       ]);
+        $user = Auth::user();
+
+        if ($user) {
+            $payment = Payment::where('userID', $user->userID)->get();
+            $application = Application::where('userID', $user->userID)->first();
+            $totalPayment = $user->payment()->sum('payFeeTotal');
+            $totalInvoice = '3700.00';
+            $totalCredit = $totalPayment - $totalInvoice;
+            $balances = $totalInvoice - $totalPayment;
+
+            return view('Payment.kpPayment',[
+                'payment' => $payment,
+                'user' => $user,
+                'application' => $application,
+                'totalPayment' => $totalPayment,
+                'totalInvoice' => $totalInvoice,
+                'totalCredit' => $totalCredit,
+                'balances' => $balances,
+
+
+            ]);
+        }else {
+            // If the user is not logged in, redirect them to the login page
+            return redirect()->route('home');
+        }
 
     }
 
+    
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function createPayment()
     {
         //
     }
@@ -39,9 +59,10 @@ class kpPaymentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePaymentRequest $request)
+    public function savePayment(StorePaymentRequest $request)
     {
-        $user = User::find(1);
+        $user = Auth::user();
+
         $application = Application::find(1);
         $payment = new Payment;
         $payment1 = Payment::all();
@@ -63,42 +84,29 @@ class kpPaymentController extends Controller
         // Save the payment model to the database
         $payment->save();
 
-        return view('Payment.kpPayment',[
-            'payment' => $payment1,
-            'user' => $user,
-            'application' => $application,
-        ]);
+        return redirect()->route('kpPayment');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Payment $payment)
+    public function indexInvoice()
     {
-        //
+        $user = Auth::user();
+
+        if ($user) {
+            $payment = Payment::where('userID', $user->userID)->get();
+            $application = Application::where('userID', $user->userID)->first();
+
+            return view('Payment.kpInvoice',[
+                'payment' => $payment,
+                'user' => $user,
+                'application' => $application,
+
+
+            ]);
+        }else {
+            // If the user is not logged in, redirect them to the login page
+            return redirect()->route('home');
+        }
+
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatePaymentRequest $request, Payment $payment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Payment $payment)
-    {
-        //
-    }
 }
