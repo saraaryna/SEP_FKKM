@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id('appID');
-            $table->unsignedBigInteger('userID'); // Foreign Key userID
-            $table->foreign('userID')->references('id')->on('users');
-            $table->unsignedBigInteger('kioskID'); // Foreign Key kioskID
-            $table->foreign('kioskID')->references('id')->on('kiosks');
-            $table->enum('appBusinessType', ['Food & Beverages', 'Clothing', 'Beauty & Personal Care', 'Others']);
-            $table->date('appStartDate');
-            $table->enum('appStatus', ['In Progress', 'Approved', 'Rejected']);
+            $table->unsignedBigInteger('userID'); // Foreign Key
+            $table->foreign('userID')->references('userID')->on('users');
+            $table->string('appName');
+            $table->string('appPhoneNum');
+            $table->string('appBusinessType');
+            $table->string('appKioskNum');
+            $table->dateTime('appBusinessPeriod');
+            $table->enum('appStatus', ['Approved', 'Rejected', 'In Progress']); 
             $table->timestamps();
         });
     }

@@ -1,5 +1,5 @@
 @extends('Complaint.base')
-@section('Complaint.complaint')
+@section('Complaint.kpComplaint')
 
 <div class="container-fluid">
     <div class="header">
@@ -53,7 +53,7 @@
                             <td class="table-action">
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#update-{{ $complaint->id }}"><i
                                         class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                <a href="/complaint/{{$complaint->id}}/delete"><i
+                                <a href="/kpcomplaint/{{$complaint->id}}/delete"><i
                                         class="align-middle fas fa-fw fa-trash"></i></a>
                             </td>
                         </tr>
@@ -65,48 +65,7 @@
     </div>
 </div>
 </div>
-<!--Modal Kemaskini-->
-<div class="modal fade" id="update-{{ $complaint->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropL abel">Update</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body m-3">
-                <form method="POST" action="/complaint/{{ $complaint->id }}">
-                    @csrf
-                    @method('PUT')
-                    <input type="hidden" name="id" value="{{$complaint->id}}">
-                    <div class="row">
-                        <div class="form-group">
-                            <label>Complaint</label>
-                            <input class="form-control" name="compDateOccured" type="date" id="inputcompDateOccured"
-                                value="{{$complaint->compDateOccured}}">
-                        </div>
-                        <div class="form-group">
-                            <label>Kiosk Number</label>
-                            <input class="form-control" name="compKioskNum" type="text" id="inputcompKioskNum"
-                                value="{{$complaint->compKioskNum}}">
-                        </div>
-                        <div class="form-group">
-                            <label>Phone Number</label>
-                            <input class="form-control" name="compPhoneNum" type="text" id="inputcompPhoneNum"
-                                value="{{$complaint->compPhoneNum}}">
-                        </div>
-                        
-                
-                    </div>
-                    <br>
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">CLOSE</button>
-                    <button type="submit" class="btn btn-primary">UPDATE</button>
-                </form>
-            </div>
-        </div>
-    </div>
-              
-</div>
+
 <!-- Modal -->
 <div class="modal fade" id="addComplaint" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -116,19 +75,24 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body m-3">
-                <form method="POST" action="/complaint" enctype="multipart/form-data">
+                <form method="POST" action="/kpComplaint" enctype="multipart/form-data">
                     @csrf
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="compName" name="compName" required>
+                    </div>
                     <div class="form-group">
                         <label for="name">Date Occured</label>
                         <input type="date" class="form-control" id="compDateOccured" name="compDateOccured" required>
                     </div>
+                    <input type="hidden" name="userID" value="1">
                     <div class="form-group">
-                        <label for="ic">Kiosk Number</label>
-                        <input type="text" class="form-control" id="compKioskNum" name="compKioskNum" required>
+                        <label for="num">Kiosk Number</label>
+                        <input type="number" class="form-control" id="compKioskNum" name="compKioskNum" required>
                     </div>
                     <div class="form-group">
                         <label for="num">Phone Number</label>
-                        <input type="text" class="form-control" id="compPhoneNum" name="compKioskNum" required>
+                        <input type="text" class="form-control" id="compPhoneNum" name="compPhoneNum" required>
                     </div>
                     <div class="form-group">
                         <label for="role">Complaint Type</label>
@@ -137,6 +101,10 @@
                             <option value="Technical Issue">Technical Issue</option>
                         </select>
                     </div>
+                    <input type="hidden" name="compDescription" value="testing">
+                    <input type="hidden" name="compEvidence" value="evidence">
+                    <input type="hidden" name="compStatus" value="In Investigation">
+                    <input type="hidden" name="compPIC" value="None">
                     <div class="form-group">
                         <label>Upload Evidence</label>
                         <input type="file" name="compEvidence" class="form-control" id="inputFile">

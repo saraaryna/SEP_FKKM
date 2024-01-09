@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+    protected $primaryKey = 'userID';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,6 +45,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+<<<<<<< HEAD
 
     public function applications()
     {
@@ -52,6 +54,12 @@ class User extends Authenticatable
 
  
     
+=======
+    public function complaint()
+    {
+        return $this->hasMany(Complaint::class, 'userID');
+    }
+>>>>>>> 74c00ffd8e607c3a5c1ad53cf7d1a3729e8504a2
 }
 
 
