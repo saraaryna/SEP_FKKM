@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Complaint;
+namespace App\Http\Controllers\ComplaintController;
 
 use App\Http\Controllers\Controller;
 use App\Models\Complaint;
 use App\Models\User;
 use App\Http\Requests\StoreComplaintRequest;
 use App\Http\Requests\UpdateComplaintRequest;
+use Illuminate\Support\Facades\Auth;
 
 
 class kpComplaintController extends Controller
@@ -16,12 +17,19 @@ class kpComplaintController extends Controller
      */
     public function index()
     {
-        $complaint = Complaint::all();
-        $user = User::find(1);
-        return view('Complaint.kpComplaint', [
-            'complaint' => $complaint,
-            'user' => $user,
-        ]);
+
+        $user = Auth::user();
+
+        if ($user) {
+            $complaint = Complaint::where('userID', $user->userID)->get();
+            return view('Complaint.kpComplaint', [
+                'complaint' => $complaint,
+                'user' => $user,
+            ]);
+        } else {
+            // If the user is not logged in, redirect them to the login page
+            return redirect()->route('home');
+        }
     }
 
     /**
@@ -38,12 +46,13 @@ class kpComplaintController extends Controller
     public function store(StoreComplaintRequest $request)
     {
         $complaint = new Complaint;
+        $user = Auth::user();
 
         // Store the uploaded file
         //$compEvidence = $request->file('compEvidence')->store('banner');
 
         // Set values for the Complaint model
-        $complaint->userID = $request->userID;
+        $complaint->userID = $user->userID;;
         $complaint->compName = $request->compName;
         $complaint->compDate = $request->compDate;
         $complaint->compDateOccured = $request->compDateOccured;
@@ -84,8 +93,9 @@ class kpComplaintController extends Controller
      */
     public function update(UpdateComplaintRequest $request, Complaint $complaint)
     {
+
         $complaint->complaintID = $request->complaintID;
-        $complaint= Complaint::find($complaint->complaintID);
+        $complaint = Complaint::find($complaint->complaintID);
         $complaint->compName = $request->compName;
         $complaint->compDateOccured = $request->compDateOccured;
         $complaint->compKioskNum = $request->compKioskNum;

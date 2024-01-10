@@ -53,13 +53,119 @@
                             <td class="table-action">
                                 <a href="#" data-bs-toggle="modal" data-bs-target=""><i
                                         class="align-middle fas fa-fw fa-eye"></i></i></a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#update-{{ $complaint->userID }}"><i
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#update-{{ $complaint->complaintID }}"><i
                                         class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#destroy-{{ $complaint->userID }}"><i
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#destroy-{{ $complaint->complaintID }}"><i
                                         class="align-middle fas fa-fw fa-trash"></i></i></a>
 
                             </td>
                         </tr>
+                        <!-- Modal Update-->
+                        <div class="modal fade" id="update-{{ $complaint->complaintID }}" data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropL abel">Assign Person</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body m-3">
+                                        <form method="POST" action="/kpComplaintEdit">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="complaintID" value="{{$complaint->complaintID}}">
+                                            <div class="row">
+
+                                                <div class="form-group">
+                                                    <label>Complaint Name</label>
+                                                    <input type="text" class="form-control" id="compName"
+                                                        name="compName" value="{{$complaint->compName}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Complaint Date</label>
+                                                    <input type="text" class="form-control" id="compDate"
+                                                        name="compDate" value="{{$complaint->compDate}}" disabled>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Date Occured</label>
+                                                    <input type="date" class="form-control" id="compDateOccured"
+                                                        name="compDateOccured" value="{{$complaint->compDateOccured}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Kiosk Number</label>
+                                                    <input type="number" class="form-control" id="compKioskNum"
+                                                        name="compKioskNum" value="{{$complaint->compKioskNum}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Phone Number</label>
+                                                    <input type="number" class="form-control" id="compPhoneNum"
+                                                        name="compPhoneNum" value="{{$complaint->compPhoneNum}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Description</label>
+                                                    <input type="text" class="form-control" id="compDescription"
+                                                        name="compDescription" value="{{$complaint->compDescription}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Complaint Type</label>
+                                                    <select class="form-control" id="compType" name="compType">
+                                                        @if ($complaint->compType == "Maintainance")
+                                                        <option value="Maintainance" selected>Maintainance</option>
+                                                        <option value="Technical Issue">Technical Issue</option>
+                                                        <option value="Accessibility Issues">Accessibility Issues
+                                                        </option>
+                                                        <option value="Financial Concerns">Financial Concerns</option>
+                                                        <option value="Others">Others</option>
+                                                        @elseif ($complaint->compType == "Technical Issue")
+                                                        <option value="Maintainance">Maintainance</option>
+                                                        <option value="Technical Issue" selected>Technical Issue
+                                                        </option>
+                                                        <option value="Accessibility Issues">Accessibility Issues
+                                                        </option>
+                                                        <option value="Financial Concerns">Financial Concerns</option>
+                                                        <option value="Others">Others</option>
+                                                        @elseif ($complaint->compType == "Accessibility Issues")
+                                                        <option value="Maintainance">Maintainance</option>
+                                                        <option value="Technical Issue">Technical Issue</option>
+                                                        <option value="Accessibility Issues" selected>Accessibility
+                                                            Issues</option>
+                                                        <option value="Financial Concerns">Financial Concerns</option>
+                                                        <option value="Others">Others</option>
+                                                        @elseif ($complaint->compType == "Financial Concerns")
+                                                        <option value="Maintainance">Maintainance</option>
+                                                        <option value="Technical Issue">Technical Issue</option>
+                                                        <option value="Accessibility Issues">Accessibility Issues
+                                                        </option>
+                                                        <option value="Financial Concerns" selected>Financial Concerns
+                                                        </option>
+                                                        <option value="Others">Others</option>
+                                                        @elseif ($complaint->compType == "Others")
+                                                        <option value="Maintainance">Maintainance</option>
+                                                        <option value="Technical Issue">Technical Issue</option>
+                                                        <option value="Accessibility Issues">Accessibility Issues
+                                                        </option>
+                                                        <option value="Financial Concerns" selected>Financial Concerns
+                                                        </option>
+                                                        <option value="Others" selected>Others</option>
+                                                        @endif
+                                                    </select>
+                                                </div>
+
+
+
+                                            </div>
+                                            <br>
+                                            <button type="button" class="btn btn-outline-primary"
+                                                data-bs-dismiss="modal">CLOSE</button>
+                                            <button type="submit" class="btn btn-primary">UPDATE</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                                      
+                        </div>
                         @endforeach
                     </tbody>
                 </table>
@@ -68,101 +174,7 @@
     </div>
 </div>
 </div>
-<div class="modal fade" id="update-{{ $complaint->userID }}" data-bs-backdrop="static" data-bs-keyboard="false"
-    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropL abel">Assign Person</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body m-3">
-                <form method="POST" action="/kpComplaintEdit">
-                    @csrf
-                    @method('PUT')
-                    <input type="hidden" name="complaintID" value="{{$complaint->complaintID}}">
-                    <div class="row">
-
-                        <div class="form-group">
-                            <label>Complaint Name</label>
-                            <input type="text" class="form-control" id="compName" name="compName"
-                                value="{{$complaint->compName}}">
-                        </div>
-                        <div class="form-group">
-                            <label>Complaint Date</label>
-                            <input type="text" class="form-control" id="compDate" name="compDate"
-                                value="{{$complaint->compDate}}" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label>Date Occured</label>
-                            <input type="date" class="form-control" id="compDateOccured" name="compDateOccured"
-                                value="{{$complaint->compDateOccured}}">
-                        </div>
-                        <div class="form-group">
-                            <label>Kiosk Number</label>
-                            <input type="number" class="form-control" id="compKioskNum" name="compKioskNum"
-                                value="{{$complaint->compKioskNum}}">
-                        </div>
-                        <div class="form-group">
-                            <label>Phone Number</label>
-                            <input type="number" class="form-control" id="compPhoneNum" name="compPhoneNum"
-                                value="{{$complaint->compPhoneNum}}">
-                        </div>
-                        <div class="form-group">
-                            <label>Description</label>
-                            <input type="text" class="form-control" id="compDescription" name="compDescription"
-                                value="{{$complaint->compDescription}}">
-                        </div>
-                        <div class="form-group">
-                            <label>Complaint Type</label>
-                            <select class="form-control" id="compType" name="compType">
-                                @if ($complaint->compType == "Maintainance")
-                                <option value="Maintainance" selected>Maintainance</option>
-                                <option value="Technical Issue">Technical Issue</option>
-                                <option value="Accessibility Issues">Accessibility Issues</option>
-                                <option value="Financial Concerns">Financial Concerns</option>
-                                <option value="Others">Others</option>
-                                @elseif ($complaint->compType == "Technical Issue")
-                                <option value="Maintainance">Maintainance</option>
-                                <option value="Technical Issue" selected>Technical Issue</option>
-                                <option value="Accessibility Issues">Accessibility Issues</option>
-                                <option value="Financial Concerns">Financial Concerns</option>
-                                <option value="Others">Others</option>
-                                @elseif ($complaint->compType == "Accessibility Issues")
-                                <option value="Maintainance">Maintainance</option>
-                                <option value="Technical Issue">Technical Issue</option>
-                                <option value="Accessibility Issues" selected>Accessibility Issues</option>
-                                <option value="Financial Concerns">Financial Concerns</option>
-                                <option value="Others">Others</option>
-                                @elseif ($complaint->compType == "Financial Concerns")
-                                <option value="Maintainance">Maintainance</option>
-                                <option value="Technical Issue">Technical Issue</option>
-                                <option value="Accessibility Issues">Accessibility Issues</option>
-                                <option value="Financial Concerns" selected>Financial Concerns</option>
-                                <option value="Others">Others</option>
-                                @elseif ($complaint->compType == "Others")
-                                <option value="Maintainance">Maintainance</option>
-                                <option value="Technical Issue">Technical Issue</option>
-                                <option value="Accessibility Issues">Accessibility Issues</option>
-                                <option value="Financial Concerns" selected>Financial Concerns</option>
-                                <option value="Others" selected>Others</option>
-                                @endif
-                            </select>
-                        </div>
-
-
-
-                    </div>
-                    <br>
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">CLOSE</button>
-                    <button type="submit" class="btn btn-primary">UPDATE</button>
-                </form>
-            </div>
-        </div>
-    </div>
-              
-</div>
-<!-- Modal -->
+<!-- Modal-->
 <div class="modal fade" id="addComplaint" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -243,7 +255,7 @@
             if (confirm("Are you sure you want to delete this user?")) {
                 var form = document.createElement("form");
                 form.method = "post";
-                form.action = "admin-deleteUser.php";
+                form.action = "/kpComplaintDestroy";
 
                 var input = document.createElement("input");
                 input.type = "hidden";

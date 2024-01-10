@@ -26,13 +26,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+/* Kiosk */
+Route::get('/adminKiosk', [App\Http\Controllers\KioskController\KioskController::class, 'index'])->name('adminKiosk');
+
 /* Complaint */
-Route::get('/kpComplaint', [App\Http\Controllers\Complaint\kpComplaintController::class, 'index'])->name('kpComplaint');
-Route::post('/kpComplaint', [App\Http\Controllers\Complaint\kpComplaintController::class, 'store'])->name('kpComplaint');
-Route::put('/kpComplaintEdit', [App\Http\Controllers\Complaint\kpComplaintController::class, 'update'])->name('kpComplaint');
-Route::delete('/kpComplaintDestroy', [App\Http\Controllers\Complaint\kpComplaintController::class, 'destroy'])->name('kpComplaint');
-Route::get('/fktComplaint', [App\Http\Controllers\Complaint\fktComplaintController::class, 'index'])->name('fktComplaint');
-Route::put('/fktComplaintEdit', [App\Http\Controllers\Complaint\fktComplaintController::class, 'update'])->name('fktComplaint');
+Route::get('/kpComplaint', [App\Http\Controllers\ComplaintController\kpComplaintController::class, 'index'])->name('kpComplaint');
+Route::post('/kpComplaint', [App\Http\Controllers\ComplaintController\kpComplaintController::class, 'store'])->name('kpComplaint');
+Route::put('/kpComplaintEdit', [App\Http\Controllers\ComplaintController\kpComplaintController::class, 'update'])->name('kpComplaint');
+Route::delete('/kpComplaintDestroy', [App\Http\Controllers\ComplaintController\kpComplaintController::class, 'destroy'])->name('kpComplaint');
+Route::get('/fktComplaint', [App\Http\Controllers\ComplaintController\fktComplaintController::class, 'index'])->name('fktComplaint');
+Route::put('/fktComplaintEdit', [App\Http\Controllers\ComplaintController\fktComplaintController::class, 'update'])->name('fktComplaint');
 
 Route::resource('/sale', SaleController::class);
 
