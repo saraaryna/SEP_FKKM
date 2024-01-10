@@ -12,7 +12,19 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->id();
+            $table->id('payID');
+            $table->unsignedBigInteger('userID'); // Foreign Key
+            $table->foreign('userID')->references('userID')->on('users');
+            $table->unsignedBigInteger('appID'); // Foreign Key
+            $table->foreign('appID')->references('appID')->on('applications');
+            $table->string('payFor');
+            $table->string('payFeeType');
+            $table->decimal('payFeeTotal', 10, 2);
+            $table->integer('payKioskNum');
+            $table->string('payEmail');
+            $table->string('payRemarks');
+            $table->string('payProof');
+            $table->datetime('payDate');
             $table->timestamps();
         });
     }
