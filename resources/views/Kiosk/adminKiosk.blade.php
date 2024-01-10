@@ -69,6 +69,7 @@
                                         <form method="POST" action="/kioskEdit">
                                             @csrf
                                             @method('PUT')
+                                            <input type="hidden" name="kiosk" value="{{$complaint->kioskID}}">
                                             <input type="hidden" name="kioskID" value="{{$kiosk->kioskID}}">
                                             <div class="row">
 
@@ -89,8 +90,8 @@
                                                         <option value="Available" selected>Available</option>
                                                         <option value="Not Available">Not Available</option>
                                                         @elseif ($kiosk->kioskStatus == "Not Available")
-                                                        <option value="Available">Maintainance</option>
-                                                        <option value="Not Available" selected>Technical Issue
+                                                        <option value="Available" >Available</option>
+                                                        <option value="Not Available" selected>Not Available</option>
                                                         </option>
                                                         @endif
                                                     </select>

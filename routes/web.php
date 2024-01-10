@@ -30,6 +30,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 /* Kiosk */
 Route::get('/adminKiosk', [App\Http\Controllers\KioskController\KioskController::class, 'index'])->name('adminKiosk');
+Route::post('/adminKiosk', [App\Http\Controllers\KioskController\KioskController::class, 'store'])->name('adminKiosk');
+Route::put('/kioskEdit', [App\Http\Controllers\KioskController\KioskController::class, 'update'])->name('adminKiosk');
 
 /* Complaint */
 Route::get('/kpComplaint', [App\Http\Controllers\ComplaintController\kpComplaintController::class, 'index'])->name('kpComplaint');
