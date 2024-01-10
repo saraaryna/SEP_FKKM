@@ -51,10 +51,12 @@
                             </td>
                             @endif
                             <td class="table-action">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#update-{{ $complaint->userID }}"><i
+                                <a href="#" data-bs-toggle="modal"
+                                    data-bs-target="#updatePIC-{{ $complaint->userID }}"><i
                                         class="align-middle fas fa-fw fa-bell"></i></i></a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#destroy-{{ $complaint->userID }}"><i
-                                        class="align-middle fas fa-fw fa-trash"></i></i></a>
+                                <a href="#" data-bs-toggle="modal"
+                                    data-bs-target="#updateStatus-{{ $complaint->userID }}"><i
+                                        class="align-middle fas fa-fw fa-pen"></i></i></a>
                                 <a href="/complaint/{{$complaint->id}}/delete"><i
                                         class="align-middle fas fa-fw fa-trash"></i></a>
                             </td>
@@ -68,7 +70,7 @@
 </div>
 </div>
 <!--Modal Update PIC-->
-<div class="modal fade" id="update-{{ $complaint->userID }}" data-bs-backdrop="static" data-bs-keyboard="false"
+<div class="modal fade" id="updatePIC-{{ $complaint->userID }}" data-bs-backdrop="static" data-bs-keyboard="false"
     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
@@ -81,10 +83,11 @@
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="complaintID" value="{{$complaint->complaintID}}">
+                    <input type="hidden" name="compStatus" value="{{$complaint->compStatus}}">
                     <div class="row">
                         <div class="form-group">
                             <label>Person In Charge</label>
-                            <input type="text" class="form-control" id="compPIC" name="compPIC">
+                            <input type="text" class="form-control" id="compPIC" name="compPIC" value="{{$complaint->compPIC}}">
                         </div>
 
                     </div>
@@ -98,23 +101,45 @@
               
 </div>
 <!--Modal Update Status-->
-<div class="modal fade" id="destroy-{{ $complaint->userID }}" data-bs-backdrop="static" data-bs-keyboard="false"
+<div class="modal fade" id="updateStatus-{{ $complaint->userID }}" data-bs-backdrop="static" data-bs-keyboard="false"
     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropL abel">Assign Person</h5>
+                <h5 class="modal-title" id="staticBackdropL abel">Update Status</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body m-3">
-                <form method="POST" action="/fktComplaintEdit">
+                <form method="POST" action="/fktComplaintEditStatus">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="complaintID" value="{{$complaint->complaintID}}">
+                    <input type="hidden" name="compPIC" value="{{$complaint->compPIC}}">
                     <div class="row">
                         <div class="form-group">
-                            <label>Person In Charge</label>
-                            <input type="text" class="form-control" id="compPIC" name="compPIC">
+
+                            <label>Complaint Status</label>
+                            <select class="form-control" id="compStatus" name="compStatus">
+                                @if ($complaint->compStatus == "In Review")
+                                <option value="In Review" selected>In Review</option>
+                                <option value="In Investigation">In Investigation</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Solved">Solved</option>
+                                @elseif ($complaint->compStatus == "In Progress")
+                                <option value="In Investigation">In Investigation</option>
+                                <option value="In Review">In Review</option>
+                                <option value="In Progress"selected>In Progress</option>
+                                <option value="Solved">Solved</option>
+                                @elseif ($complaint->compStatus == "In Investigation")
+                                <option value="In Investigation" selected>In Investigation</option>
+                                <option value="In Review">In Review</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Solved">Solved</option>
+                                @elseif ($complaint->compStatus == "Solved")
+                                <option value="Solved">Solved</option>
+
+                                @endif
+                            </select>
                         </div>
 
                     </div>

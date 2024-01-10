@@ -26,12 +26,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/* Complaint */
 Route::get('/kpComplaint', [App\Http\Controllers\Complaint\kpComplaintController::class, 'index'])->name('kpComplaint');
 Route::post('/kpComplaint', [App\Http\Controllers\Complaint\kpComplaintController::class, 'store'])->name('kpComplaint');
-Route::post('/kpComplaintEdit', [App\Http\Controllers\Complaint\kpComplaintController::class, 'update'])->name('kpComplaint');
+Route::put('/kpComplaintEdit', [App\Http\Controllers\Complaint\kpComplaintController::class, 'update'])->name('kpComplaint');
 Route::delete('/kpComplaintDestroy', [App\Http\Controllers\Complaint\kpComplaintController::class, 'destroy'])->name('kpComplaint');
 Route::get('/fktComplaint', [App\Http\Controllers\Complaint\fktComplaintController::class, 'index'])->name('fktComplaint');
 Route::put('/fktComplaintEdit', [App\Http\Controllers\Complaint\fktComplaintController::class, 'update'])->name('fktComplaint');
+
 Route::resource('/sale', SaleController::class);
 
 /* Payment */

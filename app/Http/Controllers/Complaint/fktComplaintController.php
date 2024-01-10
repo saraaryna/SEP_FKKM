@@ -62,6 +62,7 @@ class fktComplaintController extends Controller
         $complaint->complaintID = $request->complaintID;
         $complaint= Complaint::find($complaint->complaintID);
         $complaint->compPIC = $request->compPIC;
+        $complaint->compStatus = $request->compStatus;
         $complaint->update();
         return redirect('/fktComplaint');
     }

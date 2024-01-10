@@ -51,13 +51,11 @@
                             </td>
                             @endif
                             <td class="table-action">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#update-{{ $complaint->userID }}"><i
+                                <a href="#" data-bs-toggle="modal" data-bs-target=""><i
                                         class="align-middle fas fa-fw fa-eye"></i></i></a>
-                                <a href="#" data-bs-toggle="modal"
-                                    data-bs-target="#update-{{ $complaint->userID }}"><i
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#update-{{ $complaint->userID }}"><i
                                         class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                <a href="#" data-bs-toggle="modal"
-                                    data-bs-target="#destroy-{{ $complaint->userID }}"><i
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#destroy-{{ $complaint->userID }}"><i
                                         class="align-middle fas fa-fw fa-trash"></i></i></a>
 
                             </td>
@@ -70,133 +68,86 @@
     </div>
 </div>
 </div>
-<!--Modal Kemaskini-->
 <div class="modal fade" id="update-{{ $complaint->userID }}" data-bs-backdrop="static" data-bs-keyboard="false"
     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropL abel">Update</h5>
+                <h5 class="modal-title" id="staticBackdropL abel">Assign Person</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body m-3">
                 <form method="POST" action="/kpComplaintEdit">
                     @csrf
-                    <input type="hidden" name="userID" value="{{$complaint->userID}}">
+                    @method('PUT')
+                    <input type="hidden" name="complaintID" value="{{$complaint->complaintID}}">
                     <div class="row">
+
                         <div class="form-group">
-                            <label>Complaint Date</label>
-                            <input class="form-control" name="compDate" type="text" id="inputcompDate"
-                                value="{{$complaint->compDate}}" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input class="form-control" name="compName" type="text" id="inputcompName"
+                            <label>Complaint Name</label>
+                            <input type="text" class="form-control" id="compName" name="compName"
                                 value="{{$complaint->compName}}">
                         </div>
                         <div class="form-group">
-                            <label>Date Occured</label>
-                            <input class="form-control" name="compDateOccured" type="date" id="inputcompDateOccured"
-                                value="{{$complaint->compDateOccured}}">
-                        </div>
-                        <div class="form-group">
-                            <label>Kiosk Number</label>
-                            <input class="form-control" name="compKioskNum" type="number" id="inputcompKioskNum"
-                                value="{{$complaint->compKioskNum}}">
-                        </div>
-                        <div class="form-group">
-                            <label>Phone Number</label>
-                            <input class="form-control" name="compPhoneNum" type="number" id="inputcompPhoneNum"
-                                value="{{$complaint->compPhoneNum}}">
-                        </div>
-                        <div class="form-group">
-                            <label>Complaint Type</label>
-                            <select class="form-control" id="compType" name="compType" value="{{$complaint->compType}}"
-                                id="inputcompType" required>
-                                <option value="Maintainance">Maintainance</option>
-                                <option value="Technical Issue">Technical Issue</option>
-                                <option value="Accessibility Issues">Accessibility Issues</option>
-                                <option value="Financial Concerns">Financial Concerns</option>
-                                <option value="Others">Others</option>
-                            </select>
-
-                            <div class="form-group">
-                                <label>Description</label>
-                                <input class="form-control" name="compDescription" type="text" id="inputcompDescription"
-                                    value="{{$complaint->compDescription}}">
-                            </div>
-                            <input type="hidden" name="compEvidence" id="inputcompEvidence" value="{{$complaint->compEvidence}}">
-                            <input type="hidden" name="compStatus" id="inputcompStatus"  value="{{$complaint->compStatus}}">
-                            <input type="hidden" name="compPIC" id="inputcompPIC"  value="{{$complaint->compPIC}}">
-
-                        </div>
-
-
-
-                    </div>
-                    <br>
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">CLOSE</button>
-                    <button type="submit" class="btn btn-primary">UPDATE</button>
-                </form>
-            </div>
-        </div>
-    </div>
-              
-</div>
-
-<!--Modal Delete-->
-<div class="modal fade" id="destroy-{{ $complaint->userID }}" data-bs-backdrop="static" data-bs-keyboard="false"
-    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropL abel">Delete</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body m-3">
-                <form method="DELETE" action="/kpComplaintDestroy">
-                    @csrf
-                    
-                    <input type="hidden" name="userID" value="{{$complaint->userID}}">
-                    <div class="row">
-                        <div class="form-group">
                             <label>Complaint Date</label>
-                            <input class="form-control" name="compDate" type="text" id="inputcompDate"
+                            <input type="text" class="form-control" id="compDate" name="compDate"
                                 value="{{$complaint->compDate}}" disabled>
                         </div>
                         <div class="form-group">
                             <label>Date Occured</label>
-                            <input class="form-control" name="compDateOccured" type="date" id="inputcompDateOccured"
+                            <input type="date" class="form-control" id="compDateOccured" name="compDateOccured"
                                 value="{{$complaint->compDateOccured}}">
                         </div>
                         <div class="form-group">
                             <label>Kiosk Number</label>
-                            <input class="form-control" name="compKioskNum" type="number" id="inputcompKioskNum"
+                            <input type="number" class="form-control" id="compKioskNum" name="compKioskNum"
                                 value="{{$complaint->compKioskNum}}">
                         </div>
                         <div class="form-group">
                             <label>Phone Number</label>
-                            <input class="form-control" name="compPhoneNum" type="number" id="inputcompPhoneNum"
+                            <input type="number" class="form-control" id="compPhoneNum" name="compPhoneNum"
                                 value="{{$complaint->compPhoneNum}}">
                         </div>
                         <div class="form-group">
+                            <label>Description</label>
+                            <input type="text" class="form-control" id="compDescription" name="compDescription"
+                                value="{{$complaint->compDescription}}">
+                        </div>
+                        <div class="form-group">
                             <label>Complaint Type</label>
-                            <select class="form-control" id="compType" name="compType" value="{{$complaint->compType}}"
-                                id="inputcompType" required>
-                                <option>Select One</option disabled>
-                                <option value="Maintainance">Maintainance</option>
+                            <select class="form-control" id="compType" name="compType">
+                                @if ($complaint->compType == "Maintainance")
+                                <option value="Maintainance" selected>Maintainance</option>
                                 <option value="Technical Issue">Technical Issue</option>
                                 <option value="Accessibility Issues">Accessibility Issues</option>
                                 <option value="Financial Concerns">Financial Concerns</option>
                                 <option value="Others">Others</option>
+                                @elseif ($complaint->compType == "Technical Issue")
+                                <option value="Maintainance">Maintainance</option>
+                                <option value="Technical Issue" selected>Technical Issue</option>
+                                <option value="Accessibility Issues">Accessibility Issues</option>
+                                <option value="Financial Concerns">Financial Concerns</option>
+                                <option value="Others">Others</option>
+                                @elseif ($complaint->compType == "Accessibility Issues")
+                                <option value="Maintainance">Maintainance</option>
+                                <option value="Technical Issue">Technical Issue</option>
+                                <option value="Accessibility Issues" selected>Accessibility Issues</option>
+                                <option value="Financial Concerns">Financial Concerns</option>
+                                <option value="Others">Others</option>
+                                @elseif ($complaint->compType == "Financial Concerns")
+                                <option value="Maintainance">Maintainance</option>
+                                <option value="Technical Issue">Technical Issue</option>
+                                <option value="Accessibility Issues">Accessibility Issues</option>
+                                <option value="Financial Concerns" selected>Financial Concerns</option>
+                                <option value="Others">Others</option>
+                                @elseif ($complaint->compType == "Others")
+                                <option value="Maintainance">Maintainance</option>
+                                <option value="Technical Issue">Technical Issue</option>
+                                <option value="Accessibility Issues">Accessibility Issues</option>
+                                <option value="Financial Concerns" selected>Financial Concerns</option>
+                                <option value="Others" selected>Others</option>
+                                @endif
                             </select>
-
-                            <div class="form-group">
-                                <label>Description</label>
-                                <input class="form-control" name="compDescription" type="text" id="inputcompDescription"
-                                    value="{{$complaint->compDescription}}">
-                            </div>
-
                         </div>
 
 
@@ -301,7 +252,7 @@
 
                 form.appendChild(input);
 
-               umeppendChild(form);
+                umeppendChild(form);
                 form.submit();
             }
         }

@@ -84,19 +84,16 @@ class kpComplaintController extends Controller
      */
     public function update(UpdateComplaintRequest $request, Complaint $complaint)
     {
-        $complaint->userID = $request->userID;
+        $complaint->complaintID = $request->complaintID;
+        $complaint= Complaint::find($complaint->complaintID);
         $complaint->compName = $request->compName;
-        $complaint->compDate = $request->compDate;
         $complaint->compDateOccured = $request->compDateOccured;
         $complaint->compKioskNum = $request->compKioskNum;
         $complaint->compPhoneNum = $request->compPhoneNum;
         $complaint->compType = $request->compType;
         $complaint->compDescription = $request->compDescription;
-        $complaint->compStatus = $request->compStatus;
-        $complaint->compPIC = $request->compPIC;
-        $complaint->compEvidence = $request->compEvidence;
-        $complaint->save();
-
+        $complaint->update();
+        return redirect('/kpComplaint');
     }
 
     /**
