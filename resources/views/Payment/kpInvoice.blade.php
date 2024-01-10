@@ -34,84 +34,76 @@
                     </thead>
                     <tbody>
                         <tr>
-                        @foreach($payment as $payment)
+                        @foreach($payment as $payments)
 
 
                         <td class="text-xs">{{ $loop->index + 1 }}</td>
                         <td class="text-xs">{{$user->name}}</td>
                         <td class="text-xs">{{$application->appBusinessType}}</td>
-                        <td class="text-xs">{{$payment->payKioskNum}}</td>
-                        <td class="text-xs">{{$payment->payFeeTotal}}</td>
-                        <td class="text-xs">{{$payment->payKioskNum}}</td>
-                        <td class="text-xs">{{$payment->payFeeType}}</td>
+                        <td class="text-xs">{{$payments->payKioskNum}}</td>
+                        <td class="text-xs">{{$payments->payFeeTotal}}</td>
+                        <td class="text-xs">{{$payments->payKioskNum}}</td>
+                        <td class="text-xs">{{$payments->payFeeType}}</td>
                         <td class="table-action">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#view-{{ $payment->payID }}"><i class="align-middle fas fa-fw fa-eye"></i></i></a>
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#generate-{{ $payment->payID }}"><i class="align-middle fas fa-fw fa-print"></i></i></a>
-                            <!--<a href="/payment/{{$payment->id}}/delete"><i class="align-middle fas fa-fw fa-trash"></i></a>-->
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#view-{{ $payments->payID }}"><i class="align-middle fas fa-fw fa-eye"></i></i></a>
+                            <a href="{{ route('printFKBursaryPayment', ['payID' => $payments->payID]) }}"><i class="align-middle fas fa-fw fa-print"></i></i></a>
+                            <!--<a href="/payment/{{$payments->id}}/delete"><i class="align-middle fas fa-fw fa-trash"></i></a>-->
                         </td>
                     </tr>
 
                 <!-- Modal Kemaskini View -->
-                <div class="modal fade" id="view-{{ $payment->payID }}"  tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal fade" id="view-{{ $payments->payID }}"  tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">View Payment Form</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body m-3">
-                                <form method="POST" action="/updatePayment" enctype="multipart/form-data">
+                            <div class="modal-body m-3 mt-0">
+                                <form method="POST" action="/updatePayment/{{ $payments->payID }}" enctype="multipart/form-data">
                                     @csrf
-                                    <input type="hidden" name="id" value="">
+                                    <input type="hidden" name="userID" value="{{ $payments->user->userID }}">
+                                    <input type="hidden" name="appID" value="{{ $payments->appID }}">
+                                    <div class="form-group">
+                                         <label class="fw-bold col-md-12 " for="name">Payment For</label>
+                                         <label class="fw-bolder p-2" for="name">
+                                            @if ($payments->appID === $application->appID)
+                                                {{ $application->appName }} -- {{ $payments->payKioskNum }}
+                                            @endif
+                                        </label>
+                                    </div>
                                      <div class="form-group">
-                                         <label for="name">Payment For</label>
-                                         <select class="form-control " id="payFor" name="payFor" value="{{ $payment->payFor }}" required>
-                                                <option value="{{$user->userID}}">{{$user->name}} -- {{$user->userID}}</option>
-                                        </select>   
-                                        </div>
-                                     <div class="form-group">
-                                         <label for="email">Fee Type</label>
-                                         <select class="form-control" id="payFeeType" name="payFeeType"  value="{{ $payment->payFeeType }}" required>
-                                             <option disabled  value="Select Business Type">Fee Type</option>
-                                             <option value="Rental">Rental</option>
-                                             <option value="Compound">Compound</option>
-                                             <option value="Others">Others</option>
-                                         </select>                    
+                                         <label class="fw-bold col-md-12 " for="email">Fee Type :</label>
+                                         <label class="fw-bolder p-2" for="email">{{ $payments->payFeeType }}</label>
+
                                      </div>
                                      <div class="form-group">
-                                         <label for="contactNumber">Payment Total(MYR)</label>
-                                         <input type="text" class="form-control" id="payFeeTotal" name="payFeeTotal"  value="{{ $payment->payFeeTotal }}" required>
+                                         <label class="fw-bold col-md-12" for="contactNumber">Payment Total(MYR) :</label>
+                                         <label class="fw-bolder p-2" for="contactNumber">{{ $payments->payFeeTotal }}</label>
                                      </div>
                                      <div class="form-group">
-                                         <label for="appKioskNum">Kiosk Number</label>
-                                         <select class="form-control" id="payKioskNum" name="payKioskNum"  value="{{ $payment->payKioskNum }}" required>
-                                             <option disabled  value="Kiosk Number">Select Kiosk Number</option>
-                                             <option value="1">1</option>
-                                             <option value="2">2</option>
-                                             <option value="3">3</option>
-                                             <option value="4">4</option>
-                                         </select>
+                                         <label class="fw-bold col-md-12" for="appKioskNum">Kiosk Number :</label>
+                                         <label class="fw-bolder p-2" for="appKioskNum">{{ $payments->payKioskNum }}</label>
                                      </div>
                                      <div class="form-group">
-                                         <label for="appBusinessPeriod">Name</label>
-                                         <label for="appBusinessPeriod">{{ $user->name }}</label>
+                                         <label class="fw-bold col-md-12" for="appBusinessPeriod">Name :</label>
+                                         <label class="fw-bolder p-2" for="appBusinessPeriod">{{ $payments->user->name }}</label>
                                      </div>
                                      <div class="form-group">
-                                         <label for="appBusinessPeriod">Email Address</label>
-                                         <input type="text" class="form-control" id="payEmail" name="payEmail"  value="{{ $payment->payEmail }}" required>
+                                         <label class="fw-bold col-md-12" for="appBusinessPeriod">Email Address :</label>
+                                         <label class="fw-bolder p-2" for="appBusinessPeriod">{{ $payments->payEmail }}</label>
                                      </div>
                                      <div class="form-group">
-                                         <label for="appBusinessPeriod">Remarks</label>
-                                         <input type="text" class="form-control" id="payRemarks" name="payRemarks"  value="{{ $payment->payRemarks }}" required>
+                                         <label class="fw-bold col-md-12" for="appBusinessPeriod">Remarks :</label>
+                                         <label class="fw-bolder p-2" for="appBusinessPeriod">{{ $payments->payRemarks }}</label>
                                      </div>
                                      <div class="form-group">
-                                         <label for="appBusinessPeriod">Proof of Payment</label>
-                                         <input type="file" class="form-control" id="payProof" name="payProof"  value="{{ $payment->payProof }}" required>
+                                         <label class="fw-bold col-md-12" for="appBusinessPeriod">Proof of Payment :</label>
+                                         <label class="fw-bolder p-2" for="appBusinessPeriod">{{ $payments->payProof }}</label>
                                      </div>
                                      <input type="hidden" id="payDate" name="payDate" value="<?php echo date('Y-m-d'); ?>" required>
-                                     <div class="modal-footer">
-                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                         <button type="submit" class="btn btn-info" name="addPayment">Submit</button>
+                                     <div class="modal-footer justify-content-center">
+                                         <button type="button" class="btn btn-secondary" style=" background-color: #41968B; color:white;" data-bs-dismiss="modal">Back</button>
                                      </div>
                                 </form>
                             </div>
@@ -119,7 +111,7 @@
                     </div>
                 </div>
                 <!-- Modal Kemaskini Generate -->
-                <div class="modal fade" id="generate-{{ $payment->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal fade" id="generate-{{ $payments->payID }}" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -127,10 +119,10 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body m-3">
-                                <form method="POST" action="/dashboard-admin/{{ $payment->payID}}" enctype="multipart/form-data">
+                                <form method="POST" action="/dashboard-admin/{{ $payments->payID}}" enctype="multipart/form-data">
                                     @csrf 
                                     @method('PUT')
-                                    <input type="hidden" name="id" value="{{$payment->payID}}">
+                                    <input type="hidden" name="id" value="{{$payments->payID}}">
                                     <div class="form-group">
                                         <label for="name">Payment For</label>
                                         <input type="text" class="form-control" id="appName" name="appName" required>
@@ -184,7 +176,7 @@
                     </div>
                 </div>
                 <!-- Modal Kemaskini View -->
-                <div class="modal fade" id="remind-{{ $payment->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal fade" id="remind-{{ $payments->id }}" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">

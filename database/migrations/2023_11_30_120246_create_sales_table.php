@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('userID'); // Foreign Key userID
             $table->foreign('userID')->references('userID')->on('users');
             $table->unsignedBigInteger('kioskID'); // Foreign Key kioskID
-            $table->foreign('kioskID')->references('id')->on('kiosks');
+            $table->foreign('kioskID')->references('kioskID')->on('kiosks');
             $table->date('salesDate');
             $table->float('salesTotal', 8, 2);
             $table->timestamps();

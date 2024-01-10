@@ -78,8 +78,20 @@ class KioskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kiosk $kiosk)
-    {
-        //
+    public function destroy($kioskID)
+{
+    // Find the Kiosk record based on $kioskID
+    $kiosk = Kiosk::find($kioskID);
+
+    if (!$kiosk) {
+        // Optionally, handle the case where the Kiosk record is not found
+        return redirect()->back()->with('error', 'Kiosk not found');
     }
+
+    // Delete the Kiosk record
+    $kiosk->delete();
+
+    // Optionally, redirect the user after the deletion
+    return redirect()->route('/adminKiosk');
+}
 }

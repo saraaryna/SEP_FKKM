@@ -1,5 +1,6 @@
 @extends('Kiosk.base')
 @section('Kiosk.adminKiosk')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <div class="container-fluid">
     <div class="header">
@@ -45,15 +46,56 @@
                             </td>
                             @endif
                             <td class="table-action">
-                                <a href="#" data-bs-toggle="modal" data-bs-target=""><i
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#view-{{ $kiosk->kioskID }}"><i
                                         class="align-middle fas fa-fw fa-eye"></i></i></a>
                                 <a href="#" data-bs-toggle="modal" data-bs-target="#update-{{ $kiosk->kioskID }}"><i
                                         class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#destroy-{{ $kiosk->kioskID }}"><i
+                                <a href="#"  onclick="deleteUser({{ $kiosk->kioskID }})"><i
                                         class="align-middle fas fa-fw fa-trash"></i></i></a>
 
                             </td>
                         </tr>
+                        <!-- Modal View-->
+                        <div class="modal fade" id="view-{{ $kiosk->kioskID }}" data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropL abel">Edit Kiosk</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body m-3">
+                                        <form method="POST" action="/kioskEdit">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="kioskID" value="{{$kiosk->kioskID}}">
+                                            
+                                            <div class="row">
+
+                                                <div class="form-group">
+                                                    <label>Kiosk Number</label>
+                                                    <label class="fw-bolder">{{$kiosk->kioskNumber}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Kiosk Location</label>
+                                                    <label class="fw-bolder">{{$kiosk->kioskLocation}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Status</label>
+                                                    <label class="fw-bolder">{{$kiosk->kioskStatus}}</label>
+                                                </div>
+                                            </div>
+                                            <br>
+
+                                            <button type="button" class="btn btn-outline-primary justify-content-center"
+                                                data-bs-dismiss="modal">Back</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                          
                         <!-- Modal Update-->
                         <div class="modal fade" id="update-{{ $kiosk->kioskID }}" data-bs-backdrop="static"
                             data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
@@ -69,8 +111,8 @@
                                         <form method="POST" action="/kioskEdit">
                                             @csrf
                                             @method('PUT')
-                                            <input type="hidden" name="kiosk" value="{{$complaint->kioskID}}">
                                             <input type="hidden" name="kioskID" value="{{$kiosk->kioskID}}">
+                                            
                                             <div class="row">
 
                                                 <div class="form-group">
@@ -84,7 +126,7 @@
                                                         name="kioskLocation" value="{{$kiosk->kioskLocation}}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label>Complaint Type</label>
+                                                    <label>Status</label>
                                                     <select class="form-control" id="kioskStatus" name="kioskStatus">
                                                         @if ($kiosk->kioskStatus == "Available")
                                                         <option value="Available" selected>Available</option>
@@ -165,21 +207,23 @@
             datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
         });
 
-        function deleteUser(userID) {
+        function deleteUser(kioskID) {
             if (confirm("Are you sure you want to delete this user?")) {
-                var form = document.createElement("form");
-                form.method = "post";
-                form.action = "/kpComplaintDestroy";
-
-                var input = document.createElement("input");
-                input.type = "hidden";
-                input.name = "userID";
-                input.value = userID;
-
-                form.appendChild(input);
-
-                umeppendChild(form);
-                form.submit();
+                console.log(kioskID);
+                fetch(`/kioskDestroy/${kioskID}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                }).then(response => {
+                    // Handle the response as needed
+                    console.log(response);
+                    // Optionally, redirect to another page after deletion
+                    window.location.href = '/adminKiosk';
+                }).catch(error => {
+                    console.error('Error:', error);
+                });
             }
         }
 

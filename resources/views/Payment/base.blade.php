@@ -106,8 +106,9 @@
 				<div class="container-fluid" >
 
 					{{-- Yield --}}
+                    @yield('Payment.kpInvoice')
                     @yield('Payment.kpPayment')
-					@yield('Payment.kpInvoice')
+                    @yield('Payment.FKBursaryPayment')
 
 
 					</div>
