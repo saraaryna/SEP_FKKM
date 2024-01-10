@@ -1,3 +1,5 @@
+<!--ERNIE MASTURA BINTI BAKRI (CB21161)-->
+
 @extends('Sale.base')
 @section('contents')
 
@@ -8,7 +10,7 @@
         </h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="sale.php">Kiosk Sales</a></li>
+                <li class="breadcrumb-item"><a href="gotosale">Kiosk Sales</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Sales List</a></li>
             </ol>
         </nav>
@@ -21,7 +23,7 @@
                 <!-- total sales per month -->
                 <div class="card-header">Sales per month</div>
                 <div class="card-body">
-                    <h2><b>RM260.00</b></h2> 
+                    <h2><b></b></h2> 
                 </div>
             </div>
         </div>
@@ -30,7 +32,7 @@
                 <!-- total sales per year -->
                 <div class="card-header">Sales per year</div>
                 <div class="card-body">
-                    <h2><b>RM3000.00</b></h2> 
+                    <h2><b></b></h2> 
                 </div>
             </div>
         </div>
@@ -39,7 +41,7 @@
                 <!-- total sales  -->
                 <div class="card-header">Total sales</div>
                 <div class="card-body">
-                    <h2><b>RM12,500.00</b></h2> 
+                    <h2><b></b></h2> 
                 </div>
             </div>
         </div>
@@ -64,37 +66,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                           
-                            <td class="text-xs"></td>
-                            <td class="text-xs"></td>
-                            <td class="text-xs"></td>
-                            <td style="text-xs">
-                                
-                                <span class="badge rounded-pill bg-success"></span>
-                                
-                                <span class="badge rounded-pill bg-danger"></span>
-                                
-                                <span class="badge rounded-pill bg-warning "></span>
-                            </td>
-                           
-                            <td class="table-action">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="">
-                                    <!-- Icon for "Edit" action -->
-                                    <i class="align-middle fas fa-fw fa-pen"></i> 
-                                </a>
-                                <a href="#">
-                                    <!-- Icon for "View" action -->
-                                    <i class="align-middle fas fa-fw fa-eye"></i> 
-                                </a>
-                                <a href="#">
-                                    <!-- Icon for "Delete" action -->
-                                    <i class="align-middle fas fa-fw fa-trash"></i> 
-                                </a>
-                            </td>
+                        @foreach($sales as $index => $sale)
+                            <tr>
+                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $sale->kioskID }}</td>
+                                <td>{{ $sale->salesDate }}</td>
+                                <td>{{ $sale->salesTotal }}</td>
+                                <td class="table-action">
+                                    
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#editApp" data-saleid="{{ $sale->id }}">
+                                        <!-- Icon for "Edit" action -->
+                                        <i class="align-middle fas fa-fw fa-pen"></i>
+                                    </a>
 
-                        </tr>
-                       
+                                    <a href="#">
+                                        <!-- Icon for "View" action -->
+                                        <i class="align-middle fas fa-fw fa-eye"></i> 
+                                    </a>
+                                    <a href="#">
+                                        <!-- Icon for "Delete" action -->
+                                        <i class="align-middle fas fa-fw fa-trash"></i> 
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -112,32 +107,66 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body m-3">
-                <form method="POST" action="addSale" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('kpsale.store') }}" enctype="multipart/form-data">
+                @csrf
+                <!-- Date field -->
+                <div class="form-group">
+                    <label for="salesDate">Date</label>
+                    <input type="date" class="form-control" id="salesDate" name="salesDate" required>
+                </div>
+                <!-- Total Sales field -->
+                <div class="form-group">
+                    <label for="totalSales">Total Sales (RM)</label>
+                    <input type="text" class="form-control" id="totalSales" name="totalSales" required>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-info" name="addSale">Add</button>
+                </div>
+            </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal for Edit -->
+<div class="modal fade" id="editApp" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Edit Sales</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body m-3">
+                <!-- Form for editing sales details -->
+                <form method="POST" action="{{ route('updateSale', ['id' => $sale->id]) }}" enctype="multipart/form-data">
+                    
                     @csrf
-                    <!--Kiosk Number-->
+                    @method('PUT') 
+
+                    <!-- Fields for editing sales details -->
                     <div class="form-group">
-                        <label for="ic">Kiosk Number</label>
-                        <input type="text" class="form-control" id="salesKioskNum" name="salesKioskNum"  disabled>
+                        <label for="editSalesDate">Date</label>
+                        <input type="date" class="form-control" id="editSalesDate" name="editSalesDate" required>
                     </div>
-                    <!--Date-->
                     <div class="form-group">
-                        <label for="name">Date</label>
-                        <input type="date" class="form-control" id="salesDate" name="salesDate" required>
-                    </div>
-                    <!--Total sales-->
-                    <div class="form-group">
-                        <label for="num">Total Sales (RM)</label>
-                        <input type="text" class="form-control" id="totalSales" name="totalSales" required>
+                        <label for="editTotalSales">Total Sales (RM)</label>
+                        <input type="text" class="form-control" id="editTotalSales" name="editTotalSales" required>
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-info" name="addUser">Add</button>
+                        <button type="submit" class="btn btn-info" name="updateSale">Update</button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
+</div>
+
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -152,6 +181,17 @@
                 responsive: true
             });
             datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+
+            // Handle edit modal
+            $('#datatables-buttons').on('click', 'a[data-bs-target="#editApp"]', function () {
+                var saleID = $(this).data('saleid');
+
+                var saleDetails = fetchSaleDetails(saleID);
+
+                // Populate the edit modal fields with the fetched details
+                $('#editSalesDate').val(saleDetails.salesDate);
+                $('#editTotalSales').val(saleDetails.salesTotal);
+            });
         });
 
         function deleteSale(saleID) {
@@ -170,6 +210,14 @@
                 document.body.appendChild(form);
                 form.submit();
             }
+        }
+
+        function fetchSaleDetails(saleID) {
+            
+            return {
+                salesDate: '2022-01-01', 
+                salesTotal: '100.00',  
+            };
         }
 
 

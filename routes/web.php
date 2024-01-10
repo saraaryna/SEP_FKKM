@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ComplaintController;
-use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SaleController\kpSaleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,18 +16,17 @@ use App\Http\Controllers\SaleController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
-
-
-//route for kiosk participant sale
-Route::get('gotosale', function () {
-    return view('Sale.kpsale');
+//KIOSK PARTICIPANT SALE
+Route::get('kpsale', function () {
+    return view('Sale.kpSale');
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-Route::resource('complaint', ComplaintController::class);
+// Define routes for Kiosk Participant Sale
+Route::get('kpsale', [kpSaleController::class, 'index'])->name('kpsale.index');
+Route::post('kpsale', [kpSaleController::class, 'store'])->name('kpsale.store');
+Route::put('kpsale/{id}', [kpSaleController::class, 'update'])->name('updateSale');

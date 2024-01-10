@@ -23,6 +23,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $userRole = Auth::user()->userRole; // Use the correct field name
+        
+    
+        if ($userRole == 'Admin') {
+            return view('Application.Admin.dashboard');
+        } elseif ($userRole == 'Kiosk Participant') {
+            return view('Sale.kpSale');
+        } else {
+            return view('home');
+        }
     }
 }
