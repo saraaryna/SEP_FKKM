@@ -6,6 +6,7 @@ use App\Models\Application;
 use App\Models\Complaint;
 use App\Models\Kiosk;
 use App\Models\User;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,6 +28,11 @@ class HomeController extends Controller
         $totalApp = Application::count();
         $totalKiosk = Kiosk::count();
         $totalComplaint = Complaint::count();
+        // $totalKiosk = Kiosk::count();
+        // $totalComplaint = Complaint::count();
+        $user = User::all();
+        $sales = Sale::all();
+        $kiosk = Kiosk::all(); 
 
         $userRoles = User::groupBy('userRole')->pluck('userRole');
         $userCounts = User::groupBy('userRole')->selectRaw('count(*) as total')->pluck('total');
@@ -57,7 +63,15 @@ class HomeController extends Controller
             'userCounts' => $userCounts,
             ]);
 
-        } else {
+        } 
+        elseif ($userRole == 'PUPUK Admin')
+        {
+            return view('Sale.padminSale',[
+                'user' => $user,
+                'kiosk' => $kiosk,
+            ]);
+        }
+        else {
             return view('home');
         }
     }
