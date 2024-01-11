@@ -1,4 +1,4 @@
-@extends('Application.KioskParticipant.base')
+@extends('baseKP')
 @section('Application.KioskParticipant.dashboard')
 
 

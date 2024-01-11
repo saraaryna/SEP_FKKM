@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\Complaint;
+use App\Models\Kiosk;
 use App\Models\User;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,8 +26,13 @@ class HomeController extends Controller
         $application = Application::all();
         $totalUsers = User::count();
         $totalApp = Application::count();
+        $totalKiosk = Kiosk::count();
+        $totalComplaint = Complaint::count();
         // $totalKiosk = Kiosk::count();
         // $totalComplaint = Complaint::count();
+        $user = User::all();
+        $sales = Sale::all();
+        $kiosk = Kiosk::all(); 
 
         $userRoles = User::groupBy('userRole')->pluck('userRole');
         $userCounts = User::groupBy('userRole')->selectRaw('count(*) as total')->pluck('total');
@@ -37,8 +45,8 @@ class HomeController extends Controller
                 'user' => $user,
                 'totalUsers' => $totalUsers,
                 'totalApp' => $totalApp,
-                // 'totalKiosk' => $totalKiosk,
-                // 'totalComplaint' => $totalComplaint,
+                'totalKiosk' => $totalKiosk,
+                'totalComplaint' => $totalComplaint,
                 'userRoles' => $userRoles,
                 'userCounts' => $userCounts,
         
@@ -49,13 +57,21 @@ class HomeController extends Controller
             'user' => $user,
             'totalUsers' => $totalUsers,
             'totalApp' => $totalApp,
-            // 'totalKiosk' => $totalKiosk,
-            // 'totalComplaint' => $totalComplaint,
+            'totalKiosk' => $totalKiosk,
+            'totalComplaint' => $totalComplaint,
             'userRoles' => $userRoles,
             'userCounts' => $userCounts,
             ]);
 
-        } else {
+        } 
+        elseif ($userRole == 'PUPUK Admin')
+        {
+            return view('Sale.padminSale',[
+                'user' => $user,
+                'kiosk' => $kiosk,
+            ]);
+        }
+        else {
             return view('home');
         }
     }
