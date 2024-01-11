@@ -30,3 +30,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('kpsale', [kpSaleController::class, 'index'])->name('kpsale.index');
 Route::post('kpsale/store', [kpSaleController::class, 'store'])->name('kpsale.store');
 Route::put('kpsale/{sale}', [kpSaleController::class, 'update'])->name('kpsale.update');
+Route::get('/kpsale/{sale}/delete', [kpSaleController::class, 'destroy']);
+

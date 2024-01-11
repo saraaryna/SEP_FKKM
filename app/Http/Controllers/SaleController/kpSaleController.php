@@ -37,7 +37,7 @@ class kpSaleController extends Controller
         $sales = Sale::all();
 
         // Pass the sales data to the view and show a success message
-        return view('Sale.kpSale', compact('sales'))->with('success', 'New sale added successfully');
+        return redirect()->route('kpsale.index')->with('success', 'New sale added successfully');
     }
 
     
@@ -47,20 +47,23 @@ class kpSaleController extends Controller
         return redirect()->route('kpsale.index')->with('success', 'Record updated successfully');
     }
 
-    
 
-    public function edit(Sale $sale)
+    public function destroy($salesID)
     {
-        //
-    }
+        // Find the Kiosk record based on $kioskID
+        $sale = Sale::find($salesID);
 
+        if (!$sale) {
+            // Optionally, handle the case where the Sale record is not found
+            return redirect()->back()->with('error', 'Sale not found');
+        }
 
-    public function destroy(Sale $sale)
-    {
-        //
+        // Delete the Sale record
         $sale->delete();
 
-        return redirect('/dashboard-admin');
-
+        // Optionally, redirect the sale after the deletion
+        return redirect()->route('kpsale.index')->with('success', 'Sale deleted successfully');
     }
+
+
 }
