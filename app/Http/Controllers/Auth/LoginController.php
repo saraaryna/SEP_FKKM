@@ -30,6 +30,7 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
+        dd($user->userRole);
         // Redirect based on userRole
         if ($user->userRole === 'Admin') {
             return redirect()->route('Application.Admin.dashboard'); // Adjust the route name as needed
@@ -37,7 +38,7 @@ class LoginController extends Controller
             return redirect()->route('kiosk.dashboard'); // Adjust the route name as needed
         } else {
             // You can add more conditions or a default redirection here
-            return redirect()->route('default.dashboard'); // Adjust the route name as needed
+            return redirect()->route('home'); // Adjust the route name as needed
         }
     }
 }

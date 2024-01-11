@@ -1,4 +1,4 @@
-@extends('Application.Admin.base')
+@extends('baseAdmin')
 @section('Application.Admin.dashboard')
 
 

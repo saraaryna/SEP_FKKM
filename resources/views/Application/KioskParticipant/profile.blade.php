@@ -1,4 +1,4 @@
-@extends('Application.KioskParticipant.base')
+@extends('baseKP')
 @section('Application.KioskParticipant.profile')
 <div class="container-fluid">
     <div class="header">

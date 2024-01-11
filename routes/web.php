@@ -49,7 +49,6 @@ Route::get('padmin', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 // Define routes for Kiosk Participant Sale
 Route::get('kpsale', [kpSaleController::class, 'index'])->name('kpsale.index');
 Route::post('kpsale/store', [kpSaleController::class, 'store'])->name('kpsale.store');
@@ -112,6 +111,5 @@ Route::get('/admin/user/{user}', [AdminApplicationController::class, 'deleteUser
 // KP
 Route::get('/KP-profile', [kpApplicationController::class, 'profile'])->name('kp-profile');
 Route::put('/KP-profile/update', [kpApplicationController::class, 'updateProfile'])->name('kp.profile.update');
-
 
 
