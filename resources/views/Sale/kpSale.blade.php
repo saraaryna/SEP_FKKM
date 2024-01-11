@@ -51,7 +51,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <a href="#" class="btn btn-info" style="float: right;" data-bs-toggle="modal" data-bs-target="#addApp">+
+                <a href="#" class="btn btn-info" style="float: right;" data-bs-toggle="modal" data-bs-target="#addSale">+
                     New Sales</a>
             </div>
             <div class="card-body">
@@ -72,10 +72,11 @@
                                 <td>{{ $sale->kioskID }}</td>
                                 <td>{{ $sale->salesDate }}</td>
                                 <td>{{ $sale->salesTotal }}</td>
+
+                                
                                 <td class="table-action">
-                                    
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#editApp" data-saleid="{{ $sale->id }}">
-                                        <!-- Icon for "Edit" action -->
+                                    <!--Edit-->
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#update-{{ $sale->salesID }}">
                                         <i class="align-middle fas fa-fw fa-pen"></i>
                                     </a>
 
@@ -89,6 +90,40 @@
                                     </a>
                                 </td>
                             </tr>
+
+                            <!-- Modal for update -->
+                            <div class="modal fade" id="update-{{ $sale->salesID }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Edit Sales</h4>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body m-3">
+                                            <!-- Form for editing sales details -->
+                                            <form method="POST" action="{{ route('kpsale.update', ['sale' => $sale['salesID']]) }}">
+                                                @csrf
+                                                @method('PUT') 
+                                                <!-- Fields for editing sales details -->
+                                                <div class="form-group">
+                                                    <label for="salesDate">Date</label>
+                                                    <input type="date" class="form-control" id="salesDate" name="salesDate" value="{{$sale->salesDate}}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="salesTotal">Total Sales (RM)</label>
+                                                    <input type="text" class="form-control" id="salesTotal" name="salesTotal" value="{{$sale->salesTotal}}">
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-info" name="updateSale">Update</button>
+                                                </div>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                     </tbody>
                 </table>
@@ -99,7 +134,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="addApp" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="addSale" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -131,41 +166,7 @@
     </div>
 
 
-    <!-- Modal for Edit -->
-<div class="modal fade" id="editApp" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Sales</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body m-3">
-                <!-- Form for editing sales details -->
-                <form method="POST" action="{{ route('updateSale', ['id' => $sale->id]) }}" enctype="multipart/form-data">
-                    
-                    @csrf
-                    @method('PUT') 
-
-                    <!-- Fields for editing sales details -->
-                    <div class="form-group">
-                        <label for="editSalesDate">Date</label>
-                        <input type="date" class="form-control" id="editSalesDate" name="editSalesDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="editTotalSales">Total Sales (RM)</label>
-                        <input type="text" class="form-control" id="editTotalSales" name="editTotalSales" required>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-info" name="updateSale">Update</button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-</div>
+    
 
 
     <script>
@@ -182,16 +183,7 @@
             });
             datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
 
-            // Handle edit modal
-            $('#datatables-buttons').on('click', 'a[data-bs-target="#editApp"]', function () {
-                var saleID = $(this).data('saleid');
-
-                var saleDetails = fetchSaleDetails(saleID);
-
-                // Populate the edit modal fields with the fetched details
-                $('#editSalesDate').val(saleDetails.salesDate);
-                $('#editTotalSales').val(saleDetails.salesTotal);
-            });
+           
         });
 
         function deleteSale(saleID) {
@@ -212,14 +204,7 @@
             }
         }
 
-        function fetchSaleDetails(saleID) {
-            
-            return {
-                salesDate: '2022-01-01', 
-                salesTotal: '100.00',  
-            };
-        }
-
+       
 
     </script>
 

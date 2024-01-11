@@ -40,10 +40,11 @@ class kpSaleController extends Controller
         return view('Sale.kpSale', compact('sales'))->with('success', 'New sale added successfully');
     }
 
+    
     public function update(Request $request, $id) {
         $sale = Sale::find($id);
         $sale->update($request->all());
-        return redirect('/kpsale')->with('success', 'Record updated successfully');
+        return redirect()->route('kpsale.index')->with('success', 'Record updated successfully');
     }
 
     

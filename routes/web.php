@@ -28,5 +28,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Define routes for Kiosk Participant Sale
 Route::get('kpsale', [kpSaleController::class, 'index'])->name('kpsale.index');
-Route::post('kpsale', [kpSaleController::class, 'store'])->name('kpsale.store');
-Route::put('kpsale/{id}', [kpSaleController::class, 'update'])->name('updateSale');
+Route::post('kpsale/store', [kpSaleController::class, 'store'])->name('kpsale.store');
+Route::put('kpsale/{sale}', [kpSaleController::class, 'update'])->name('kpsale.update');
