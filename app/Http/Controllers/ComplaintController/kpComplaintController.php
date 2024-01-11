@@ -111,6 +111,18 @@ class kpComplaintController extends Controller
      */
     public function destroy(Complaint $complaint)
     {
-        $complaint->delete();
+        // Find the Kiosk record based on $kioskID
+        $complaint = Complaint::find($complaint);
+
+    if (!$complaint) {
+        // Optionally, handle the case where the Kiosk record is not found
+        return redirect()->back()->with('error', 'Complaint not found');
+    }
+
+    // Delete the Kiosk record
+    $complaint->delete();
+
+    // Optionally, redirect the user after the deletion
+    return redirect()->route('/kpComplaint');
     }
 }
