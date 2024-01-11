@@ -69,7 +69,7 @@
                         @foreach($sales as $index => $sale)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $sale->kioskID }}</td>
+                                <td>{{ $sale->kioskNumber }}</td>
                                 <td>{{ $sale->salesDate }}</td>
                                 <td>{{ $sale->salesTotal }}</td>
 

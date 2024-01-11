@@ -5,6 +5,7 @@ namespace  App\Http\Controllers\SaleController;
 
 use Illuminate\Http\Request;
 use App\Models\Sale;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 
 class padminSaleController extends Controller
@@ -13,6 +14,7 @@ class padminSaleController extends Controller
     {
         // Retrieve the sales data from the database
         $sales = Sale::all();
+        $user = User::all();
 
         // Prepare data for chart
         $chartData = $this->prepareChartData($sales);

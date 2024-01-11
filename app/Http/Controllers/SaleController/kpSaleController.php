@@ -6,6 +6,7 @@ namespace App\Http\Controllers\SaleController;
 
 use Illuminate\Http\Request;
 use App\Models\Sale;
+use App\Models\Kiosk;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth; 
 
@@ -18,7 +19,8 @@ class kpSaleController extends Controller
         $user = $request->user();
     
         $sales = Sale::all(); // Use the Sale model to retrieve all sales data
-
+        $kiosk = Kiosk::all(); 
+        
         // Calculate total sales per month
         $totalSalesPerMonth = $sales->where('salesDate', '>=', now()->startOfMonth())->sum('salesTotal');
 
