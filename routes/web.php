@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\ComplaintController;
+
 use App\Http\Controllers\SaleController\kpSaleController;
+use App\Http\Controllers\SaleController\padminSaleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +24,11 @@ Route::get('kpsale', function () {
     return view('Sale.kpSale');
 });
 
+//PUPUK ADMIN SALE
+Route::get('padmin', function () {
+    return view('Sale.padminSale');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -32,3 +38,5 @@ Route::post('kpsale/store', [kpSaleController::class, 'store'])->name('kpsale.st
 Route::put('kpsale/{sale}', [kpSaleController::class, 'update'])->name('kpsale.update');
 Route::get('/kpsale/{sale}/delete', [kpSaleController::class, 'destroy']);
 
+// Define routes for PUPUK Admin Sale
+Route::get('padmin', [padminSaleController::class, 'index'])->name('padmin.index');

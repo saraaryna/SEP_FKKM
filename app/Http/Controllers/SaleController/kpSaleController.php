@@ -28,6 +28,7 @@ class kpSaleController extends Controller
         // Calculate overall total sales
         $overallTotalSales = $sales->sum('salesTotal');
 
+
         return view('Sale.kpSale', [
             'sales' => $sales,
             'totalSalesPerMonth' => $totalSalesPerMonth,
