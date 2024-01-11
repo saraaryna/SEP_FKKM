@@ -91,7 +91,7 @@
                                 </select>   
                                 </div>
                              <div class="form-group">
-                                 <label for="email">Fee Type</label>
+                                 <label for="userEmail">Fee Type</label>
                                  <select class="form-control" id="payFeeType" name="payFeeType" required>
                                      <option disabled selected value="Select Business Type">Fee Type</option>
                                      <option value="Rental">Rental</option>
@@ -118,8 +118,8 @@
                                  <label for="appBusinessPeriod">{{ $user->name }}</label>
                              </div>
                              <div class="form-group">
-                                 <label for="appBusinessPeriod">Email Address</label>
-                                 <input type="text" class="form-control" id="payEmail" name="payEmail" required>
+                                 <label for="appBusinessPeriod">userEmail Address</label>
+                                 <input type="text" class="form-control" id="payuserEmail" name="payuserEmail" required>
                              </div>
                              <div class="form-group">
                                  <label for="appBusinessPeriod">Remarks</label>

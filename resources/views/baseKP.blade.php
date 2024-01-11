@@ -101,7 +101,7 @@
 					<a class="nav-link dropdown-toggle position-relative" href="#" id="userDropdown" data-bs-toggle="dropdown">
 						<i class="align-middle fas fa-cog"></i>
 					</a>
-					<div class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+					<div class="dropdown-menu dropdown-menu-start" aria-labelledby="userDropdown">
 						<a class="dropdown-item" href="/KP-profile">
 							<i class="align-middle me-1 fas fa-fw fa-user"></i> View Profile
 						</a>
@@ -115,6 +115,7 @@
 					</div>
 				</li>
 			</ul>
+			
 		
 			
 					{{-- Yield --}}

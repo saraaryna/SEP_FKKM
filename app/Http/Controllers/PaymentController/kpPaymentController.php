@@ -76,7 +76,7 @@ class kpPaymentController extends Controller
         $payment->payFeeType = $request->payFeeType;
         $payment->payFeeTotal = $request->payFeeTotal;
         $payment->payKioskNum = $request->payKioskNum;
-        $payment->payEmail = $request->payEmail;
+        $payment->payuserEmail = $request->payuserEmail;
         $payment->payRemarks = $request->payRemarks;
         $payment->payProof = $request->payProof;
         $payment->payDate = $request->payDate;

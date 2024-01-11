@@ -110,10 +110,10 @@ class kpApplicationController extends Controller
         $request->validate([
             'userName' => 'required|string|max:255',
             'userIC' => 'required|string|max:20',
-            'userEmail' => 'required|email|max:255',
+            'userEmail' => 'required|userEmail|max:255',
             'userAddress' => 'required|string|max:255',
             'userPhoneNum' => 'required|string|max:20',
-            'userPassword' => 'nullable|string|min:6', // Add password validation if needed
+            'password' => 'nullable|string|min:6', // Add password validation if needed
             // Add more fields as needed
         ]);
     
@@ -128,8 +128,8 @@ class kpApplicationController extends Controller
         ];
     
         // Update password if provided
-        if ($request->filled('userPassword')) {
-            $userData['userPassword'] = bcrypt($request->input('userPassword'));
+        if ($request->filled('password')) {
+            $userData['password'] = bcrypt($request->input('password'));
         }
     
         $user->update($userData);

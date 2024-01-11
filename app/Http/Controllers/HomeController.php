@@ -29,8 +29,8 @@ class HomeController extends Controller
         $totalApp = Application::count();
         $totalKiosk = Kiosk::count();
         $totalComplaint = Complaint::count();
-        // $totalKiosk = Kiosk::count();
-        // $totalComplaint = Complaint::count();
+        $totalKiosk = Kiosk::count();
+        $totalComplaint = Complaint::count();
         $users = User::all();
         $sales = Sale::all();
         $kiosk = Kiosk::all(); 
@@ -72,6 +72,7 @@ class HomeController extends Controller
         elseif ($userRole == 'PUPUK Admin')
         {
             return view('Sale.padminSale',[
+                'sales' => $sales,
                 'user' => $user,
                 'users' => $users,
                 'kiosk' => $kiosk,
@@ -84,7 +85,7 @@ class HomeController extends Controller
                 'complaint' => $complaint,
             ]);
         }
-        elseif ($userRole == 'FK Bursary')
+        elseif ($userRole == 'Fk Bursary')
         {
             return view('Payment.FKBursaryPayment',[
                 'user' => $user,

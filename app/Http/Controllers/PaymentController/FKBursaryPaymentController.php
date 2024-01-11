@@ -8,6 +8,7 @@ use App\Models\Application;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreFKBursaryPayment;
 use App\Http\Requests\UpdateFKBursaryPayment;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -68,7 +69,7 @@ class FKBursaryPaymentController extends Controller
             $payment->payFeeType = $request->payFeeType;
             $payment->payFeeTotal = $request->payFeeTotal;
             $payment->payKioskNum = $request->payKioskNum;
-            $payment->payEmail = $request->payEmail;
+            $payment->payuserEmail = $request->payuserEmail;
             $payment->payRemarks = $request->payRemarks;
             $payment->payProof = $request->payProof;
             $payment->payDate = $request->payDate;
@@ -102,7 +103,7 @@ class FKBursaryPaymentController extends Controller
             $payment->payFeeType = $request->payFeeType;
             $payment->payFeeTotal = $request->payFeeTotal;
             $payment->payKioskNum = $request->payKioskNum;
-            $payment->payEmail = $request->payEmail;
+            $payment->payuserEmail = $request->payuserEmail;
             $payment->payRemarks = $request->payRemarks;
             $payment->payProof = $request->payProof;
             $payment->payDate = $request->payDate;
@@ -123,6 +124,40 @@ class FKBursaryPaymentController extends Controller
     public function remindParticipant(Payment $payment)
     {
         //
+    }
+
+    public function profile(Request $request)
+    {
+        $user = $request->user();
+
+        return view('Payment.profile',[
+            'user' => $user,
+        ]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+    $user = $request->user();
+
+    // Validate the form data (customize validation rules as needed)
+    $request->validate([
+        'userName' => 'required|string|max:255',
+        'userIC' => 'required|string|max:20',
+        'userEmail' => 'required|userEmail|max:255',
+        'userAddress' => 'required|string|max:255',
+        'userPhoneNum' => 'required|string|max:20',
+    ]);
+
+    // Update user profile
+    $user->update([
+        'userName' => $request->input('userName'),
+        'userIC' => $request->input('userIC'),
+        'userEmail' => $request->input('userEmail'),
+        'userAddress' => $request->input('userAddress'),
+        'userPhoneNum' => $request->input('userPhoneNum'),
+    ]);
+
+    return redirect()->route('fkBursary-profile');
     }
 
     public function createReceipt(Payment $payment, $payID)

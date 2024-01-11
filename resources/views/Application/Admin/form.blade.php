@@ -182,7 +182,7 @@
                         <input type="text" class="form-control" id="appPhoneNum" name="appPhoneNum" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Business Type</label>
+                        <label for="userEmail">Business Type</label>
                         <select class="form-control" id="appBusinessType" name="appBusinessType" required>
                             <option disabled selected value="Select Business Type">Business Type</option>
                             <option value="Food">Food</option>

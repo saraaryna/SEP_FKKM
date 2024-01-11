@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('userPhoneNum')->nullable();
             $table->enum('userRole', ['Kiosk Participant', 'Admin', 'FK Technical Team', 'Fk Bursary', 'PUPUK Admin'])->default('Kiosk Participant'); 
             $table->string('userEmail')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('userPassword');
+            $table->timestamp('userEmail_verified_at')->nullable();
+            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });

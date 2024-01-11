@@ -1,9 +1,9 @@
-@extends('baseKP')
-@section('Application.KioskParticipant.profile')
+@extends('Sale.basePADmin')
+@section('contents')
 <div class="container-fluid">
     <div class="header">
         <h1 class="header-title">
-            User Profile
+            Manage User
         </h1>
         {{-- <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -19,7 +19,7 @@
                     <h3 class="card-title mb-0">User Profile</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('kp.profile.update') }}" method="post">
+                    <form action="{{ route('fkBursary.profile.update') }}" method="post">
                         @csrf
                         @method('put')
 
@@ -51,11 +51,7 @@
                             <label for="userPhoneNum" class="form-label">Phone Number:</label>
                             <input type="text" class="form-control" id="userPhoneNum" name="userPhoneNum" value="{{ $user->userPhoneNum }}" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">New Password:</label>
-                            <input type="password" class="form-control" id="password" name="password">
-                        </div>                        
-                        <button type="submit" class="btn" style="background-color: #30C9B7;" >Update</button>
+                        <button type="submit" class="btn" style="background-color: #41968B; color:white;">Update Profile</button>
                     </form>
                 </div>
             </div>

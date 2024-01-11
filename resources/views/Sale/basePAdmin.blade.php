@@ -50,7 +50,7 @@
 	<script src="js/app.js"></script>
 	<!-- END SETTINGS -->
 </head>
-
+		
 <body>
 
     <div class="wrapper" >

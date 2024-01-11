@@ -30,17 +30,17 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="userEmail" class="form-label">{{ __('Email Address') }}</label>
-                                        <input id="userEmail" type="email" class="form-control @error('userEmail') is-invalid @enderror" name="userEmail" value="{{ old('userEmail') }}" required autocomplete="userEmail">
+                                        <label for="userEmail" class="form-label">{{ __('userEmail Address') }}</label>
+                                        <input id="userEmail" type="userEmail" class="form-control @error('userEmail') is-invalid @enderror" name="userEmail" value="{{ old('userEmail') }}" required autocomplete="userEmail">
                                         @error('userEmail')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="userPassword" class="form-label">{{ __('Password') }}</label>
-                                        <input id="userPassword" type="password" class="form-control @error('userPassword') is-invalid @enderror" name="userPassword" required autocomplete="new-password">
-                                        @error('userPassword')
+                                        <label for="password" class="form-label">{{ __('Password') }}</label>
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                        @error('password')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>

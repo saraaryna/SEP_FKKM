@@ -119,7 +119,7 @@ class AdminApplicationController extends Controller
     $request->validate([
         'userName' => 'required|string|max:255',
         'userIC' => 'required|string|max:20',
-        'userEmail' => 'required|email|max:255',
+        'userEmail' => 'required|userEmail|max:255',
         'userAddress' => 'required|string|max:255',
         'userPhoneNum' => 'required|string|max:20',
         // Add more fields as needed
@@ -155,15 +155,15 @@ public function addUser(Request $request)
     $validatedData = $request->validate([
         'userName' => 'required|string|max:255',
         'userIC' => 'required|string|max:20',
-        'userEmail' => 'required|email|max:255',
+        'userEmail' => 'required|userEmail|max:255',
         'userAddress' => 'required|string|max:255',
         'userPhoneNum' => 'required|string|max:20',
         'userRole' => 'required|string|in:Kiosk Participant,FK Technical Team,FK Bursary,PUPUK Admin', // Adjust roles as needed
         // Add more fields as needed
     ]);
 
-    // Set userPassword to hashed userIC
-    $validatedData['userPassword'] = Hash::make($validatedData['userIC']);
+    // Set password to hashed userIC
+    $validatedData['password'] = Hash::make($validatedData['userIC']);
 
     // Create a new user
     User::create($validatedData);

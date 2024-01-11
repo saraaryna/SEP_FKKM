@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyuserEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Application;
-
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -22,7 +22,7 @@ class User extends Authenticatable
     protected $fillable = [
         'userName',
         'userEmail',
-        'userPassword',
+        'password',
         'userAddress',
         'userPhoneNum',
         'userIC',
@@ -32,7 +32,7 @@ class User extends Authenticatable
 
 
     protected $hidden = [
-        'userPassword',
+        'password',
         'remember_token',
     ];
 
@@ -42,8 +42,8 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
-        'userPassword' => 'hashed',
+        'userEmail_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
     public function complaint()
     {
@@ -54,6 +54,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Payment::class, 'userID');
     }
+
+
+    public function setPasswordAttribute($value)
+    {
+        $this->attributes['password'] = Hash::make($value);
+    }
+
+    // ...
+
 }
 
 

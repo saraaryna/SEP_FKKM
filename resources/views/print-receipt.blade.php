@@ -83,7 +83,7 @@
                     <p><strong>Kiosk Number:</strong> {{ $payment->payKioskNum }}</p>
                 </div>
                 <div class="form-group p-2">
-                    <p><strong>Email:</strong> {{ $payment->payEmail }}</p>
+                    <p><strong>userEmail:</strong> {{ $payment->payuserEmail }}</p>
                 </div>
                 <div class="form-group p-2">
                     <p><strong>Remarks:</strong> {{ $payment->payRemarks }}</p>

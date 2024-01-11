@@ -4,22 +4,22 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Foundation\Auth\VerifiesuserEmails;
 
 class VerificationController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Email Verification Controller
+    | userEmail Verification Controller
     |--------------------------------------------------------------------------
     |
-    | This controller is responsible for handling email verification for any
-    | user that recently registered with the application. Emails may also
-    | be re-sent if the user didn't receive the original email message.
+    | This controller is responsible for handling userEmail verification for any
+    | user that recently registered with the application. userEmails may also
+    | be re-sent if the user didn't receive the original userEmail message.
     |
     */
 
-    use VerifiesEmails;
+    use VerifiesuserEmails;
 
     /**
      * Where to redirect users after verification.

@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
             'userPhoneNum' => '0182815400',
             'userRole' => 'Admin',
             'userEmail' => 'admin@gmail.com',
-            'userPassword' => Hash::make('admin123'),
+            'password' => Hash::make('admin123'),
         ]);
 	User::create([
             'userID' => '2',
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'userPhoneNum' => '019239812',
             'userRole' => 'FK Technical Team',
             'userEmail' => 'fktechnical@gmail.com',
-            'userPassword' => Hash::make('fktechnical123'),
+            'password' => Hash::make('fktechnical123'),
         ]);
 	User::create([
             'userID' => '3',
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
             'userPhoneNum' => '019123912',
             'userRole' => 'FK Bursary',
             'userEmail' => 'fkbursary@gmail.com',
-            'userPassword' => Hash::make('fkbursary123'),
+            'password' => Hash::make('fkbursary123'),
         ]);
 	User::create([
             'userID' => '4',
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
             'userPhoneNum' => '0194329802',
             'userRole' => 'PUPUK Admin',
             'userEmail' => 'pupukadmin@gmail.com',
-            'userPassword' => Hash::make('pupukadmin123'),
+            'password' => Hash::make('pupukadmin123'),
         ]);
     }
     

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SaleController\kpSaleController;
 use App\Http\Controllers\SaleController\padminSaleController;
 use App\Http\Controllers\ComplaintController\kpComplaintController;
+use App\Http\Controllers\PaymentController\FKBursaryPaymentController;
 use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Auth;
 
@@ -115,6 +116,11 @@ Route::put('/KP-profile/update', [kpApplicationController::class, 'updateProfile
 //FK Technical Team
 Route::get('/fkt-profile', [fktComplaintController::class, 'profile'])->name('fkt-profile');
 Route::put('/fkt-profile/update', [fktComplaintController::class, 'updateProfile'])->name('fkt.profile.update');
+
+//FK Bursary Team
+Route::get('/fkBursary-profile', [FKBursaryPaymentController::class, 'profile'])->name('fkBursary-profile');
+Route::put('/fkBursary-profile/update', [FKBursaryPaymentController::class, 'updateProfile'])->name('fkBursary.profile.update');
+
 
 
 

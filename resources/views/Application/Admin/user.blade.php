@@ -27,7 +27,7 @@
                             <th>NO</th>
                             <th>Name</th>
                             <th>No IC</th>
-                            <th>Email</th>
+                            <th>userEmail</th>
                             <th>Phone Number</th>
                             <th>Address</th>
                             <th>Role</th>
@@ -78,8 +78,8 @@
                         <input type="text" class="form-control" id="userIC" name="userIC" required>
                     </div>
                     <div class="form-group">
-                        <label for="userEmail">Email</label>
-                        <input type="email" class="form-control" id="userEmail" name="userEmail" required>
+                        <label for="userEmail">userEmail</label>
+                        <input type="userEmail" class="form-control" id="userEmail" name="userEmail" required>
                     </div>
                     <div class="form-group">
                         <label for="userAddress">Address</label>
