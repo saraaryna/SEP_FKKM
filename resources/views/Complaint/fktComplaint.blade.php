@@ -67,8 +67,8 @@
                                 <a href="#" data-bs-toggle="modal"
                                     data-bs-target="#view-{{ $complaint->complaintID }}"><i
                                         class="align-middle fas fa-fw fa-eye"></i></i></a>
-                                <a href="/complaint/{{$complaint->id}}/delete"><i
-                                        class="align-middle fas fa-fw fa-trash"></i></a>
+                                <a href="#" onclick="confirmDelete('/fktComplaint/{{$complaint->complaintID}}/delete')">
+                                    <i class="align-middle fas fa-fw fa-trash"></i>
                             </td>
                         </tr>
 
@@ -296,23 +296,16 @@
             datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
         });
 
-        function deleteUser(userID) {
-            if (confirm("Are you sure you want to delete this user?")) {
-                var form = document.createElement("form");
-                form.method = "post";
-                form.action = "admin-deleteUser.php";
-
-                var input = document.createElement("input");
-                input.type = "hidden";
-                input.name = "userID";
-                input.value = userID;
-
-                form.appendChild(input);
-
-                document.body.appendChild(form);
-                form.submit();
+        function confirmDelete(url) {
+            var confirmation = confirm("Are you sure you want to delete this complaint?");
+            if (confirmation) {
+                window.location.href = url; // If confirmed, proceed with the deletion
+            } else {
+                // If not confirmed, do nothing or provide feedback to the user
+                // For example: alert("Deletion canceled");
             }
         }
+
 
 
     </script>

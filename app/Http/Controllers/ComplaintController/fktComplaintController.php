@@ -73,5 +73,8 @@ class fktComplaintController extends Controller
     public function destroy(Complaint $complaint)
     {
         $complaint->delete();
+
+        return redirect('/fktComplaint');
+
     }
 }

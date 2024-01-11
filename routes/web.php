@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApplicationController\AdminApplicationController;
 use App\Http\Controllers\ApplicationController\kpApplicationController;
+use App\Http\Controllers\ComplaintController\fktComplaintController;
 use App\Http\Controllers\KioskController;
 use Illuminate\Support\Facades\Route;
 
@@ -69,10 +70,11 @@ Route::delete('/kioskDestroy/{kioskID}', [App\Http\Controllers\KioskController\K
 Route::get('/kpComplaint', [App\Http\Controllers\ComplaintController\kpComplaintController::class, 'index'])->name('kpComplaint');
 Route::post('/kpComplaint', [App\Http\Controllers\ComplaintController\kpComplaintController::class, 'store'])->name('kpComplaint');
 Route::put('/kpComplaintEdit', [App\Http\Controllers\ComplaintController\kpComplaintController::class, 'update'])->name('kpComplaint');
-Route::delete('/kpComplaintDestroy/{complaintID}', [App\Http\Controllers\ComplaintController\kpComplaintController::class, 'destroy'])->name('kpComplaintDestroy');
+Route::get('/kpComplaint/{complaint}/delete', [kpComplaintController::class, 'destroy']);
 Route::get('/fktComplaint', [App\Http\Controllers\ComplaintController\fktComplaintController::class, 'index'])->name('fktComplaint');
 Route::put('/fktComplaintEdit', [App\Http\Controllers\ComplaintController\fktComplaintController::class, 'update'])->name('fktComplaint');
 Route::put('/fktComplaintEditStatus', [App\Http\Controllers\ComplaintController\fktComplaintController::class, 'update'])->name('fktComplaint');
+Route::get('/fktComplaint/{complaint}/delete', [fktComplaintController::class, 'destroy']);
 
 Route::resource('/sale', SaleController::class);
 
