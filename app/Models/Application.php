@@ -7,19 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Application extends Model
 {
-    protected $primaryKey = 'appID';
-
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'userID');
-    }
-
-    public function kiosk() {
-        return $this->belongsTo(Kiosk::class, 'kioskID');
-    }
-
-    public function payment()
-    {
-        return $this->hasMany(Payment::class, 'appID');
-    }
+    use HasFactory;
 }

@@ -107,8 +107,7 @@
 				<div class="container-fluid" >
 
 					{{-- Yield --}}
-                    @yield('Complaint.kpComplaint')
-					
+                    @yield('Complaint.complaint')
 
 
 					</div>

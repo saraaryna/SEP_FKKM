@@ -48,13 +48,5 @@ class User extends Authenticatable
     public function complaint()
     {
         return $this->hasMany(Complaint::class, 'userID');
-
-    }
-    public function payment()
-    {
-        return $this->hasMany(Payment::class, 'userID');
     }
 }
-
-
-
