@@ -38,8 +38,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if($payment->count() > 0)
                         @foreach($payment as $payments)
-
                         <tr>
 
 
@@ -230,7 +230,8 @@
                     </div>
                 </div>
                 @endforeach
-
+                @else
+                @endif
             </tbody>
         </table>
 
@@ -314,6 +315,17 @@
 		document.addEventListener("DOMContentLoaded", function() {
             var currentDate = new Date().toISOString().split('T')[0];
             
+            // Datatables basic
+			$('#datatables-basic').DataTable({
+				responsive: true
+			});
+			// Datatables with Buttons
+			var datatablesButtons = $('#datatables-buttons').DataTable({
+				lengthChange: !1,
+				buttons: ["copy", "print"],
+				responsive: true
+			});
+			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
             
             document.getElementById('payDate').value = currentDate;
 			// Datatables basic
@@ -356,16 +368,7 @@
                 console.log('Script executed successfully');
             });
 
-			$('#datatables-basic').DataTable({
-				responsive: true
-			});
-			// Datatables with Buttons
-			var datatablesButtons = $('#datatables-buttons').DataTable({
-				lengthChange: !1,
-				buttons: ["copy", "print"],
-				responsive: true
-			});
-			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+			
 		
            
         });

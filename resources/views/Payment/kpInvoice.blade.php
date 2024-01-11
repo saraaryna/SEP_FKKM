@@ -33,8 +33,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        @if($payment->count() > 0)
                         @foreach($payment as $payments)
+                        <tr>
 
 
                         <td class="text-xs">{{ $loop->index + 1 }}</td>
@@ -190,7 +191,8 @@
                     </div>
                 </div>
                 @endforeach
-
+                @else
+                @endif
             </tbody>
         </table>
     </div>

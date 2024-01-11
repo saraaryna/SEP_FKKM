@@ -40,14 +40,21 @@
                             <td class="text-xs">{{$complaint->compKioskNum}}</td>
                             <td class="text-xs">{{$complaint->compDate}}</td>
                             <td class="text-xs">{{$complaint->compType}}</td>
-                            <td class="text-xs">{{$complaint->compPIC}}</td>
-                            <td style="text-xs">
-                                @if ($complaint->compStatus === "Approved")
-                                <span class="badge rounded-pill bg-success">{{ $complaint->compStatus}}</span>
-                                @elseif($complaint->compStatus === "Rejected")
-                                <span class="badge rounded-pill bg-danger">{{ $complaint->compStatus}}</span>
+                            <td class="text-xs">@if ($complaint->compPIC === "None")
+                                <span class="badge rounded-pill bg-danger">{{ $complaint->compPIC}}</span>
                                 @else
-                                <span class="badge rounded-pill bg-warning ">{{ $complaint->compStatus}}</span>
+                                <span class="badge rounded-pill bg-success">{{ $complaint->compPIC}}</span>
+                            </td>
+                            @endif</td>
+                            <td style="text-xs">
+                                @if ($complaint->compStatus === "In Investigation")
+                                <span class="badge rounded-pill bg-primary">{{ $complaint->compStatus}}</span>
+                                @elseif($complaint->compStatus === "In Progress")
+                                <span class="badge rounded-pill bg-warning">{{ $complaint->compStatus}}</span>
+                                @elseif($complaint->compStatus === "In Review")
+                                <span class="badge rounded-pill bg-warning">{{ $complaint->compStatus}}</span>
+                                @elseif($complaint->compStatus === "Solved")
+                                <span class="badge rounded-pill bg-success ">{{ $complaint->compStatus}}</span>
                             </td>
                             @endif
                             <td class="table-action">
@@ -57,8 +64,11 @@
                                 <a href="#" data-bs-toggle="modal"
                                     data-bs-target="#updateStatus-{{ $complaint->complaintID }}"><i
                                         class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                <a href="/complaint/{{$complaint->id}}/delete"><i
-                                        class="align-middle fas fa-fw fa-trash"></i></a>
+                                <a href="#" data-bs-toggle="modal"
+                                    data-bs-target="#view-{{ $complaint->complaintID }}"><i
+                                        class="align-middle fas fa-fw fa-eye"></i></i></a>
+                                <a href="#" onclick="confirmDelete('/fktComplaint/{{$complaint->complaintID}}/delete')">
+                                    <i class="align-middle fas fa-fw fa-trash"></i>
                             </td>
                         </tr>
 
@@ -97,10 +107,67 @@
                             </div>
                                       
                         </div>
-                        <!--Modal Update Status-->
-                        <div class="modal fade" id="updateStatus-{{ $complaint->userID }}" data-bs-backdrop="static"
+                        <!--Modal Update View-->
+                        <div class="modal fade" id="view-{{ $complaint->complaintID }}" data-bs-backdrop="static"
                             data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropL abel">Assign Person</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body m-3">
+                                        <form method="POST" action="/fktComplaintEdit">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="complaintID" value="{{$complaint->complaintID}}">
+                                            <input type="hidden" name="compStatus" value="{{$complaint->compStatus}}">
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label>Name :</label>
+                                                    <label class="fw-bolder">{{$complaint->compName}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Complaint Date :</label>
+                                                    <label class="fw-bolder">{{$complaint->compDate}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Date Occured :</label>
+                                                    <label class="fw-bolder">{{$complaint->compDateOccured}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Kiosk Number :</label>
+                                                    <label class="fw-bolder">{{$complaint->compKioskNum}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Phone Number :</label>
+                                                    <label class="fw-bolder">{{$complaint->compPhoneNum}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Complaint Type :</label>
+                                                    <label class="fw-bolder">{{$complaint->compType}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Description :</label>
+                                                    <label class="fw-bolder">{{$complaint->compDescription}}</label>
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <button type="button" class="btn btn-outline-primary"
+                                                data-bs-dismiss="modal">CLOSE</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                                      
+                        </div>
+                        <!--Modal Update Status-->
+                        <div class="modal fade" id="updateStatus-{{ $complaint->complaintID }}"
+                            data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -229,23 +296,16 @@
             datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
         });
 
-        function deleteUser(userID) {
-            if (confirm("Are you sure you want to delete this user?")) {
-                var form = document.createElement("form");
-                form.method = "post";
-                form.action = "admin-deleteUser.php";
-
-                var input = document.createElement("input");
-                input.type = "hidden";
-                input.name = "userID";
-                input.value = userID;
-
-                form.appendChild(input);
-
-                document.body.appendChild(form);
-                form.submit();
+        function confirmDelete(url) {
+            var confirmation = confirm("Are you sure you want to delete this complaint?");
+            if (confirmation) {
+                window.location.href = url; // If confirmed, proceed with the deletion
+            } else {
+                // If not confirmed, do nothing or provide feedback to the user
+                // For example: alert("Deletion canceled");
             }
         }
+
 
 
     </script>

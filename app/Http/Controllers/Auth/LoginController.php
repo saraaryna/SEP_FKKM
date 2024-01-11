@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
+
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
@@ -15,7 +17,15 @@ class LoginController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        if ($user->userRole === 'Kiosk Participant') {
+            return redirect('/kpsale');
+        }
+
+        // Add other role checks if needed
+        // ...
+
+        // Default redirect if no specific role is matched
+        return redirect('/home');
     }
 
     protected function authenticated(Request $request, $user)

@@ -1,5 +1,7 @@
 <?php
 
+//ERNIE MASTURA BINTI BAKRI (CB21161)
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id('salesID');
-            $table->unsignedBigInteger('userID'); // Foreign Key userID
+            $table->unsignedBigInteger('userID')->nullable(); // Foreign Key userID
             $table->foreign('userID')->references('userID')->on('users');
-            $table->unsignedBigInteger('kioskID'); // Foreign Key kioskID
-            $table->foreign('kioskID')->references('userID')->on('kiosks');
+            $table->unsignedBigInteger('kioskID')->nullable();// Foreign Key kioskID
+            $table->foreign('kioskID')->references('kioskID')->on('kiosks');
             $table->date('salesDate');
             $table->float('salesTotal', 8, 2);
             $table->timestamps();

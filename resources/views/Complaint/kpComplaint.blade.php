@@ -1,5 +1,6 @@
 @extends('Complaint.base')
 @section('Complaint.kpComplaint')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <div class="container-fluid">
     <div class="header">
@@ -42,32 +43,94 @@
                             <td class="text-xs">{{$complaint->compDate}}</td>
                             <td class="text-xs">{{$complaint->compDescription}}</td>
                             <td style="text-xs">
-                                @if ($complaint->compStatus === "Approved")
-                                <span class="badge rounded-pill bg-success">{{ $complaint->compStatus}}</span>
-                                @elseif($complaint->compStatus === "Rejected")
-                                <span class="badge rounded-pill bg-danger">{{ $complaint->compStatus}}</span>
-                                @else
-                                <span class="badge rounded-pill bg-warning ">{{ $complaint->compStatus}}</span>
+                                @if ($complaint->compStatus === "In Investigation")
+                                <span class="badge rounded-pill bg-primary">{{ $complaint->compStatus}}</span>
+                                @elseif($complaint->compStatus === "In Progress")
+                                <span class="badge rounded-pill bg-warning">{{ $complaint->compStatus}}</span>
+                                @elseif($complaint->compStatus === "In Review")
+                                <span class="badge rounded-pill bg-warning">{{ $complaint->compStatus}}</span>
+                                @elseif($complaint->compStatus === "Solved")
+                                <span class="badge rounded-pill bg-success ">{{ $complaint->compStatus}}</span>
                             </td>
                             @endif
                             <td class="table-action">
-                                <a href="#" data-bs-toggle="modal" data-bs-target=""><i
+                                <a href="#" data-bs-toggle="modal"
+                                    data-bs-target="#view-{{ $complaint->complaintID }}"><i
                                         class="align-middle fas fa-fw fa-eye"></i></i></a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#update-{{ $complaint->complaintID }}"><i
+                                <a href="#" data-bs-toggle="modal"
+                                    data-bs-target="#update-{{ $complaint->complaintID }}"><i
                                         class="align-middle fas fa-fw fa-pen"></i></i></a>
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#destroy-{{ $complaint->complaintID }}"><i
-                                        class="align-middle fas fa-fw fa-trash"></i></i></a>
+                                <a href="#" onclick="confirmDelete('/kpComplaint/{{$complaint->complaintID}}/delete')">
+                                    <i class="align-middle fas fa-fw fa-trash"></i>
+                                </a>
 
                             </td>
                         </tr>
-                        <!-- Modal Update-->
-                        <div class="modal fade" id="update-{{ $complaint->complaintID }}" data-bs-backdrop="static"
+                        <!--Modal Update View-->
+                        <div class="modal fade" id="view-{{ $complaint->complaintID }}" data-bs-backdrop="static"
                             data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
                             aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="staticBackdropL abel">Assign Person</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body m-3">
+                                        <form method="POST" action="/fktComplaintEdit">
+                                            @csrf
+                                            @method('PUT')
+                                            <input type="hidden" name="complaintID" value="{{$complaint->complaintID}}">
+                                            <input type="hidden" name="compStatus" value="{{$complaint->compStatus}}">
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label>Name :</label>
+                                                    <label class="fw-bolder">{{$complaint->compName}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Complaint Date :</label>
+                                                    <label class="fw-bolder">{{$complaint->compDate}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Date Occured :</label>
+                                                    <label class="fw-bolder">{{$complaint->compDateOccured}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Kiosk Number :</label>
+                                                    <label class="fw-bolder">{{$complaint->compKioskNum}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Phone Number :</label>
+                                                    <label class="fw-bolder">{{$complaint->compPhoneNum}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Complaint Type :</label>
+                                                    <label class="fw-bolder">{{$complaint->compType}}</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Description :</label>
+                                                    <label class="fw-bolder">{{$complaint->compDescription}}</label>
+                                                </div>
+
+                                            </div>
+                                            <br>
+                                            <button type="button" class="btn btn-outline-primary"
+                                                data-bs-dismiss="modal">CLOSE</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                                      
+                        </div>
+                        <!--Modal Update-->
+                        <div class="modal fade" id="update-{{ $complaint->complaintID }}" data-bs-backdrop="static"
+                            data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropL abel">Update Status</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
@@ -116,7 +179,8 @@
                                                         <option value="Technical Issue">Technical Issue</option>
                                                         <option value="Accessibility Issues">Accessibility Issues
                                                         </option>
-                                                        <option value="Financial Concerns">Financial Concerns</option>
+                                                        <option value="Financial Concerns">Financial Concerns
+                                                        </option>
                                                         <option value="Others">Others</option>
                                                         @elseif ($complaint->compType == "Technical Issue")
                                                         <option value="Maintainance">Maintainance</option>
@@ -124,21 +188,24 @@
                                                         </option>
                                                         <option value="Accessibility Issues">Accessibility Issues
                                                         </option>
-                                                        <option value="Financial Concerns">Financial Concerns</option>
+                                                        <option value="Financial Concerns">Financial Concerns
+                                                        </option>
                                                         <option value="Others">Others</option>
                                                         @elseif ($complaint->compType == "Accessibility Issues")
                                                         <option value="Maintainance">Maintainance</option>
                                                         <option value="Technical Issue">Technical Issue</option>
                                                         <option value="Accessibility Issues" selected>Accessibility
                                                             Issues</option>
-                                                        <option value="Financial Concerns">Financial Concerns</option>
+                                                        <option value="Financial Concerns">Financial Concerns
+                                                        </option>
                                                         <option value="Others">Others</option>
                                                         @elseif ($complaint->compType == "Financial Concerns")
                                                         <option value="Maintainance">Maintainance</option>
                                                         <option value="Technical Issue">Technical Issue</option>
                                                         <option value="Accessibility Issues">Accessibility Issues
                                                         </option>
-                                                        <option value="Financial Concerns" selected>Financial Concerns
+                                                        <option value="Financial Concerns" selected>Financial
+                                                            Concerns
                                                         </option>
                                                         <option value="Others">Others</option>
                                                         @elseif ($complaint->compType == "Others")
@@ -146,7 +213,8 @@
                                                         <option value="Technical Issue">Technical Issue</option>
                                                         <option value="Accessibility Issues">Accessibility Issues
                                                         </option>
-                                                        <option value="Financial Concerns" selected>Financial Concerns
+                                                        <option value="Financial Concerns" selected>Financial
+                                                            Concerns
                                                         </option>
                                                         <option value="Others" selected>Others</option>
                                                         @endif
@@ -187,7 +255,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" class="form-control" id="compName" name="compName" required>
+                        <input type="text" class="form-control" id="compName" name="compName" value="{{$user->userName}}" required>
                     </div>
                     <div class="form-group">
                         <label for="name">Date Occured</label>
@@ -250,27 +318,20 @@
             });
             datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
         });
+    </script>
 
-        function deleteUser(userID) {
-            if (confirm("Are you sure you want to delete this user?")) {
-                var form = document.createElement("form");
-                form.method = "post";
-                form.action = "/kpComplaintDestroy";
-
-                var input = document.createElement("input");
-                input.type = "hidden";
-                input.name = "userID";
-                input.value = userID;
-
-                form.appendChild(input);
-
-                umeppendChild(form);
-                form.submit();
+    <script>
+        function confirmDelete(url) {
+            var confirmation = confirm("Are you sure you want to delete this application?");
+            if (confirmation) {
+                window.location.href = url; // If confirmed, proceed with the deletion
+            } else {
+                // If not confirmed, do nothing or provide feedback to the user
+                // For example: alert("Deletion canceled");
             }
         }
-
-
     </script>
+
 
 
     @stop

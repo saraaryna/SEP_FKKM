@@ -112,5 +112,8 @@ class kpComplaintController extends Controller
     public function destroy(Complaint $complaint)
     {
         $complaint->delete();
+
+        return redirect('/kpComplaint');
+
     }
 }
