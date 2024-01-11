@@ -51,7 +51,9 @@
                             @endif
                         <td class="table-action">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#update-{{ $application->appID }}"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                            <a href="/KP-appForm/{{$application->appID}}/delete"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                            <a href="/KP-appForm/{{$application->appID}}/delete" class="delete-link">
+                                <i class="align-middle fas fa-fw fa-trash"></i>
+                            </a>                        
                         </td>
                     </tr>                                  
                 <!-- Modal Kemaskini -->
@@ -182,6 +184,22 @@
 		});
 
 	</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var deleteLinks = document.querySelectorAll('.delete-link');
+
+        deleteLinks.forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                var confirmation = confirm('Are you sure you want to delete this application?');
+                
+                if (!confirmation) {
+                    event.preventDefault(); // Cancel the default behavior if not confirmed
+                }
+            });
+        });
+    });
+</script>
 
 
 @stop

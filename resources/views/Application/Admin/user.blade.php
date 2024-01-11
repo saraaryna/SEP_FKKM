@@ -45,8 +45,10 @@
                         <td class="text-xs">{{$user->userAddress}}</td>
                         <td class="text-xs">{{$user->userRole}}</td>
                         <td class="table-action">
-                            <a href="{{ route('admin.deleteUser', ['user' => $user->userID]) }}"><i class="align-middle fas fa-fw fa-trash"></i></a>
-                        </td>
+                            <a href="{{ route('admin.deleteUser', ['user' => $user->userID]) }}" onclick="return confirm('Are you sure you want to delete this user?')">
+                                <i class="align-middle fas fa-fw fa-trash"></i>
+                            </a>
+                      </td>
                     </tr>       
                     @endforeach                           
             </tbody>
@@ -124,6 +126,20 @@
 		});
 
 	</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var deleteLinks = document.querySelectorAll('.delete-link');
 
+        deleteLinks.forEach(function(link) {
+            link.addEventListener('click', function(event) {
+                var confirmation = confirm('Are you sure you want to delete this user?');
+                
+                if (!confirmation) {
+                    event.preventDefault(); // Cancel the default behavior if not confirmed
+                }
+            });
+        });
+    });
+</script>
 
 @stop

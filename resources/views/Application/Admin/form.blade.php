@@ -51,7 +51,9 @@
                             @endif
                         <td class="table-action">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#update-{{ $application->appID }}"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
-                            <a href="/Admin-appForm/{{$application->appID}}/delete"><i class="align-middle fas fa-fw fa-trash"></i></a>
+                            <a href="#" onclick="confirmDelete('/Admin-appForm/{{$application->appID}}/delete')">
+                                <i class="align-middle fas fa-fw fa-trash"></i>
+                            </a>                        
                         </td>
                     </tr>                                  
                 <!-- Modal Kemaskini -->
@@ -158,6 +160,18 @@
 		});
 
 	</script>
+
+<script>
+    function confirmDelete(url) {
+        var confirmation = confirm("Are you sure you want to delete this application?");
+        if (confirmation) {
+            window.location.href = url; // If confirmed, proceed with the deletion
+        } else {
+            // If not confirmed, do nothing or provide feedback to the user
+            // For example: alert("Deletion canceled");
+        }
+    }
+</script>
 
 
 @stop
