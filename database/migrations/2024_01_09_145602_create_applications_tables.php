@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('kiosks', function (Blueprint $table) {
-            $table->id('kioskID');
+        Schema::create('applications', function (Blueprint $table) {
+            $table->id('appID');
             $table->unsignedBigInteger('userID'); // Foreign Key
             $table->foreign('userID')->references('userID')->on('users');
-            $table->integer('kioskNumber');
-            $table->string('kioskLocation');
-            $table->string('kioskStatus');
+            $table->string('appName');
+            $table->string('appPhoneNum');
+            $table->string('appBusinessType');
+            $table->string('appKioskNum');
+            $table->dateTime('appBusinessPeriod');
+            $table->enum('appStatus', ['Approved', 'Rejected', 'In Progress']); 
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('kiosks');
+        Schema::dropIfExists('applications');
     }
 };

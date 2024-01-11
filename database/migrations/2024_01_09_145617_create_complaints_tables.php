@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id('complaintID');
             $table->unsignedBigInteger('userID'); // Foreign Key
             $table->foreign('userID')->references('userID')->on('users');
+            $table->unsignedBigInteger('appID'); // Foreign Key
+            $table->foreign('appID')->references('appID')->on('applications');
             $table->string('compName');
             $table->timestamp('compDate');
             $table->date('compDateOccured');

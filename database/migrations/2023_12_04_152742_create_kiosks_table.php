@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sales', function (Blueprint $table) {
-            $table->id();
+        Schema::create('kiosks', function (Blueprint $table) {
+            $table->id('kioskID');
             $table->unsignedBigInteger('userID'); // Foreign Key userID
             $table->foreign('userID')->references('userID')->on('users');
-            $table->unsignedBigInteger('kioskID'); // Foreign Key kioskID
-            $table->foreign('kioskID')->references('kioskID')->on('kiosks');
-            $table->date('salesDate');
-            $table->float('salesTotal', 8, 2);
+            $table->integer('kioskNumber');
+            $table->string('KioskLocation');
+            $table->enum('kioskStatus', ['Available', 'Not Available']);
             $table->timestamps();
-
         });
     }
 
@@ -29,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sales');
+        Schema::dropIfExists('kiosks');
     }
 };
