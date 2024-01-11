@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id('complaintID');
             $table->unsignedBigInteger('userID'); // Foreign Key
             $table->foreign('userID')->references('userID')->on('users');
-            $table->unsignedBigInteger('appID'); // Foreign Key
-            $table->foreign('appID')->references('appID')->on('applications');
             $table->string('compName');
             $table->timestamp('compDate');
             $table->date('compDateOccured');
@@ -24,7 +22,6 @@ return new class extends Migration
             $table->string('compPhoneNum');
             $table->string('compType');
             $table->string('compDescription');
-            $table->string('compEvidence');
             $table->enum('compStatus', ['In Investigation', 'In Review', 'In Progress', 'Solved']);
             $table->string('compPIC');
             $table->timestamps();
