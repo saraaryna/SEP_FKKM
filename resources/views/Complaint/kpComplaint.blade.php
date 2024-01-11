@@ -154,7 +154,7 @@
                                                 <div class="form-group">
                                                     <label>Date Occured</label>
                                                     <input type="date" class="form-control" id="compDateOccured"
-                                                        name="compDateOccured" value="{{$complaint->compDateOccured}}">
+                                                        name="compDateOccured" value="{{$complaint->compDateOccured}}" >
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Kiosk Number</label>
