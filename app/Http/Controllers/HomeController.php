@@ -59,7 +59,7 @@ class HomeController extends Controller
             return view('Application.KioskParticipant.dashboard',[
             'application' => $application,
             'user' => $user,
-            'usesr' => $users,
+            'users' => $users,
             'totalUsers' => $totalUsers,
             'totalApp' => $totalApp,
             'totalKiosk' => $totalKiosk,

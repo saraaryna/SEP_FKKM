@@ -40,12 +40,12 @@
                             @csrf
 
                             <div class="row mb-3">
-                                <label for="userEmail" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="userEmail" type="email" class="form-control @error('userEmail') is-invalid @enderror" name="userEmail" value="{{ old('userEmail') }}" required autocomplete="userEmail" autofocus>
+                                    <input id="email" name="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                                    @error('userEmail')
+                                    @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -54,12 +54,12 @@
                             </div>
 
                             <div class="row mb-3">
-                                <label for="userPassword" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="userPassword" type="password" class="form-control @error('userPassword') is-invalid @enderror" name="userPassword" required autocomplete="current-userPassword">
+                                    <input id="password" name="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
-                                    @error('userPassword')
+                                    @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
@@ -71,11 +71,11 @@
                                 <label for="userRole" class="col-md-4 col-form-label text-md-end">{{ __('User Role') }}</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="userRole" required>
+                                    <select class="form-control" name="userRole"  id="userRole" required>
                                         <option value="Category">Category</option>
                                         <option value="Kiosk Participant">Kiosk Participant</option>
                                         <option value="PUPUK Admin">PUPUK Admin</option>
-                                        <option value="FK Bursary">FK Bursary</option>
+                                        <option value="Fk Bursary">FK Bursary</option>
                                         <option value="FK Technical Team">FK Technical Team</option>
                                     </select>
 

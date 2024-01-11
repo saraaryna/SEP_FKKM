@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'userAddress' => 'Taman Makmur',
             'userPhoneNum' => '0182815400',
             'userRole' => 'Admin',
-            'userEmail' => 'admin@gmail.com',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('admin123'),
         ]);
 	User::create([
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
             'userAddress' => 'Hulu Langat',
             'userPhoneNum' => '019239812',
             'userRole' => 'FK Technical Team',
-            'userEmail' => 'fktechnical@gmail.com',
+            'email' => 'fktechnical@gmail.com',
             'password' => Hash::make('fktechnical123'),
         ]);
 	User::create([
@@ -41,7 +41,7 @@ class UserSeeder extends Seeder
             'userAddress' => 'Rompin',
             'userPhoneNum' => '019123912',
             'userRole' => 'FK Bursary',
-            'userEmail' => 'fkbursary@gmail.com',
+            'email' => 'fkbursary@gmail.com',
             'password' => Hash::make('fkbursary123'),
         ]);
 	User::create([
@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
             'userAddress' => 'Kotasas',
             'userPhoneNum' => '0194329802',
             'userRole' => 'PUPUK Admin',
-            'userEmail' => 'pupukadmin@gmail.com',
+            'email' => 'pupukadmin@gmail.com',
             'password' => Hash::make('pupukadmin123'),
         ]);
     }

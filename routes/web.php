@@ -5,7 +5,7 @@ use App\Http\Controllers\ApplicationController\kpApplicationController;
 use App\Http\Controllers\ComplaintController\fktComplaintController;
 use App\Http\Controllers\KioskController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Auth\LoginController;
 
 use App\Http\Controllers\SaleController\kpSaleController;
 use App\Http\Controllers\SaleController\padminSaleController;
@@ -48,6 +48,9 @@ Route::get('padmin', function () {
 });*/
 
 Auth::routes();
+
+Route::post('/login', [LoginController::class, 'authenticate'])->name('login');
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // Define routes for Kiosk Participant Sale

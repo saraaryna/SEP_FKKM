@@ -119,7 +119,7 @@ class AdminApplicationController extends Controller
     $request->validate([
         'userName' => 'required|string|max:255',
         'userIC' => 'required|string|max:20',
-        'userEmail' => 'required|userEmail|max:255',
+        'email' => 'required|email|max:255',
         'userAddress' => 'required|string|max:255',
         'userPhoneNum' => 'required|string|max:20',
         // Add more fields as needed
@@ -129,7 +129,7 @@ class AdminApplicationController extends Controller
     $user->update([
         'userName' => $request->input('userName'),
         'userIC' => $request->input('userIC'),
-        'userEmail' => $request->input('userEmail'),
+        'email' => $request->input('email'),
         'userAddress' => $request->input('userAddress'),
         'userPhoneNum' => $request->input('userPhoneNum'),
         // Update more fields as needed
@@ -155,7 +155,7 @@ public function addUser(Request $request)
     $validatedData = $request->validate([
         'userName' => 'required|string|max:255',
         'userIC' => 'required|string|max:20',
-        'userEmail' => 'required|userEmail|max:255',
+        'email' => 'required|email|max:255',
         'userAddress' => 'required|string|max:255',
         'userPhoneNum' => 'required|string|max:20',
         'userRole' => 'required|string|in:Kiosk Participant,FK Technical Team,FK Bursary,PUPUK Admin', // Adjust roles as needed

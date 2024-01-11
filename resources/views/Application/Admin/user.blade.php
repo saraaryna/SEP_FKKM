@@ -40,7 +40,7 @@
                         <td class="text-xs">{{ $loop->index + 1 }}</td>
                         <td class="text-xs">{{$user->userName}}</td>
                         <td class="text-xs">{{$user->userIC}}</td>
-                        <td class="text-xs">{{$user->userEmail}}</td>
+                        <td class="text-xs">{{$user->email}}</td>
                         <td class="text-xs">{{$user->userPhoneNum}}</td>
                         <td class="text-xs">{{$user->userAddress}}</td>
                         <td class="text-xs">{{$user->userRole}}</td>
@@ -78,8 +78,8 @@
                         <input type="text" class="form-control" id="userIC" name="userIC" required>
                     </div>
                     <div class="form-group">
-                        <label for="userEmail">userEmail</label>
-                        <input type="userEmail" class="form-control" id="userEmail" name="userEmail" required>
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="userAddress">Address</label>

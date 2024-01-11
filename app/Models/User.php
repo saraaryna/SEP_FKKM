@@ -21,7 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'userName',
-        'userEmail',
+        'email',
         'password',
         'userAddress',
         'userPhoneNum',
@@ -42,7 +42,7 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'userEmail_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
     public function complaint()
