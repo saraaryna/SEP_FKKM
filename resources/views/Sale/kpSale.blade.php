@@ -1,6 +1,6 @@
 <!--ERNIE MASTURA BINTI BAKRI (CB21161)-->
 
-@extends('Sale.base')
+@extends('baseKP')
 @section('contents')
 
 <div class="container-fluid">

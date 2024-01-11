@@ -18,7 +18,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <a href="#" class="btn btn-info" style="float: right; background-color: #30C9B7; color:black;" data-bs-toggle="modal" data-bs-target="#addApp">+ New Application</a>
+                <a href="#" class="btn btn-info" style="float: right; background-color: #30C9B7; color:white;" data-bs-toggle="modal" data-bs-target="#addApp">+ New Application</a>
             </div>
             <div class="card-body">
                 <table id="datatables-buttons" class="table table-striped" style="width:100%">

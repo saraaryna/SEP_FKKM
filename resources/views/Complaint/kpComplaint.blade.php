@@ -1,7 +1,8 @@
-@extends('Complaint.base')
+@extends('baseKP')
 @section('Complaint.kpComplaint')
-<meta name="csrf-token" content="{{ csrf_token() }}">
 
+
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="container-fluid">
     <div class="header">
         <h1 class="header-title">
@@ -17,7 +18,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <a href="#" class="btn btn-info" style="float: right;" data-bs-toggle="modal"
+                <a href="#" class="btn" style="float: right; background-color: #30C9B7; color:white;" data-bs-toggle="modal"
                     data-bs-target="#addComplaint">+
                     New Complaint</a>
             </div>

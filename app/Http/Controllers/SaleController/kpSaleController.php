@@ -36,6 +36,7 @@ class kpSaleController extends Controller
             'totalSalesPerMonth' => $totalSalesPerMonth,
             'totalSalesPerYear' => $totalSalesPerYear,
             'overallTotalSales' => $overallTotalSales,
+            'user' => $user,
         ]);
     }
 

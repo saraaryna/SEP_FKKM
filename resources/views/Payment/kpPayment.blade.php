@@ -1,4 +1,4 @@
-@extends('Payment.base')
+@extends('baseKP')
 @section('Payment.kpPayment')
 
         <div class="container-fluid">
