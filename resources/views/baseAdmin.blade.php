@@ -109,6 +109,7 @@
 					@yield('Application.Admin.dashboard')
 					@yield('Application.Admin.profile')
 					@yield('Application.Admin.user')
+					@yield('Kiosk.adminKiosk')
 		
 
 			</main>

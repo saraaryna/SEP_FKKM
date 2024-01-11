@@ -23,7 +23,7 @@
                 <!-- total sales per month -->
                 <div class="card-header">Sales per month</div>
                 <div class="card-body">
-                    <h2><b>{{ $totalSalesPerMonth }}</b></h2>
+                    <h2><b>RM{{ number_format($totalSalesPerMonth, 2) }}</b></h2>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
                 <!-- total sales per year -->
                 <div class="card-header">Sales per year</div>
                 <div class="card-body">
-                    <h2><b>{{ $totalSalesPerYear }}</b></h2>
+                    <h2><b>RM{{ number_format($totalSalesPerYear, 2) }}</b></h2>
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
                 <!-- total sales  -->
                 <div class="card-header">Total sales</div>
                 <div class="card-body">
-                    <h2><b>{{ $overallTotalSales }}</b></h2>
+                    <h2><b>RM{{ number_format($overallTotalSales, 2) }}</b></h2>
                 </div>
             </div>
         </div>
@@ -59,7 +59,6 @@
                     <thead>
                         <tr>
                             <th>NO</th>
-                            <th>Kiosk Number</th>
                             <th>Date</th>
                             <th>Sales (RM)</th>
                             <th>Action</th>
@@ -69,7 +68,6 @@
                         @foreach($sales as $index => $sale)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $sale->kioskNumber }}</td>
                                 <td>{{ $sale->salesDate }}</td>
                                 <td>{{ $sale->salesTotal }}</td>
 

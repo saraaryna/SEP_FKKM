@@ -38,8 +38,8 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="userEmail" class="form-label">userEmail:</label>
-                            <input type="userEmail" class="form-control" id="userEmail" name="userEmail" value="{{ $user->userEmail }}" required>
+                            <label for="email" class="form-label">email:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" required>
                         </div>
                         <div class="mb-3">
                             <label for="userAddress" class="form-label">Address:</label>

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\Complaint;
 use App\Models\Kiosk;
-use App\Models\Payment;
 use App\Models\User;
+use App\Models\Payment;
 use App\Models\Sale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +18,19 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
+    private function prepareChartData($sales)
+    {
+        $chartData = [];
+
+        foreach ($sales as $sale) {
+            $month = date('F', strtotime($sale->salesDate));
+
+            $chartData[$month] = isset($chartData[$month]) ? $chartData[$month] + $sale->salesTotal : $sale->salesTotal;
+
+        }
+
+        return $chartData;
+    }
     public function index(Request $request)
     {
         $userRole = Auth::user()->userRole; // Use the correct field name
@@ -39,7 +52,7 @@ class HomeController extends Controller
 
         $userRoles = User::groupBy('userRole')->pluck('userRole');
         $userCounts = User::groupBy('userRole')->selectRaw('count(*) as total')->pluck('total');
-
+        $chartData = $this->prepareChartData($sales);
 
 
         if ($userRole == 'Admin') {
@@ -72,13 +85,13 @@ class HomeController extends Controller
         elseif ($userRole == 'PUPUK Admin')
         {
             return view('Sale.padminSale',[
-                'sales' => $sales,
                 'user' => $user,
                 'users' => $users,
+                'sales' => $sales,
                 'kiosk' => $kiosk,
+                'chartData' => $chartData,
             ]);
-        }
-        elseif ($userRole == 'FK Technical Team')
+        }elseif ($userRole == 'FK Technical Team')
         {
             return view('Complaint.fktComplaint',[
                 'user' => $user,

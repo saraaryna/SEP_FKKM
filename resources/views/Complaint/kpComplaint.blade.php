@@ -316,7 +316,7 @@
 
     <script>
         function confirmDelete(url) {
-            var confirmation = confirm("Are you sure you want to delete this application?");
+            var confirmation = confirm("Are you sure you want to delete this complaint?");
             if (confirmation) {
                 window.location.href = url; // If confirmed, proceed with the deletion
             } else {

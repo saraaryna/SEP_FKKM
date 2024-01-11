@@ -22,20 +22,20 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'userEmail' => fake()->unique()->safeuserEmail(),
-            'userEmail_verified_at' => now(),
+            'email' => fake()->unique()->safeemail(),
+            'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
     }
 
     /**
-     * Indicate that the model's userEmail address should be unverified.
+     * Indicate that the model's email address should be unverified.
      */
     public function unverified(): static
     {
         return $this->state(fn (array $attributes) => [
-            'userEmail_verified_at' => null,
+            'email_verified_at' => null,
         ]);
     }
 }

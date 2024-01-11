@@ -31,16 +31,14 @@
         </div>
     </div>
 
-    <div class="col-12">
+    <div class="col-6">
         <div class="card">
             <div class="card-body">
                 <table id="datatables-buttons" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Kiosk Participant Name</th>
                             <th>Date</th>
-                            <th>Kiosk No</th>
                             <th>Sales (RM)</th>
                         </tr>
                     </thead>
@@ -48,9 +46,7 @@
                         @foreach($sales as $index => $sale)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $sale->userName }}</td>
                                 <td>{{ $sale->salesDate }}</td>
-                                <td>{{ $sale->kioskNumber }}</td>
                                 <td>{{ $sale->salesTotal }}</td>
                             </tr>
                         @endforeach
@@ -65,8 +61,8 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Get the chart data from PHP
-        var chartData = @json($chartData);
+        // Get the sales data from PHP
+        var chartData = @json($chartData); // Assuming $sales is an array of sales data
 
         // Prepare labels and data for Chart.js
         var labels = Object.keys(chartData);
@@ -96,5 +92,7 @@
         });
     });
 </script>
+
+
 
 @endsection

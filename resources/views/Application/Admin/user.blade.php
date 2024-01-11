@@ -27,7 +27,7 @@
                             <th>NO</th>
                             <th>Name</th>
                             <th>No IC</th>
-                            <th>userEmail</th>
+                            <th>email</th>
                             <th>Phone Number</th>
                             <th>Address</th>
                             <th>Role</th>

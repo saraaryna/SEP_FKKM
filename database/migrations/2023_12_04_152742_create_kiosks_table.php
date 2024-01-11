@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('userID'); // Foreign Key userID
             $table->foreign('userID')->references('userID')->on('users');
             $table->integer('kioskNumber');
-            $table->string('KioskLocation');
+            $table->string('kioskLocation');
             $table->enum('kioskStatus', ['Available', 'Not Available']);
             $table->timestamps();
         });

@@ -29,7 +29,9 @@ class padminSaleController extends Controller
 
         foreach ($sales as $sale) {
             $month = date('F', strtotime($sale->salesDate));
+
             $chartData[$month] = isset($chartData[$month]) ? $chartData[$month] + $sale->salesTotal : $sale->salesTotal;
+
         }
 
         return $chartData;

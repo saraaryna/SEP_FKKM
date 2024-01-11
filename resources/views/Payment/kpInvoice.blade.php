@@ -1,4 +1,4 @@
-@extends('Payment.base')
+@extends('baseKP')
 @section('Payment.kpInvoice')
 
 <div class="container-fluid">
@@ -39,7 +39,7 @@
 
 
                         <td class="text-xs">{{ $loop->index + 1 }}</td>
-                        <td class="text-xs">{{$user->name}}</td>
+                        <td class="text-xs">{{$user->userName}}</td>
                         <td class="text-xs">{{$application->appBusinessType}}</td>
                         <td class="text-xs">{{$payments->payKioskNum}}</td>
                         <td class="text-xs">{{$payments->payFeeTotal}}</td>
@@ -74,8 +74,8 @@
                                         </label>
                                     </div>
                                      <div class="form-group">
-                                         <label class="fw-bold col-md-12 " for="userEmail">Fee Type :</label>
-                                         <label class="fw-bolder p-2" for="userEmail">{{ $payments->payFeeType }}</label>
+                                         <label class="fw-bold col-md-12 " for="email">Fee Type :</label>
+                                         <label class="fw-bolder p-2" for="email">{{ $payments->payFeeType }}</label>
 
                                      </div>
                                      <div class="form-group">
@@ -88,11 +88,11 @@
                                      </div>
                                      <div class="form-group">
                                          <label class="fw-bold col-md-12" for="appBusinessPeriod">Name :</label>
-                                         <label class="fw-bolder p-2" for="appBusinessPeriod">{{ $payments->user->name }}</label>
+                                         <label class="fw-bolder p-2" for="appBusinessPeriod">{{ $payments->user->userName }}</label>
                                      </div>
                                      <div class="form-group">
-                                         <label class="fw-bold col-md-12" for="appBusinessPeriod">userEmail Address :</label>
-                                         <label class="fw-bolder p-2" for="appBusinessPeriod">{{ $payments->payuserEmail }}</label>
+                                         <label class="fw-bold col-md-12" for="appBusinessPeriod">email Address :</label>
+                                         <label class="fw-bolder p-2" for="appBusinessPeriod">{{ $payments->payemail }}</label>
                                      </div>
                                      <div class="form-group">
                                          <label class="fw-bold col-md-12" for="appBusinessPeriod">Remarks :</label>
@@ -129,7 +129,7 @@
                                         <input type="text" class="form-control" id="appName" name="appName" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="userEmail">Fee Type</label>
+                                        <label for="email">Fee Type</label>
                                         <select class="form-control" id="appBusinessType" name="appBusinessType" required>
                                             <option disabled selected value="Select Business Type">Business Type</option>
                                             <option value="Food">Food</option>
@@ -156,7 +156,7 @@
                                         <input type="datetime-local" class="form-control" id="appBusinessPeriod" name="appBusinessPeriod" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="appBusinessPeriod">userEmail Address</label>
+                                        <label for="appBusinessPeriod">email Address</label>
                                         <input type="datetime-local" class="form-control" id="appBusinessPeriod" name="appBusinessPeriod" required>
                                     </div>
                                     <div class="form-group">
@@ -223,7 +223,7 @@
                         </select>   
                         </div>
                      <div class="form-group">
-                         <label for="userEmail">Fee Type</label>
+                         <label for="email">Fee Type</label>
                          <select class="form-control" id="payFeeType" name="payFeeType" required>
                              <option disabled selected value="Select Business Type">Fee Type</option>
                              <option value="Rental">Rental</option>
@@ -250,8 +250,8 @@
                          <label for="appBusinessPeriod"></label>
                      </div>
                      <div class="form-group">
-                         <label for="appBusinessPeriod">userEmail Address</label>
-                         <input type="text" class="form-control" id="payuserEmail" name="payuserEmail" required>
+                         <label for="appBusinessPeriod">email Address</label>
+                         <input type="text" class="form-control" id="payemail" name="payemail" required>
                      </div>
                      <div class="form-group">
                          <label for="appBusinessPeriod">Remarks</label>

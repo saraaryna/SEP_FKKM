@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('appPhoneNum');
             $table->string('appBusinessType');
             $table->string('appKioskNum');
-            $table->dateTime('appBusinessPeriod');
+            $table->date('appBusinessPeriod');
             $table->enum('appStatus', ['Approved', 'Rejected', 'In Progress']); 
             $table->timestamps();
         });

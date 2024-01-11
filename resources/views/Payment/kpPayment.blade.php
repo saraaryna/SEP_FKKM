@@ -16,7 +16,7 @@
                 <div class="card">
 
                     <div class="card-header">
-                        <a href="/kpInvoice" class="btn btn-info" style="float: right; background-color: #30C9B7; color:white;" >Invoice</a>
+                        <a href="{{ route('kpInvoice') }}" class="btn btn-info" style="float: right; background-color: #30C9B7; color:white;" >Invoice</a>
                     </div>
                                 <div class="modal-content">
                                     <div class="modal-header text-center">
@@ -28,7 +28,7 @@
                                             <label for="name">Kiosk Number :</label>
                                             <label class="fw-bold" for="name">{{ $application->appKioskNum}}</label>
                                             <label for="name">Name :</label>
-                                            <label class="fw-bold" for="name">{{ $user->name}}</label>
+                                            <label class="fw-bold" for="name">{{ $user->userName}}</label>
                                             <label for="name">Business Type :</label>
                                             <label  class="fw-bold" for="name">{{ $application->appBusinessType}}</label>
                                         </div>
@@ -91,7 +91,7 @@
                                 </select>   
                                 </div>
                              <div class="form-group">
-                                 <label for="userEmail">Fee Type</label>
+                                 <label for="email">Fee Type</label>
                                  <select class="form-control" id="payFeeType" name="payFeeType" required>
                                      <option disabled selected value="Select Business Type">Fee Type</option>
                                      <option value="Rental">Rental</option>
@@ -115,11 +115,11 @@
                              </div>
                              <div class="form-group">
                                  <label for="appBusinessPeriod">Name</label>
-                                 <label for="appBusinessPeriod">{{ $user->name }}</label>
+                                 <label for="appBusinessPeriod">{{ $user->userName }}</label>
                              </div>
                              <div class="form-group">
-                                 <label for="appBusinessPeriod">userEmail Address</label>
-                                 <input type="text" class="form-control" id="payuserEmail" name="payuserEmail" required>
+                                 <label for="appBusinessPeriod">email Address</label>
+                                 <input type="text" class="form-control" id="payemail" name="payemail" required>
                              </div>
                              <div class="form-group">
                                  <label for="appBusinessPeriod">Remarks</label>

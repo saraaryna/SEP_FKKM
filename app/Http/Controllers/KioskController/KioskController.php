@@ -8,17 +8,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreKioskRequest;
 use App\Http\Requests\UpdateKioskRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+
 
 class KioskController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $user = $request->user();
+
         $kiosk = Kiosk::all();
         return view('Kiosk.adminKiosk', [
             'kiosk' => $kiosk,
+            'user' => $user,
         ]);
     }
 
@@ -70,6 +75,7 @@ class KioskController extends Controller
         $kiosk->kioskID = $request->kioskID;
         $kiosk= Kiosk::find($kiosk->kioskID);
         $kiosk->kioskNumber= $request->kioskNumber;
+        $kiosk->kioskLocation= $request->kioskLocation;
         $kiosk->kioskStatus = $request->kioskStatus;
         $kiosk->update();
         return redirect('/adminKiosk');

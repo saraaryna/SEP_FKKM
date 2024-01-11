@@ -53,7 +53,7 @@ class fktComplaintController extends Controller
     $request->validate([
         'userName' => 'required|string|max:255',
         'userIC' => 'required|string|max:20',
-        'userEmail' => 'required|userEmail|max:255',
+        'email' => 'required|email|max:255',
         'userAddress' => 'required|string|max:255',
         'userPhoneNum' => 'required|string|max:20',
     ]);
@@ -62,7 +62,7 @@ class fktComplaintController extends Controller
     $user->update([
         'userName' => $request->input('userName'),
         'userIC' => $request->input('userIC'),
-        'userEmail' => $request->input('userEmail'),
+        'email' => $request->input('email'),
         'userAddress' => $request->input('userAddress'),
         'userPhoneNum' => $request->input('userPhoneNum'),
     ]);

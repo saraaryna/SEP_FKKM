@@ -69,7 +69,7 @@ class FKBursaryPaymentController extends Controller
             $payment->payFeeType = $request->payFeeType;
             $payment->payFeeTotal = $request->payFeeTotal;
             $payment->payKioskNum = $request->payKioskNum;
-            $payment->payuserEmail = $request->payuserEmail;
+            $payment->payemail = $request->payemail;
             $payment->payRemarks = $request->payRemarks;
             $payment->payProof = $request->payProof;
             $payment->payDate = $request->payDate;
@@ -103,7 +103,7 @@ class FKBursaryPaymentController extends Controller
             $payment->payFeeType = $request->payFeeType;
             $payment->payFeeTotal = $request->payFeeTotal;
             $payment->payKioskNum = $request->payKioskNum;
-            $payment->payuserEmail = $request->payuserEmail;
+            $payment->payemail = $request->payemail;
             $payment->payRemarks = $request->payRemarks;
             $payment->payProof = $request->payProof;
             $payment->payDate = $request->payDate;
@@ -143,7 +143,7 @@ class FKBursaryPaymentController extends Controller
     $request->validate([
         'userName' => 'required|string|max:255',
         'userIC' => 'required|string|max:20',
-        'userEmail' => 'required|userEmail|max:255',
+        'email' => 'required|email|max:255',
         'userAddress' => 'required|string|max:255',
         'userPhoneNum' => 'required|string|max:20',
     ]);
@@ -152,7 +152,7 @@ class FKBursaryPaymentController extends Controller
     $user->update([
         'userName' => $request->input('userName'),
         'userIC' => $request->input('userIC'),
-        'userEmail' => $request->input('userEmail'),
+        'email' => $request->input('email'),
         'userAddress' => $request->input('userAddress'),
         'userPhoneNum' => $request->input('userPhoneNum'),
     ]);

@@ -123,9 +123,10 @@
 					@yield('Application.KioskParticipant.dashboard')
 					@yield('Application.KioskParticipant.profile')
 					@yield('Complaint.kpComplaint')
-					@yield('Payment.kpInvoive')
+					@yield('Payment.kpInvoice')
 					@yield('Payment.kpPayment')
-					@yield('contents')
+					@yield('contents')	
+					@yield('Kiosk.adminKiosk')
 
 
 

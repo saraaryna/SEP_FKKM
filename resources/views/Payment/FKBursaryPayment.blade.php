@@ -46,9 +46,9 @@
                         <td class="text-xs">{{ $loop->index + 1 }}</td>
                         <td class="text-xs">
                             @foreach($users as $userr)
-                                @if ($payments->userID == $userr->userID)
-                                    {{ $userr->name }}
-                                @endif
+                                
+                                    {{ $userr->userName }}
+                                
                             @endforeach
                         </td>
                         <td class="text-xs">
@@ -94,8 +94,8 @@
                                         </label>
                                     </div>
                                      <div class="form-group">
-                                         <label class="fw-bold col-md-12 " for="userEmail">Fee Type :</label>
-                                         <label class="fw-bolder p-2" for="userEmail">{{ $payments->payFeeType }}</label>
+                                         <label class="fw-bold col-md-12 " for="email">Fee Type :</label>
+                                         <label class="fw-bolder p-2" for="email">{{ $payments->payFeeType }}</label>
 
                                      </div>
                                      <div class="form-group">
@@ -108,11 +108,11 @@
                                      </div>
                                      <div class="form-group">
                                          <label class="fw-bold col-md-12" for="appBusinessPeriod">Name :</label>
-                                         <label class="fw-bolder p-2" for="appBusinessPeriod">{{ $payments->user->name }}</label>
+                                         <label class="fw-bolder p-2" for="appBusinessPeriod">{{ $payments->user->userName }}</label>
                                      </div>
                                      <div class="form-group">
-                                         <label class="fw-bold col-md-12" for="appBusinessPeriod">userEmail Address :</label>
-                                         <label class="fw-bolder p-2" for="appBusinessPeriod">{{ $payments->payuserEmail }}</label>
+                                         <label class="fw-bold col-md-12" for="appBusinessPeriod">email Address :</label>
+                                         <label class="fw-bolder p-2" for="appBusinessPeriod">{{ $payments->payemail }}</label>
                                      </div>
                                      <div class="form-group">
                                          <label class="fw-bold col-md-12" for="appBusinessPeriod">Remarks :</label>
@@ -160,7 +160,7 @@
                                         </select>   
                                         </div>
                                      <div class="form-group">
-                                         <label for="userEmail">Fee Type</label>
+                                         <label for="email">Fee Type</label>
                                          <select class="form-control" id="payFeeType" name="payFeeType"  value="{{ $payments->payFeeType }}" required>
                                              <option disabled  value="Select Business Type">Fee Type</option>
                                              <option value="Rental">Rental</option>
@@ -186,8 +186,8 @@
                                          <label for="appBusinessPeriod">{{ $payments->user->name }}</label>
                                      </div>
                                      <div class="form-group">
-                                         <label for="appBusinessPeriod">userEmail Address</label>
-                                         <input type="text" class="form-control" id="payuserEmail" name="payuserEmail"  value="{{ $payments->payuserEmail }}" required>
+                                         <label for="appBusinessPeriod">email Address</label>
+                                         <input type="text" class="form-control" id="payemail" name="payemail"  value="{{ $payments->payemail }}" required>
                                      </div>
                                      <div class="form-group">
                                          <label for="appBusinessPeriod">Remarks</label>
@@ -256,13 +256,14 @@
                      <div class="form-group">
                         <label for="name">Payment For</label>
                         <select class="form-control" id="payFor1" name="payFor" required>
+                            <option selected disabled ='Please Select'>Please Select Participant</option>
                             @foreach($application as $applications)
                                 <option value="{{ $applications->appKioskNum }}">{{ $applications->appName }} -- {{ $applications->appKioskNum }}</option>
                             @endforeach
                         </select>                   
                         </div>
                      <div class="form-group">
-                         <label for="userEmail">Fee Type</label>
+                         <label for="email">Fee Type</label>
                          <select class="form-control" id="payFeeType" name="payFeeType" required>
                              <option disabled selected value="Select Business Type">Fee Type</option>
                              <option value="Rental">Rental</option>
@@ -289,8 +290,8 @@
                          <label name="appName" id="appName" value=""></label>
                      </div>
                      <div class="form-group">
-                         <label for="appBusinessPeriod">userEmail Address</label>
-                         <input type="text" class="form-control" id="payuserEmail" name="payuserEmail" required>
+                         <label for="appBusinessPeriod">email Address</label>
+                         <input type="text" class="form-control" id="payemail" name="payemail" required>
                      </div>
                      <div class="form-group">
                          <label for="appBusinessPeriod">Remarks</label>
@@ -315,20 +316,7 @@
 		document.addEventListener("DOMContentLoaded", function() {
             var currentDate = new Date().toISOString().split('T')[0];
             
-            // Datatables basic
-			$('#datatables-basic').DataTable({
-				responsive: true
-			});
-			// Datatables with Buttons
-			var datatablesButtons = $('#datatables-buttons').DataTable({
-				lengthChange: !1,
-				buttons: ["copy", "print"],
-				responsive: true
-			});
-			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
-            
-            document.getElementById('payDate').value = currentDate;
-			// Datatables basic
+          
 
             $('#payFor1').change(function() {
                 var selectedOption = $(this).val();
@@ -368,7 +356,20 @@
                 console.log('Script executed successfully');
             });
 
-			
+			  // Datatables basic
+              $('#datatables-basic').DataTable({
+				responsive: true
+			});
+			// Datatables with Buttons
+			var datatablesButtons = $('#datatables-buttons').DataTable({
+				lengthChange: !1,
+				buttons: ["copy", "print"],
+				responsive: true
+			});
+			datatablesButtons.buttons().container().appendTo("#datatables-buttons_wrapper .col-md-6:eq(0)")
+            
+            document.getElementById('payDate').value = currentDate;
+			// Datatables basic
 		
            
         });

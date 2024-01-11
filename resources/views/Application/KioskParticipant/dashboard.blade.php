@@ -74,7 +74,7 @@
                         </div>
                     </div>
                     <h1 class="display-5 mt-1 mb-3">
-                        {{-- {{ $totalKiosk }} --}}
+                        {{ $totalKiosk }}
                     </h1>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                     </div>
                 </div>
                 <h1 class="display-5 mt-1 mb-3">
-                    {{-- {{ $totalComplaint }} --}}
+                    {{ $totalComplaint }}
                 </h1>
             </div>
         </div>

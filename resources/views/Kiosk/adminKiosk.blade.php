@@ -1,4 +1,4 @@
-@extends('Kiosk.base')
+@extends('baseAdmin')
 @section('Kiosk.adminKiosk')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -146,8 +146,7 @@
                                         </form>
                                     </div>
                                 </div>
-                            </div>
-                                      
+                            </div>   
                         </div>
                         @endforeach
                     </tbody>
@@ -208,7 +207,7 @@
         });
 
         function deleteUser(kioskID) {
-            if (confirm("Are you sure you want to delete this user?")) {
+            if (confirm("Are you sure you want to delete this kiosk?")) {
                 console.log(kioskID);
                 fetch(`/kioskDestroy/${kioskID}`, {
                     method: 'DELETE',
