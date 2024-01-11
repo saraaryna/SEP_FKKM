@@ -35,7 +35,6 @@ Route::get('kpsale', function () {
 Route::get('padmin', function () {
     return view('Sale.padminSale');
 });
-});
 
 // Route::get('/dashboard-admin', function () {
 //     return view('Application/Admin/dashboard');
