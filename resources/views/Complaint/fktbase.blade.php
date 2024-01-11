@@ -43,8 +43,8 @@
 			</a>
 			<div class="sidebar-content">
 				<div class="sidebar-user">
-					{{-- <small>{{ "ID:  " . Auth::guard('account')->user()->A_icNum }}</small><br>
-					<small>{{ "Nama:  " . Auth::guard('account')->user()->A_name }}</small> --}}
+					{{-- <span class="d-sm-inline d-none">Hi, {{$user->userName}}</span><br>
+					<span class="d-sm-inline d-none">{{$user->userRole}}</span> --}}
 				</div>
 
 				<ul class="sidebar-nav">
@@ -63,9 +63,30 @@
             
         <main class="content" >
 				<div class="container-fluid" >
+					<ul class="nav justify-content-end">
+						<li class="nav-item dropdown ms-lg-2">
+							<a class="nav-link dropdown-toggle position-relative" href="#" id="userDropdown" data-bs-toggle="dropdown">
+								<i class="align-middle fas fa-cog"></i>
+							</a>
+							<div class="dropdown-menu dropdown-menu-end dropdown-menu-lg-start" aria-labelledby="userDropdown">
+								<a class="dropdown-item" href="/fkt-profile">
+									<i class="align-middle me-1 fas fa-fw fa-user"></i> View Profile
+								</a>
+								<div class="dropdown-divider"></div>
+								<form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+									@csrf
+								</form>
+								<a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+									<i class="align-middle me-1 fas fa-fw fa-arrow-alt-circle-right"></i> Sign out
+								</a>
+							</div>
+						</li>
+					</ul>
 
 					{{-- Yield --}}
                     @yield('Complaint.fktComplaint')
+					@yield('Complaint.fktProfile')
+
 
 
 					</div>

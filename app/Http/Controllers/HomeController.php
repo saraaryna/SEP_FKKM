@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\Complaint;
 use App\Models\Kiosk;
+use App\Models\Payment;
 use App\Models\User;
 use App\Models\Sale;
 use Illuminate\Http\Request;
@@ -28,11 +29,13 @@ class HomeController extends Controller
         $totalApp = Application::count();
         $totalKiosk = Kiosk::count();
         $totalComplaint = Complaint::count();
-        // $totalKiosk = Kiosk::count();
-        // $totalComplaint = Complaint::count();
+        $totalKiosk = Kiosk::count();
+        $totalComplaint = Complaint::count();
         $user = User::all();
         $sales = Sale::all();
         $kiosk = Kiosk::all(); 
+        $complaint = Complaint::all();
+        $payment = Payment::all();
 
         $userRoles = User::groupBy('userRole')->pluck('userRole');
         $userCounts = User::groupBy('userRole')->selectRaw('count(*) as total')->pluck('total');
@@ -69,6 +72,21 @@ class HomeController extends Controller
             return view('Sale.padminSale',[
                 'user' => $user,
                 'kiosk' => $kiosk,
+            ]);
+        }
+        elseif ($userRole == 'FK Technical Team')
+        {
+            return view('Complaint.fktComplaint',[
+                'user' => $user,
+                'complaint' => $complaint,
+            ]);
+        }
+        elseif ($userRole == 'FK Bursary')
+        {
+            return view('Payment.FKBursaryPayment',[
+                'user' => $user,
+                'payment' => $payment,
+                'application' => $application,
             ]);
         }
         else {

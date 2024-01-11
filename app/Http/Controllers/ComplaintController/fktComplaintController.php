@@ -5,57 +5,26 @@ namespace App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\Controller;
 use App\Models\Complaint;
 use App\Models\User;
-use App\Http\Requests\StoreComplaintRequest;
 use App\Http\Requests\UpdateComplaintRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class fktComplaintController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+
+
+        $user = $request->user();
         $complaint = Complaint::all();
-        $user = User::find(1);
-        return view('Complaint.fktComplaint', [
-            'complaint' => $complaint,
-            'user' => $user,
-        ]);
+
+            return view('Complaint.fktComplaint', [
+                'complaint' => $complaint,
+                'user' => $user,
+            ]);
     }
     
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreComplaintRequest $request)
-    {
-        
-    }
-
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Complaint $complaint)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Complaint $complaint)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateComplaintRequest $request, Complaint $complaint)
     {
         
@@ -67,9 +36,41 @@ class fktComplaintController extends Controller
         return redirect('/fktComplaint');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    public function profile(Request $request)
+    {
+        $user = $request->user();
+
+        return view('Complaint.fktProfile',[
+            'user' => $user,
+        ]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+    $user = $request->user();
+
+    // Validate the form data (customize validation rules as needed)
+    $request->validate([
+        'userName' => 'required|string|max:255',
+        'userIC' => 'required|string|max:20',
+        'userEmail' => 'required|email|max:255',
+        'userAddress' => 'required|string|max:255',
+        'userPhoneNum' => 'required|string|max:20',
+    ]);
+
+    // Update user profile
+    $user->update([
+        'userName' => $request->input('userName'),
+        'userIC' => $request->input('userIC'),
+        'userEmail' => $request->input('userEmail'),
+        'userAddress' => $request->input('userAddress'),
+        'userPhoneNum' => $request->input('userPhoneNum'),
+    ]);
+
+    return redirect()->route('fkt-profile');
+    }
+
+ 
     public function destroy(Complaint $complaint)
     {
         $complaint->delete();

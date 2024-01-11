@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreApplicationRequest;
 use App\Models\Application;
+use App\Models\Complaint;
+use App\Models\Kiosk;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,8 +19,8 @@ class kpApplicationController extends Controller
         $application = Application::all();
         $totalUsers = User::count();
         $totalApp = Application::count();
-        // $totalKiosk = Kiosk::count();
-        // $totalComplaint = Complaint::count();
+        $totalKiosk = Kiosk::count();
+        $totalComplaint = Complaint::count();
 
         $userRoles = User::groupBy('userRole')->pluck('userRole');
         $userCounts = User::groupBy('userRole')->selectRaw('count(*) as total')->pluck('total');
@@ -30,8 +32,8 @@ class kpApplicationController extends Controller
         'user' => $user,
         'totalUsers' => $totalUsers,
         'totalApp' => $totalApp,
-        // 'totalKiosk' => $totalKiosk,
-        // 'totalComplaint' => $totalComplaint,
+        'totalKiosk' => $totalKiosk,
+        'totalComplaint' => $totalComplaint,
         'userRoles' => $userRoles,
         'userCounts' => $userCounts,
         ]);

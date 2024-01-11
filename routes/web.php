@@ -75,7 +75,7 @@ Route::put('/fktComplaintEdit', [App\Http\Controllers\ComplaintController\fktCom
 Route::put('/fktComplaintEditStatus', [App\Http\Controllers\ComplaintController\fktComplaintController::class, 'update'])->name('fktComplaint');
 Route::get('/fktComplaint/{complaint}/delete', [fktComplaintController::class, 'destroy']);
 
-Route::resource('/sale', SaleController::class);
+// Route::resource('/sale', SaleController::class);
 
 /* Payment */
 Route::get('/kpPayment', [App\Http\Controllers\PaymentController\kpPaymentController::class, 'index'])->name('kpPayment');
@@ -111,5 +111,10 @@ Route::get('/admin/user/{user}', [AdminApplicationController::class, 'deleteUser
 // KP
 Route::get('/KP-profile', [kpApplicationController::class, 'profile'])->name('kp-profile');
 Route::put('/KP-profile/update', [kpApplicationController::class, 'updateProfile'])->name('kp.profile.update');
+
+//FK Technical Team
+Route::get('/fkt-profile', [fktComplaintController::class, 'profile'])->name('fkt-profile');
+Route::put('/fkt-profile/update', [fktComplaintController::class, 'updateProfile'])->name('fkt.profile.update');
+
 
 
