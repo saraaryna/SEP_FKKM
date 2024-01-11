@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -15,25 +16,16 @@ class LoginController extends Controller
 
     public function __construct()
     {
-        if ($user->userRole === 'Kiosk Participant') {
-            return redirect('/kpsale');
-        }
-
-        // Add other role checks if needed
-        // ...
-
-        // Default redirect if no specific role is matched
-        return redirect('/home');
+        $this->middleware('guest')->except('logout');
     }
 
     protected function authenticated(Request $request, $user)
     {
-        dd($user->userRole);
         // Redirect based on userRole
         if ($user->userRole === 'Admin') {
-            return redirect()->route('Application.Admin.dashboard'); // Adjust the route name as needed
+            return redirect()->route('admin.dashboard'); // Adjust the route name as needed
         } elseif ($user->userRole === 'Kiosk Participant') {
-            return redirect()->route('kiosk.dashboard'); // Adjust the route name as needed
+            return redirect()->route('kp.dashboard'); // Adjust the route name as needed
         } else {
             // You can add more conditions or a default redirection here
             return redirect()->route('home'); // Adjust the route name as needed

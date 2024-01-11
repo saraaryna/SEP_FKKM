@@ -29,9 +29,9 @@ class HomeController extends Controller
         $totalApp = Application::count();
         $totalKiosk = Kiosk::count();
         $totalComplaint = Complaint::count();
-        $totalKiosk = Kiosk::count();
-        $totalComplaint = Complaint::count();
-        $user = User::all();
+        // $totalKiosk = Kiosk::count();
+        // $totalComplaint = Complaint::count();
+        $users = User::all();
         $sales = Sale::all();
         $kiosk = Kiosk::all(); 
         $complaint = Complaint::all();
@@ -46,6 +46,7 @@ class HomeController extends Controller
             return view('Application.Admin.dashboard',[
                 'application' => $application,
                 'user' => $user,
+                'users' => $users,
                 'totalUsers' => $totalUsers,
                 'totalApp' => $totalApp,
                 'totalKiosk' => $totalKiosk,
@@ -58,6 +59,7 @@ class HomeController extends Controller
             return view('Application.KioskParticipant.dashboard',[
             'application' => $application,
             'user' => $user,
+            'usesr' => $users,
             'totalUsers' => $totalUsers,
             'totalApp' => $totalApp,
             'totalKiosk' => $totalKiosk,
@@ -71,6 +73,7 @@ class HomeController extends Controller
         {
             return view('Sale.padminSale',[
                 'user' => $user,
+                'users' => $users,
                 'kiosk' => $kiosk,
             ]);
         }
