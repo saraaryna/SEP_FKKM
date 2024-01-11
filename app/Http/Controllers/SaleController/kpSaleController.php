@@ -18,7 +18,22 @@ class kpSaleController extends Controller
         $user = $request->user();
     
         $sales = Sale::all(); // Use the Sale model to retrieve all sales data
-        return view('Sale.kpSale', ['sales' => $sales]);
+
+        // Calculate total sales per month
+        $totalSalesPerMonth = $sales->where('salesDate', '>=', now()->startOfMonth())->sum('salesTotal');
+
+        // Calculate total sales per year
+        $totalSalesPerYear = $sales->where('salesDate', '>=', now()->startOfYear())->sum('salesTotal');
+
+        // Calculate overall total sales
+        $overallTotalSales = $sales->sum('salesTotal');
+
+        return view('Sale.kpSale', [
+            'sales' => $sales,
+            'totalSalesPerMonth' => $totalSalesPerMonth,
+            'totalSalesPerYear' => $totalSalesPerYear,
+            'overallTotalSales' => $overallTotalSales,
+        ]);
     }
 
     

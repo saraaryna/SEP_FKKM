@@ -23,7 +23,7 @@
                 <!-- total sales per month -->
                 <div class="card-header">Sales per month</div>
                 <div class="card-body">
-                    <h2><b></b></h2> 
+                    <h2><b>{{ $totalSalesPerMonth }}</b></h2>
                 </div>
             </div>
         </div>
@@ -32,7 +32,7 @@
                 <!-- total sales per year -->
                 <div class="card-header">Sales per year</div>
                 <div class="card-body">
-                    <h2><b></b></h2> 
+                    <h2><b>{{ $totalSalesPerYear }}</b></h2>
                 </div>
             </div>
         </div>
@@ -41,12 +41,12 @@
                 <!-- total sales  -->
                 <div class="card-header">Total sales</div>
                 <div class="card-body">
-                    <h2><b></b></h2> 
+                    <h2><b>{{ $overallTotalSales }}</b></h2>
                 </div>
             </div>
         </div>
-      
-</div>
+    </div>
+
 
     <div class="col-12">
         <div class="card">
