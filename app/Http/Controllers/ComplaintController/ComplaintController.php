@@ -1,10 +1,6 @@
 <?php
 
-<<<<<<< HEAD:app/Http/Controllers/ComplaintController/ComplaintController.php
-namespace App\Http\Controllers\ComplaintController;
-=======
 namespace App\Http\Controllers\Complaint;
->>>>>>> 74c00ffd8e607c3a5c1ad53cf7d1a3729e8504a2:app/Http/Controllers/Complaint/kpComplaintController.php
 
 use App\Http\Controllers\Controller;
 use App\Models\Complaint;

@@ -1,5 +1,5 @@
-@extends('Application.Admin.base')
-@section('Application.Admin.dashboard')
+@extends('Application.KioskParticipant.base')
+@section('Application.KioskParticipant.dashboard')
 
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
