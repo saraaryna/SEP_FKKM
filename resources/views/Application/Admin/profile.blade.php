@@ -1,5 +1,4 @@
-@extends('Application.Admin.base')
-
+@extends('baseAdmin')
 @section('Application.Admin.profile')
 <div class="container-fluid">
     <div class="header">

@@ -36,7 +36,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-
     /* Kiosk */
     Route::get('/adminKiosk', [App\Http\Controllers\KioskController\KioskController::class, 'index'])->name('adminKiosk');
     Route::post('/adminKiosk', [App\Http\Controllers\KioskController\KioskController::class, 'store'])->name('adminKiosk');

@@ -1,4 +1,4 @@
-@extends('Application.Admin.base')
+@extends('baseAdmin')
 @section('Application.Admin.form')
 
 
@@ -50,12 +50,79 @@
                             <span class="badge rounded-pill bg-warning ">{{ $application->appStatus}}</span></td>
                             @endif
                         <td class="table-action">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#modalDetails-{{ $application->appID }}"><i
+                                class="align-middle fas fa-fw fa-eye"></i></a>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#update-{{ $application->appID }}"><i class="align-middle fas fa-fw fa-pen"></i></i></a>
                             <a href="#" onclick="confirmDelete('/Admin-appForm/{{$application->appID}}/delete')">
                                 <i class="align-middle fas fa-fw fa-trash"></i>
                             </a>                        
                         </td>
-                    </tr>                                  
+                    </tr>        
+
+
+                          <!-- BEGIN view modal -->
+                    <div class="modal fade" id="modalDetails-{{ $application->appID }}" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Application #{{ $application->appID }} </h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body m-3">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label><b>{{$application->created_at}}</b></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @if ($application->appStatus === "Approved")
+                                            <span class="badge rounded-pill bg-success">{{ $application->appStatus}}</span>
+                                            @elseif($application->appStatus === "Rejected")
+                                            <span class="badge rounded-pill bg-danger">{{ $application->appStatus}}</span>
+                                            @else
+                                            <span class="badge rounded-pill bg-warning ">{{ $application->appStatus}}</span></td>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label><b>Application Name:</b></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ $application->appName }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label><b>Business Type:</b></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ $application->appBusinessType }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label><b>Kiosk Number:</b></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ $application->appKioskNum }}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label><b>Business Period:</b></label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            {{ $application->appBusinessPeriod }}
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END primary modal -->
+
                 <!-- Modal Kemaskini -->
                 <div class="modal fade" id="update-{{ $application->appID }}" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -84,14 +151,16 @@
                             </div>
                         </div>
                     </div>
+                    
                 @endforeach
             </tbody>
         </table>
-    </div>
+            </div>
         </div>
     </div>
 </div>
-</div>
+
+
 
 <!-- Modal -->
 <div class="modal fade" id="addApp" tabindex="-1" role="dialog" aria-hidden="true">
