@@ -9,7 +9,7 @@
         </h1>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="dashboardAdmin.php">User</a></li>
+                <li class="breadcrumb-item"><a href="dashboardAdmin.php">Kiosk Participant</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Manage Kiosk Complaint</a></li>
             </ol>
         </nav>
@@ -19,7 +19,7 @@
             <div class="card-header">
                 <a href="#" class="btn btn-info" style="float: right;" data-bs-toggle="modal"
                     data-bs-target="#addComplaint">+
-                    New Application</a>
+                    New Complaint</a>
             </div>
             <div class="card-body">
                 <table id="datatables-buttons" class="table table-striped" style="width:100%">
@@ -268,7 +268,7 @@
                     </div>
                     <div class="form-group">
                         <label for="num">Phone Number</label>
-                        <input type="text" class="form-control" id="compPhoneNum" name="compPhoneNum" required>
+                        <input type="text" class="form-control" id="compPhoneNum" name="compPhoneNum" value="{{$user->userPhoneNum}}"required>
                     </div>
                     <div class="form-group">
                         <label for="role">Complaint Type</label>
@@ -279,7 +279,6 @@
                             <option value="Accessibility Issues">Accessibility Issues</option>
                             <option value="Financial Concerns">Financial Concerns</option>
                             <option value="Others">Others</option>
-
                         </select>
                     </div>
                     <div class="form-group">
@@ -287,13 +286,8 @@
                         <input type="longtext" class="form-control" id="compDescription" name="compDescription"
                             required>
                     </div>
-                    <input type="hidden" name="compEvidence" value="evidence">
                     <input type="hidden" name="compStatus" value="In Investigation">
                     <input type="hidden" name="compPIC" value="None">
-                    <div class="form-group">
-                        <label>Upload Evidence</label>
-                        <input type="file" name="compEvidence" class="form-control" id="inputFile">
-                    </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

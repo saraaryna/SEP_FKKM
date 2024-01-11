@@ -48,10 +48,6 @@ class kpComplaintController extends Controller
         $complaint = new Complaint;
         $user = Auth::user();
 
-        // Store the uploaded file
-        //$compEvidence = $request->file('compEvidence')->store('banner');
-
-        // Set values for the Complaint model
         $complaint->userID = $user->userID;;
         $complaint->compName = $request->compName;
         $complaint->compDate = $request->compDate;
@@ -62,8 +58,6 @@ class kpComplaintController extends Controller
         $complaint->compDescription = $request->compDescription;
         $complaint->compStatus = $request->compStatus;
         $complaint->compPIC = $request->compPIC;
-        $complaint->compEvidence = $request->compEvidence;
-        //$complaint->compEvidence = $compEvidence;
 
         // Save the Complaint model to the database
         $complaint->save();
