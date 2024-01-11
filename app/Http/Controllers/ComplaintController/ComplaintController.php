@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Complaint;
 
+use App\Http\Controllers\Controller;
 use App\Models\Complaint;
+use App\Models\User;
 use App\Http\Requests\StoreComplaintRequest;
 use App\Http\Requests\UpdateComplaintRequest;
 
-class ComplaintController extends Controller
+
+class kpComplaintController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +17,10 @@ class ComplaintController extends Controller
     public function index()
     {
         $complaint = Complaint::all();
-        return view('Complaint.complaint', [
-            'complaint' => $complaint
+        $user = User::find(1);
+        return view('Complaint.kpComplaint', [
+            'complaint' => $complaint,
+            'user' => $user,
         ]);
     }
 
@@ -38,16 +43,23 @@ class ComplaintController extends Controller
         //$compEvidence = $request->file('compEvidence')->store('banner');
 
         // Set values for the Complaint model
+        $complaint->userID = $request->userID;
+        $complaint->compName = $request->compName;
+        $complaint->compDate = $request->compDate;
         $complaint->compDateOccured = $request->compDateOccured;
         $complaint->compKioskNum = $request->compKioskNum;
         $complaint->compPhoneNum = $request->compPhoneNum;
         $complaint->compType = $request->compType;
+        $complaint->compDescription = $request->compDescription;
+        $complaint->compStatus = $request->compStatus;
+        $complaint->compPIC = $request->compPIC;
+        $complaint->compEvidence = $request->compEvidence;
         //$complaint->compEvidence = $compEvidence;
 
         // Save the Complaint model to the database
         $complaint->save();
 
-        return redirect('/complaint');
+        return redirect('/kpComplaint');
     }
 
 
@@ -72,7 +84,12 @@ class ComplaintController extends Controller
      */
     public function update(UpdateComplaintRequest $request, Complaint $complaint)
     {
-        //
+        $complaint->compDateOccured = $request->compDateOccured;
+        $complaint->compKioskNum = $request->compKioskNum;
+        $complaint->compPhoneNum = $request->compPhoneNum;
+
+        $complaint->save();
+
     }
 
     /**

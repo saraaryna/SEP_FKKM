@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Complaint extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'complaintID';
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'userID');
+    }
 }
+
