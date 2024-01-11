@@ -121,7 +121,6 @@
                                     </div>
                                 </div>
                             </div>
-                                      
                         </div>
                         <!--Modal Update-->
                         <div class="modal fade" id="update-{{ $complaint->complaintID }}" data-bs-backdrop="static"
