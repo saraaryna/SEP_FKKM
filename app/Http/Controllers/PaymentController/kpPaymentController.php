@@ -56,7 +56,7 @@ class kpPaymentController extends Controller
         //
     }
 
-    /**
+    /**1
      * Store a newly created resource in storage.
      */
     public function savePayment(StorePaymentRequest $request)
