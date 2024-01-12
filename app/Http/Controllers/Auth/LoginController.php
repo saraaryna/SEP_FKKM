@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+
 
 class LoginController extends Controller
 {
@@ -21,30 +21,28 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function authenticate(Request $request)
+    protected function authenticate(Request $request )
     {
         $credentials = $request->only('email', 'password');
-        $user = User::where('email', $credentials['email'])->first();
-    
-        if ($user && Hash::check($credentials['password'], $user->password)) {
-            // Check the user's role
-            $userRole = $request->input('userRole');
-    
-            if ($user->role === $userRole) {
-                if ($userRole === 'Admin') {
-                    return redirect()->route('admin.dashboard');
-                } elseif ($userRole === 'Kiosk Participant') {
-                    return redirect()->route('kp.dashboard');
-                } elseif ($userRole === 'PUPUK Admin') {
-                    return redirect()->route('padmin.index');
-                } elseif ($userRole === 'Fk Bursary') {
-                    return redirect()->route('FKBursaryPayment');
-                } else {
-                    return redirect()->route('home');
-                }
+        $userRole = $request->input('userRole');
+        
+        
+        if (Auth::attempt($credentials, $userRole)) {
+            if($userRole === 'Admin'){
+                return redirect()->route('admin.dashboard'); // Adjust the route name as needed
+            } elseif ($userRole === 'Kiosk Participant') {
+                return redirect()->route('kp.dashboard'); // Adjust the route name as needed
+            } elseif ($userRole === 'PUPUK Admin') {
+                return redirect()->route('padmin.index'); // Adjust the route name as needed
+            } elseif ($userRole === 'Fk Bursary') {
+                return redirect()->route('FKBursaryPayment'); 
             }
+            else {
+                // You can add more conditions or a default redirection here
+                return redirect()->route('home'); // Adjust the route name as needed
+            }
+            
         }
-    
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);

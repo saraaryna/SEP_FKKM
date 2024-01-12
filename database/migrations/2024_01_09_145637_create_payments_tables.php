@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('payFeeType');
             $table->decimal('payFeeTotal', 10, 2);
             $table->integer('payKioskNum');
-            $table->string('payemail');
+            $table->string('payEmail');
             $table->string('payRemarks');
             $table->string('payProof');
             $table->datetime('payDate');
