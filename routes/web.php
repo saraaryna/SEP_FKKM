@@ -74,9 +74,9 @@ Route::get('/kpComplaint', [App\Http\Controllers\ComplaintController\kpComplaint
 Route::post('/kpComplaint', [App\Http\Controllers\ComplaintController\kpComplaintController::class, 'store'])->name('kpComplaint');
 Route::put('/kpComplaintEdit', [App\Http\Controllers\ComplaintController\kpComplaintController::class, 'update'])->name('kpComplaint');
 Route::get('/kpComplaint/{complaint}/delete', [kpComplaintController::class, 'destroy']);
-Route::get('/fktComplaint', [App\Http\Controllers\ComplaintController\fktComplaintController::class, 'index'])->name('fktComplaint');
-Route::put('/fktComplaintEdit', [App\Http\Controllers\ComplaintController\fktComplaintController::class, 'update'])->name('fktComplaintEdit');
-Route::put('/fktComplaintEditStatus', [App\Http\Controllers\ComplaintController\fktComplaintController::class, 'update'])->name('fktComplaintUpdate');
+Route::get('/fktComplaint', [App\Http\Controllers\ComplaintController\fktComplaintController::class, 'index'])->name('fktComplaintEdit');
+Route::put('/fktComplaintEdit', [App\Http\Controllers\ComplaintController\fktComplaintController::class, 'update'])->name('fktComplaintEditEditStatus');
+Route::put('/fktComplaintEditStatus', [App\Http\Controllers\ComplaintController\fktComplaintController::class, 'update'])->name('fktComplaintEditStatus');
 Route::get('/fktComplaint/{complaint}/delete', [fktComplaintController::class, 'destroy']);
 
 // Route::resource('/sale', SaleController::class);
