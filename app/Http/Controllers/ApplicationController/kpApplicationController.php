@@ -15,7 +15,7 @@ class kpApplicationController extends Controller
 {
     public function showDashboard(Request $request)
     {
-        $user = $request->user();
+        $user = Auth::user();
         $application = Application::all();
         $totalUsers = User::count();
         $totalApp = Application::count();
