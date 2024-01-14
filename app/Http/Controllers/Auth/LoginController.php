@@ -35,7 +35,9 @@ class LoginController extends Controller
             } elseif ($userRole === 'PUPUK Admin') {
                 return redirect()->route('padmin.index'); // Adjust the route name as needed
             } elseif ($userRole === 'Fk Bursary') {
-                return redirect()->route('FKBursaryPayment'); 
+                return redirect()->route('fkbursary.payment');
+            } elseif ($userRole === 'FK Technical Team') {
+                return redirect()->route('fktComplaint'); 
             }
             else {
                 // You can add more conditions or a default redirection here

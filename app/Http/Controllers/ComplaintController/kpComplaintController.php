@@ -20,16 +20,11 @@ class kpComplaintController extends Controller
 
         $user = Auth::user();
 
-        if ($user) {
             $complaint = Complaint::where('userID', $user->userID)->get();
             return view('Complaint.kpComplaint', [
                 'complaint' => $complaint,
                 'user' => $user,
             ]);
-        } else {
-            // If the user is not logged in, redirect them to the login page
-            return redirect()->route('home');
-        }
     }
 
     /**

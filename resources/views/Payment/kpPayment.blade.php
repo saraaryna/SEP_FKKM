@@ -119,7 +119,7 @@
                              </div>
                              <div class="form-group">
                                  <label for="appBusinessPeriod">email Address</label>
-                                 <input type="text" class="form-control" id="payemail" name="payemail" required>
+                                 <input type="text" class="form-control" id="payemail" name="payEmail" required>
                              </div>
                              <div class="form-group">
                                  <label for="appBusinessPeriod">Remarks</label>

@@ -85,7 +85,7 @@ Route::get('/fktComplaint/{complaint}/delete', [fktComplaintController::class, '
 Route::get('/kpPayment', [App\Http\Controllers\PaymentController\kpPaymentController::class, 'index'])->name('kpPayment');
 Route::post('/addPayment', [App\Http\Controllers\PaymentController\kpPaymentController::class, 'savePayment'])->name('addPayment');
 Route::get('/kpInvoice', [App\Http\Controllers\PaymentController\kpPaymentController::class, 'indexInvoice'])->name('kpInvoice');
-Route::get('/FKBursaryPayment', [App\Http\Controllers\PaymentController\FKBursaryPaymentController::class, 'index'])->name('FKBursaryPayment');
+Route::get('/fKBursaryPayment', [App\Http\Controllers\PaymentController\FKBursaryPaymentController::class, 'index'])->name('fkbursary.payment');
 Route::post('/addFKBursaryPayment', [App\Http\Controllers\PaymentController\FKBursaryPaymentController::class, 'savePayment'])->name('addFKBursaryPayment');
 Route::post('/updatePayment/{payID}', [App\Http\Controllers\PaymentController\FKBursaryPaymentController::class, 'viewPayment'])->name('updatePayment');
 Route::get('/printFKBursaryPayment/{payID}', [App\Http\Controllers\PaymentController\FKBursaryPaymentController::class, 'createReceipt'])->name('printFKBursaryPayment');

@@ -22,8 +22,7 @@ class FKBursaryPaymentController extends Controller
     {
         $user = Auth::user();
         $users = User::all();
-
-        if ($user) {
+            
             $payment = Payment::get();
             $application = Application::get();
 
@@ -35,10 +34,8 @@ class FKBursaryPaymentController extends Controller
 
 
             ]);
-        }else {
             // If the user is not logged in, redirect them to the login page
-            return redirect()->route('home');
-        }
+            // return redirect()->route('home');
 
     }
 
@@ -57,7 +54,7 @@ class FKBursaryPaymentController extends Controller
     {
         $user = Auth::user();
 
-        if ($user) {
+        
             $payment = new Payment;
             // Store the uploaded file
             //$compEvidence = $request->file('compEvidence')->store('banner');
@@ -77,12 +74,11 @@ class FKBursaryPaymentController extends Controller
             // Save the payment model to the database
             $payment->save();
 
-            return redirect()->route('FKBursaryPayment');
+            return redirect()->route('fkbursary.payment');
 
-        }else {
             // If the user is not logged in, redirect them to the login page
-            return redirect()->route('home');
-        }
+            //return redirect()->route('home');
+        
 
     }
     /**
@@ -92,7 +88,6 @@ class FKBursaryPaymentController extends Controller
     {
         $user = Auth::user();
 
-        if ($user) {
             // Find the existing payment by payID
             $payment = Payment::findOrFail($payID);
     
@@ -112,10 +107,7 @@ class FKBursaryPaymentController extends Controller
             $payment->save();
     
             return redirect()->route('printFKBursaryPayment', ['payID' => $payment->payID]);
-        } else {
-            // If the user is not logged in, redirect them to the login page
-            return redirect()->route('home');
-        }
+
     }
 
     /**
@@ -171,6 +163,6 @@ class FKBursaryPaymentController extends Controller
 
     public function generateReceipt(Payment $payment, $payID)
     {
-        return redirect()->route('FKBursaryPayment');
+        return redirect()->route('fkbursary.payment');
     }
 }

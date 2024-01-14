@@ -46,8 +46,8 @@
 			
 			<div class="sidebar-content">
 				<div class="sidebar-user">
-					<span class="d-sm-inline d-none">Hi, {{$user->userName}}</span><br>
-					<span class="d-sm-inline d-none">{{$user->userRole}}</span>
+					<span class="d-sm-inline d-none">Hi, Aiman</span><br>
+					<span class="d-sm-inline d-none">Kiosk Participant</span>
 				</div>
 
 				<ul class="sidebar-nav">
